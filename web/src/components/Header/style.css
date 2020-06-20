@@ -1,0 +1,78 @@
+div.header {
+  background-color: #dedede;
+  height: 135px;
+  width: 100%;
+}
+
+div.container {
+  background-color: #dedede;
+  height: 200px;
+  width: 100%;
+}
+
+div.headerContent {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto;
+  grid-column-gap: 15px;
+  margin-left: 15%;
+  margin-right: 15%;
+  height: 100%;
+  background-color: red;
+}
+
+div.logo {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  height: 100%;
+  width: 100%;
+}
+
+div.produtos {
+  grid-column-start: 5;
+  grid-column-end: 7;
+  font-family: "Roboto", sans-serif;
+  margin-top: auto;
+  margin-bottom: auto;
+  text-align: center;
+}
+
+div.contato {
+  grid-column-start: 7;
+  grid-column-end: 9;
+  font-family: "Roboto", sans-serif;
+  margin-top: auto;
+  margin-bottom: auto;
+  text-align: center;
+}
+
+div.carrinho {
+  grid-column-start: 9;
+  grid-column-end: 11;
+  font-family: "Roboto", sans-serif;
+  margin-top: auto;
+  margin-bottom: auto;
+  text-align: center;
+}
+
+div.logout {
+  grid-column-start: 11;
+  grid-column-end: 13;
+  font-family: "Roboto", sans-serif;
+  margin-top: auto;
+  margin-bottom: auto;
+  text-align: center;
+}
+
+img.logo {
+  display: block;
+  margin-right: auto;
+  margin-top: 7.5px;
+}
+
+.clickable :hover {
+  cursor: pointer;
+}
+
+.test {
+  background-color: blue;
+}
