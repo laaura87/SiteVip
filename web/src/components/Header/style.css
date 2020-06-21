@@ -6,8 +6,11 @@ div.header {
 
 div.container {
   background-color: #dedede;
-  height: 200px;
+  height: 260px;
   width: 100%;
+  position: absolute;
+  top: -135px;
+  z-index: -1;
 }
 
 div.headerContent {
@@ -17,7 +20,6 @@ div.headerContent {
   margin-left: 15%;
   margin-right: 15%;
   height: 100%;
-  background-color: red;
 }
 
 div.logo {
@@ -31,9 +33,11 @@ div.produtos {
   grid-column-start: 5;
   grid-column-end: 7;
   font-family: "Roboto", sans-serif;
-  margin-top: auto;
-  margin-bottom: auto;
   text-align: center;
+}
+
+div.produtos p {
+  padding-top: 40.5px;
 }
 
 div.contato {
@@ -73,6 +77,50 @@ img.logo {
   cursor: pointer;
 }
 
-.test {
-  background-color: blue;
+@keyframes slideDown {
+  from {
+    top: -135px;
+  }
+  to {
+    top: 135px;
+  }
+}
+
+.animation {
+  z-index: 100;
+  animation-name: slideDown;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  top: 135px;
+}
+
+div.disabled {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 60%;
+  background-color: #0d0d0d;
+  opacity: 0.5;
+}
+
+@keyframes cartSlide {
+  from {
+    right: -40%;
+  }
+  to {
+    right: 0;
+  }
+}
+
+div.cart {
+  position: absolute;
+  top: 0;
+  right: -40%;
+  height: 100%;
+  width: 40%;
+  background-color: pink;
+  animation-name: cartSlide;
+  animation-duration: 0.7s;
+  animation-fill-mode: forwards;
 }
