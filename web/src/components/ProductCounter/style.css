@@ -1,0 +1,43 @@
+div.counterContainer {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+div.counterContainer .plusButton {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  width: 30%;
+  background-color: #ffffff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+}
+
+div.counterContainer .minusButton {
+  position: absolute;
+  height: 100%;
+  right: 0;
+  width: 30%;
+  background-color: #ffffff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+  z-index: 100;
+}
+
+div.counterContainer .value {
+  position: absolute;
+  height: 100%;
+  width: 40%;
+  left: 30%;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+}
+
+.minusButton :hover {
+  cursor: pointer;
+}

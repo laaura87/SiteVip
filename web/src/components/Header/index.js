@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 
 import "./style.css";
+import Cart from "../Cart";
 
 function Component() {
-  const [categoryHidden, setCategoryHidden] = useState("");
+  const [categoryHidden, setCategoryHidden] = useState("container");
   const [disabled, setDisabled] = useState("");
   const [cart, setCart] = useState("");
 
@@ -12,7 +13,7 @@ function Component() {
   };
 
   const handleProdutoHoverDown = () => {
-    setCategoryHidden("");
+    setCategoryHidden("container");
   };
 
   const handleCartClick = () => {
@@ -27,8 +28,15 @@ function Component() {
 
   return (
     <>
+      <div
+        className={`${categoryHidden}`}
+        onMouseOver={() => handleProdutoHoverUp()}
+        onMouseOut={() => handleProdutoHoverDown()}
+      >
+        <div className="headerContent"></div>
+      </div>
       <header>
-        <div className="header">
+        <div className={`header`}>
           <div className="headerContent clickable">
             <div className="logo">
               <img
@@ -56,16 +64,12 @@ function Component() {
             <div className="logout clickable">Logout</div>
           </div>
         </div>
-        <div
-          className={`container ${categoryHidden}`}
-          onMouseOver={() => handleProdutoHoverUp()}
-          onMouseOut={() => handleProdutoHoverDown()}
-        >
-          <div className="headerContent"></div>
-        </div>
       </header>
+
       <div className={disabled}></div>
-      <div className={cart} onClick={() => disableCart()}></div>
+      <div className={`${cart} default`}>
+        <Cart disableCart={() => disableCart()} />
+      </div>
     </>
   );
 }

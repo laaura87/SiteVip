@@ -15,10 +15,10 @@ div.container {
 
 div.headerContent {
   display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-column-gap: 15px;
-  margin-left: 15%;
-  margin-right: 15%;
+  margin-left: 10%;
+  margin-right: 10%;
   height: 100%;
 }
 
@@ -80,18 +80,23 @@ img.logo {
 @keyframes slideDown {
   from {
     top: -135px;
+    visibility: hidden;
   }
   to {
     top: 135px;
+    visibility: visible;
   }
 }
 
 .animation {
-  z-index: 100;
+  background-color: #dedede;
+  height: 260px;
+  width: 100%;
+  position: absolute;
   animation-name: slideDown;
   animation-duration: 1s;
   animation-fill-mode: forwards;
-  top: 135px;
+  z-index: 100;
 }
 
 div.disabled {
@@ -99,7 +104,7 @@ div.disabled {
   top: 0;
   left: 0;
   height: 100%;
-  width: 60%;
+  width: 100%;
   background-color: #0d0d0d;
   opacity: 0.5;
 }
@@ -119,8 +124,14 @@ div.cart {
   right: -40%;
   height: 100%;
   width: 40%;
-  background-color: pink;
+  background-color: #f2f2f2;
   animation-name: cartSlide;
   animation-duration: 0.7s;
   animation-fill-mode: forwards;
+}
+
+div.default {
+  position: absolute;
+  top: 0;
+  right: -40%;
 }
