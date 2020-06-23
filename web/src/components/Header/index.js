@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import "./style.css";
 import Cart from "../Cart";
@@ -6,7 +7,7 @@ import Cart from "../Cart";
 function Component() {
   const [categoryHidden, setCategoryHidden] = useState("container");
   const [disabled, setDisabled] = useState("");
-  const [cart, setCart] = useState("");
+  const [cart, setCart] = useState("default");
 
   const handleProdutoHoverUp = () => {
     setCategoryHidden("animation");
@@ -23,36 +24,33 @@ function Component() {
 
   const disableCart = () => {
     setDisabled("");
-    setCart("");
+    setCart("default");
   };
 
   return (
     <>
-      <div
-        className={`${categoryHidden}`}
-        onMouseOver={() => handleProdutoHoverUp()}
-        onMouseOut={() => handleProdutoHoverDown()}
-      >
-        <div className="headerContent"></div>
-      </div>
       <header>
         <div className={`header`}>
           <div className="headerContent clickable">
             <div className="logo">
-              <img
-                className="logo"
-                src={`${process.env.PUBLIC_URL}/images/vip_logo.png`}
-                alt="Logo"
-                width="120"
-                height="120"
-              />
+              <Link to="/">
+                <img
+                  className="logo"
+                  src={`${process.env.PUBLIC_URL}/images/vip_logo.png`}
+                  alt="Logo"
+                  width="120"
+                  height="120"
+                />
+              </Link>
             </div>
             <div
               className={`produtos clickable`}
               onMouseOver={() => handleProdutoHoverUp()}
               onMouseOut={() => handleProdutoHoverDown()}
             >
-              <p>Produtos</p>
+              <Link to="/products">
+                <p>Produtos</p>
+              </Link>
             </div>
             <div className="contato clickable">Contato</div>
             <div
@@ -65,10 +63,65 @@ function Component() {
           </div>
         </div>
       </header>
-
+      <div
+        className={`${categoryHidden}`}
+        onMouseOver={() => handleProdutoHoverUp()}
+        onMouseOut={() => handleProdutoHoverDown()}
+      >
+        <div className="categoryContent">
+          <div>
+            <p>Computadores</p>
+            <p>Computadores</p>
+            <p>Computadores</p>
+            <p>Computadores</p>
+            <p>Computadores</p>
+            <p>Computadores</p>
+          </div>
+          <div>
+            <p>Computadores</p>
+            <p>Computadores</p>
+            <p>Computadores</p>
+            <p>Computadores</p>
+            <p>Computadores</p>
+            <p>Computadores</p>
+          </div>
+          <div>
+            <p>Computadores</p>
+            <p>Computadores</p>
+            <p>Computadores</p>
+            <p>Computadores</p>
+            <p>Computadores</p>
+            <p>Computadores</p>
+          </div>
+          <div>
+            <p>Computadores</p>
+            <p>Computadores</p>
+            <p>Computadores</p>
+            <p>Computadores</p>
+            <p>Computadores</p>
+            <p>Computadores</p>
+          </div>
+          <div>
+            <p>Computadores</p>
+            <p>Computadores</p>
+            <p>Computadores</p>
+            <p>Computadores</p>
+            <p>Computadores</p>
+            <p>Computadores</p>
+          </div>
+          <div>
+            <p>Computadores</p>
+            <p>Computadores</p>
+            <p>Computadores</p>
+            <p>Computadores</p>
+            <p>Computadores</p>
+            <p>Computadores</p>
+          </div>
+        </div>
+      </div>
       <div className={disabled}></div>
-      <div className={`${cart} default`}>
-        <Cart disableCart={() => disableCart()} />
+      <div className={`${cart}`}>
+        {/*<Cart disableCart={() => disableCart()} />*/}
       </div>
     </>
   );
