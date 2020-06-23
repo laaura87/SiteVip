@@ -8,6 +8,6 @@ routes.get("/", (req, res) => {
   });
 });
 
-routes.get("/produto", ProdutoController.index);
+routes.get("/products", ProdutoController.index);
 
 module.exports = routes;

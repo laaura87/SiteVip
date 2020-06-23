@@ -7,4 +7,7 @@ const connection = require("knex")({
   },
 });
 
+const { attachPaginate } = require("knex-paginate");
+attachPaginate();
+
 module.exports = connection;
