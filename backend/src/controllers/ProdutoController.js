@@ -25,7 +25,7 @@ module.exports = {
         "SIAC_TS.VW_PRODUTO.PROD_QTD_ATUAL"
       )
       .distinct()
-      .paginate({ perPage: 40, currentPage: req.query.page || 1 })
+      .paginate({ perPage: 16, currentPage: req.query.page || 1 })
       .catch((err) => {
         console.log(err);
         return false;

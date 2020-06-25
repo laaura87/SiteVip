@@ -14,12 +14,10 @@ function Component({ name, price }) {
       />
       <div className="name">{name}</div>
       <div className="price">{price}</div>
-      <div className="buttonContainer">
-        <DefaultButton
-          text="Adicionar no Carrinho"
-          onClick={() => alert("huhuhuh")}
-        />
-      </div>
+      <DefaultButton
+        text="Adicionar no Carrinho"
+        onClick={() => alert("huhuhuh")}
+      />
     </div>
   );
 }
