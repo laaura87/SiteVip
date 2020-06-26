@@ -1,6 +1,7 @@
 const routes = require("express").Router();
 
 const ProdutoController = require("./controllers/ProdutoController");
+const CategoriaController = require("./controllers/CategoriaController");
 
 routes.get("/", (req, res) => {
   res.json({
@@ -9,5 +10,8 @@ routes.get("/", (req, res) => {
 });
 
 routes.get("/products", ProdutoController.index);
+routes.get("/products/:prodCodigo", ProdutoController.show);
+
+routes.get("/categories", CategoriaController.index);
 
 module.exports = routes;

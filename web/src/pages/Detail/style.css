@@ -1,0 +1,36 @@
+.productContainer {
+  display: grid;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-column-gap: 15px;
+  margin-left: 10%;
+  margin-right: 10%;
+  height: auto;
+  background-color: brown;
+}
+
+.productContainer .imgContainer {
+  margin-top: 50px;
+  grid-column-start: 2;
+  grid-column-end: 6;
+  height: 470px;
+  background-color: chocolate;
+}
+
+.productContainer .info {
+  margin-top: 50px;
+  grid-column-start: 8;
+  grid-column-end: 12;
+  height: 700px;
+  background-color: chocolate;
+}
+
+.relatedProducts {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 3fr 3fr 3fr 3fr;
+  grid-column-gap: 15px;
+  margin-left: 10%;
+  margin-right: 10%;
+  height: auto;
+}

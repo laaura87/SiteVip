@@ -5,9 +5,9 @@ import DefaultButton from "../DefaultButton";
 
 function Component() {
   return (
-    <form className="search">
+    <form className="search" method="GET" action="/products">
       <div className="inputContainer">
-        <input type="text" placeholder="Pesquisar Produto" />
+        <input type="text" placeholder="Pesquisar Produto" name="description" />
       </div>
       <div className="searchContainer">
         <DefaultButton text="Pesquisar" />

@@ -105,10 +105,11 @@ img.logo {
 
 .animation {
   background-color: #dedede;
-  height: 260px;
+  height: auto;
   position: absolute;
   top: 135px;
   left: 0;
+  font-family: "Roboto", sans-serif;
   animation-name: slideDown;
   animation-duration: 1s;
   animation-fill-mode: forwards;

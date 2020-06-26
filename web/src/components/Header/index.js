@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import api from "../../services/api";
 
 import "./style.css";
 import Cart from "../Cart";
@@ -8,6 +9,18 @@ function Component() {
   const [categoryHidden, setCategoryHidden] = useState("container");
   const [disabled, setDisabled] = useState("");
   const [cart, setCart] = useState("default");
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const loadCategories = async () => {
+      setCategories(
+        await api.get("/categories").then((response) => {
+          return response.data;
+        })
+      );
+    };
+    loadCategories();
+  }, []);
 
   const handleProdutoHoverUp = () => {
     setCategoryHidden("animation");
@@ -48,18 +61,18 @@ function Component() {
               onMouseOver={() => handleProdutoHoverUp()}
               onMouseOut={() => handleProdutoHoverDown()}
             >
-              <Link to="/products">
-                <p>Produtos</p>
+              <Link to="/products?page=1">
+                <p>PRODUTOS</p>
               </Link>
             </div>
-            <div className="contato clickable">Contato</div>
+            <div className="contato clickable">CONTATO</div>
             <div
               className="carrinho clickable"
               onClick={() => handleCartClick()}
             >
-              Carrinho
+              CARRINHO
             </div>
-            <div className="logout clickable">Logout</div>
+            <div className="logout clickable">LOGOUT</div>
           </div>
         </div>
       </header>
@@ -69,54 +82,13 @@ function Component() {
         onMouseOut={() => handleProdutoHoverDown()}
       >
         <div className="categoryContent">
-          <div>
-            <p>Computadores</p>
-            <p>Computadores</p>
-            <p>Computadores</p>
-            <p>Computadores</p>
-            <p>Computadores</p>
-            <p>Computadores</p>
-          </div>
-          <div>
-            <p>Computadores</p>
-            <p>Computadores</p>
-            <p>Computadores</p>
-            <p>Computadores</p>
-            <p>Computadores</p>
-            <p>Computadores</p>
-          </div>
-          <div>
-            <p>Computadores</p>
-            <p>Computadores</p>
-            <p>Computadores</p>
-            <p>Computadores</p>
-            <p>Computadores</p>
-            <p>Computadores</p>
-          </div>
-          <div>
-            <p>Computadores</p>
-            <p>Computadores</p>
-            <p>Computadores</p>
-            <p>Computadores</p>
-            <p>Computadores</p>
-            <p>Computadores</p>
-          </div>
-          <div>
-            <p>Computadores</p>
-            <p>Computadores</p>
-            <p>Computadores</p>
-            <p>Computadores</p>
-            <p>Computadores</p>
-            <p>Computadores</p>
-          </div>
-          <div>
-            <p>Computadores</p>
-            <p>Computadores</p>
-            <p>Computadores</p>
-            <p>Computadores</p>
-            <p>Computadores</p>
-            <p>Computadores</p>
-          </div>
+          {/*categories.map((category, index) => {
+            return (
+              <div key={index}>
+                <Link className="clickable">{category.SUB_GRP_DESCRICAO}</Link>
+              </div>
+            );
+          })*/}
         </div>
       </div>
       <div className={disabled}></div>
