@@ -1,25 +1,30 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./style.css";
 
 import DefaultButton from "../DefaultButton";
 
-function Component({ name, price, image }) {
+function Component({ name, price, image, id }) {
   return (
     <div className="product">
       {image ? (
-        <img
-          id="img"
-          src={"http://187.84.80.162/imagens/" + image}
-          alt="produto"
-          className="image"
-        />
+        <Link to={`/products/${id}`}>
+          <img
+            id="img"
+            src={"http://187.84.80.162/imagens/" + image}
+            alt="produto"
+            className="image"
+          />
+        </Link>
       ) : (
-        <img
-          id="img"
-          src={process.env.PUBLIC_URL + "/images/no-image.png"}
-          alt="produto"
-          className="image"
-        />
+        <Link to={`/products/${id}`}>
+          <img
+            id="img"
+            src={process.env.PUBLIC_URL + "/images/no-image.png"}
+            alt="produto"
+            className="image"
+          />
+        </Link>
       )}
       <div className="name">{name}</div>
       <div className="price">

@@ -2,6 +2,10 @@ const connection = require("../connection");
 
 module.exports = {
   async index(req, res) {
+    let description;
+    req.query.description
+      ? (description = req.query.description.toUpperCase())
+      : (description = "%");
     const produtos = await connection("SIAC_TS.VW_PRODUTO")
       .where("FIL_CODIGO", 2)
       .andWhere("PROD_ATIVO", "S")
@@ -10,11 +14,7 @@ module.exports = {
         "LIKE",
         req.query.category || "%"
       )
-      .andWhere(
-        "PROD_DESCRICAO",
-        "LIKE",
-        `%${req.query.description.toUpperCase() || "%"}%`
-      )
+      .andWhere("PROD_DESCRICAO", "LIKE", `%${description}%`)
       .join(
         "SIAC_TS.VW_SUBGRUPO",
         "SIAC_TS.VW_PRODUTO.SUB_GRP_CODIGO",
@@ -114,6 +114,7 @@ module.exports = {
         "SIAC_TS.VW_SUBGRUPO.SUB_GRP_DESCRICAO",
         "SIAC_TS.VW_PRODUTO.PROD_QTD_ATUAL"
       )
+      .orderByRaw("dbms_random. value")
       .limit(4)
       .catch((err) => {
         console.log(err);
@@ -124,28 +125,15 @@ module.exports = {
       .where("PROD_CODIGO", product.PROD_CODIGO)
       .select("PROD_IMAG_DESCRICAO", "PROD_IMAG_NOME")
       .then((response) => {
-        if (response.length === 0) {
-          const obj = {
-            PROD_CODIGO: product.PROD_CODIGO,
-            PROD_DESCRICAO: product.PROD_DESCRICAO,
-            PROD_PRECO_VENDA: product.PROD_PRECO_VENDA,
-            SUB_GRP_DESCRICAO: product.SUB_GRP_DESCRICAO,
-            PROD_QTD_ATUAL: product.PROD_QTD_ATUAL,
-            PROD_IMAG_NOME: false,
-            PROD_IMAG_DESCRICAO: false,
-          };
-          return obj;
-        } else {
-          const obj = {
-            PROD_CODIGO: product.PROD_CODIGO,
-            PROD_DESCRICAO: product.PROD_DESCRICAO,
-            PROD_PRECO_VENDA: product.PROD_PRECO_VENDA,
-            SUB_GRP_DESCRICAO: product.SUB_GRP_DESCRICAO,
-            PROD_QTD_ATUAL: product.PROD_QTD_ATUAL,
-            PROD_IMAG: response,
-          };
-          return obj;
-        }
+        const obj = {
+          PROD_CODIGO: product.PROD_CODIGO,
+          PROD_DESCRICAO: product.PROD_DESCRICAO,
+          PROD_PRECO_VENDA: product.PROD_PRECO_VENDA,
+          SUB_GRP_DESCRICAO: product.SUB_GRP_DESCRICAO,
+          PROD_QTD_ATUAL: product.PROD_QTD_ATUAL,
+          PROD_IMAG: response,
+        };
+        return obj;
       })
       .catch((err) => {
         console.log(err);

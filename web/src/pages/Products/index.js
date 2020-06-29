@@ -72,6 +72,7 @@ function Products({ history }) {
           return (
             <Card
               key={product.PROD_CODIGO}
+              id={product.PROD_CODIGO}
               name={product.PROD_DESCRICAO}
               price={product.PROD_PRECO_VENDA}
               image={product.PROD_IMAG_NOME}
