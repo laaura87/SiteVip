@@ -9,7 +9,7 @@ div.bodyContainer {
 }
 
 div.bodyContainer .banner {
-  margin-top: 120px;
+  margin-top: 40px;
   height: 480px;
   grid-column-start: 1;
   grid-column-end: 5;

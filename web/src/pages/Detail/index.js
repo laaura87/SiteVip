@@ -52,6 +52,7 @@ function Detail({ match: { params } }) {
       }
 
       setRelatedProducts(data.relatedProducts);
+      window.scrollTo(0, 0);
     };
     loadProduct();
   }, [params.prodCodigo]);

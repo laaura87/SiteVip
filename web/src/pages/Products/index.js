@@ -27,6 +27,7 @@ function Products({ history }) {
         });
 
       setProducts(products);
+      window.scrollTo(0, 0);
     };
     loadProducts();
   }, [page, description]);

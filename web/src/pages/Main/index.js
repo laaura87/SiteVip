@@ -1,19 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
 
 import Header from "../../components/Header";
 import Card from "../../components/Card";
 import Footer from "../../components/Footer";
+import api from "../../services/api";
 
 function Main() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      await api
+        .get("/rand")
+        .then((response) => {
+          setProducts(response.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    loadProducts();
+  }, []);
+
   return (
     <>
       <Header />
       <div className="bodyContainer">
-        <Card name="Produto A" price="R$20,00" />
-        <Card name="Produto B" price="R$20,00" />
-        <Card name="Produto C" price="R$20,00" />
-        <Card name="Produto D" price="R$20,00" />
         <div className="banner">
           <img
             src={process.env.PUBLIC_URL + "/images/banner.jpg"}
@@ -32,6 +45,17 @@ function Main() {
             atender
           </div>
         </div>
+        {products.map((product) => {
+          return (
+            <Card
+              name={product.PROD_DESCRICAO}
+              price={product.PROD_PRECO_VENDA}
+              id={product.PROD_CODIGO}
+              key={product.PROD_CODIGO}
+              image={product.PROD_IMAG_NOME}
+            />
+          );
+        })}
       </div>
       <Footer />
     </>

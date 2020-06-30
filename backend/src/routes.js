@@ -11,6 +11,7 @@ routes.get("/", (req, res) => {
 
 routes.get("/products", ProdutoController.index);
 routes.get("/products/:prodCodigo", ProdutoController.show);
+routes.get("/rand", ProdutoController.random);
 
 routes.get("/categories", CategoriaController.index);
 
