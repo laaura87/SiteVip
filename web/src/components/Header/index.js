@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from "../../services/api";
+import { onSignOut } from "../../services/auth";
 
 import "./style.css";
 import Cart from "../Cart";
@@ -14,9 +15,13 @@ function Component() {
   useEffect(() => {
     const loadCategories = async () => {
       setCategories(
-        await api.get("/categories").then((response) => {
-          return response.data;
-        })
+        await api
+          .get("/categories", {
+            headers: { "x-access-token": sessionStorage.getItem("token") },
+          })
+          .then((response) => {
+            return response.data;
+          })
       );
     };
     loadCategories();
@@ -46,7 +51,7 @@ function Component() {
         <div className={`header`}>
           <div className="headerContent clickable">
             <div className="logo">
-              <Link to="/">
+              <Link to="/home">
                 <img
                   className="logo"
                   src={`${process.env.PUBLIC_URL}/images/vip_logo.png`}
@@ -72,7 +77,15 @@ function Component() {
             >
               CARRINHO
             </div>
-            <div className="logout clickable">LOGOUT</div>
+            <div
+              className="logout clickable"
+              onClick={() => {
+                onSignOut();
+                window.location.href = "/";
+              }}
+            >
+              LOGOUT
+            </div>
           </div>
         </div>
       </header>

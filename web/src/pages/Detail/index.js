@@ -24,7 +24,9 @@ function Detail({ match: { params } }) {
   useEffect(() => {
     const loadProduct = async () => {
       const data = await api
-        .get(`/products/${params.prodCodigo}`)
+        .get(`/products/${params.prodCodigo}`, {
+          headers: { "x-access-token": sessionStorage.getItem("token") },
+        })
         .then((response) => {
           return response.data;
         });

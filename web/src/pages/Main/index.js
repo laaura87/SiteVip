@@ -12,7 +12,9 @@ function Main() {
   useEffect(() => {
     const loadProducts = async () => {
       await api
-        .get("/rand")
+        .get("/rand", {
+          headers: { "x-access-token": sessionStorage.getItem("token") },
+        })
         .then((response) => {
           setProducts(response.data);
         })
