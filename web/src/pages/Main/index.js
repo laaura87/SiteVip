@@ -12,7 +12,7 @@ function Main() {
   useEffect(() => {
     const loadProducts = async () => {
       await api
-        .get("/rand", {
+        .get(`/rand?filial=${sessionStorage.getItem("filial")}`, {
           headers: { "x-access-token": sessionStorage.getItem("token") },
         })
         .then((response) => {

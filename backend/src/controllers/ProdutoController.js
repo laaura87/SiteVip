@@ -7,7 +7,7 @@ module.exports = {
       ? (description = req.query.description.toUpperCase())
       : (description = "%");
     const produtos = await connection("SIAC_TS.VW_PRODUTO")
-      .where("FIL_CODIGO", 2)
+      .where("FIL_CODIGO", req.query.filial || 0)
       .andWhere("PROD_ATIVO", "S")
       .andWhere(
         "SIAC_TS.VW_SUBGRUPO.SUB_GRP_DESCRICAO",
@@ -78,7 +78,7 @@ module.exports = {
 
   async show(req, res) {
     const product = await connection("SIAC_TS.VW_PRODUTO")
-      .where("FIL_CODIGO", 2)
+      .where("FIL_CODIGO", req.query.filial || 0)
       .andWhere("PROD_CODIGO", req.params.prodCodigo)
       .join(
         "SIAC_TS.VW_SUBGRUPO",
@@ -110,7 +110,7 @@ module.exports = {
       });
     }
     const relatedProducts = await connection("SIAC_TS.VW_PRODUTO")
-      .where("FIL_CODIGO", 2)
+      .where("FIL_CODIGO", req.query.filial || 0)
       .andWhere("SUB_GRP_DESCRICAO", product.SUB_GRP_DESCRICAO)
       .join(
         "SIAC_TS.VW_SUBGRUPO",
@@ -197,7 +197,7 @@ module.exports = {
 
   async random(req, res) {
     const produtos = await connection("SIAC_TS.VW_PRODUTO")
-      .where("FIL_CODIGO", 2)
+      .where("FIL_CODIGO", req.query.filial || 0)
       .andWhere("PROD_ATIVO", "S")
       .join(
         "SIAC_TS.VW_SUBGRUPO",

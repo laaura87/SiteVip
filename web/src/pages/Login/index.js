@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
 import DefaultButton from "../../components/DefaultButton";
 import InputMask from "react-input-mask";
@@ -8,15 +8,33 @@ import { onSignIn } from "../../services/auth";
 function Login() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [filiais, setFiliais] = useState([]);
+  const [selectOption, setSelectedOption] = useState("1");
 
   const handleLogin = async () => {
     const result = await onSignIn(login, password);
     if (result) {
+      sessionStorage.setItem("filial", selectOption);
       window.location.href = "/home";
     } else {
       alert("Login ou senha inválidos. Tente novamente");
     }
   };
+
+  useEffect(() => {
+    const loadFiliais = () => {
+      api
+        .get("/filial")
+        .then((response) => {
+          setFiliais(response.data);
+        })
+        .catch((err) => {
+          alert("Serviço Indisponível no momento");
+          console.log(err);
+        });
+    };
+    loadFiliais();
+  });
 
   return (
     <div className="full-screen">
@@ -58,6 +76,23 @@ function Login() {
                 setPassword(event.target.value);
               }}
             />
+          </div>
+          <div className="block">
+            <label to="filial">Filial:</label>
+            <select
+              name="filial"
+              id="filial"
+              className="input-login"
+              onChange={(event) => setSelectedOption(event.target.value)}
+            >
+              {filiais.map((filial, index) => {
+                return (
+                  <option value={filial.FIL_CODIGO} key={index}>
+                    {filial.FIL_NOME}
+                  </option>
+                );
+              })}
+            </select>
           </div>
           <div className="login-button-container">
             <DefaultButton

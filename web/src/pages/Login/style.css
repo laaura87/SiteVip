@@ -43,7 +43,7 @@
   top: 5%;
   font-family: "Roboto", "Sans-Serif";
   color: #0d0d0d;
-  font-size: 20px;
+  font-size: 17px;
   border: 2px solid #8c2a32;
   border-radius: 15px;
 }
@@ -51,7 +51,7 @@
 .input-login {
   width: 75%;
   margin-left: 12.5%;
-  font-size: 20px;
+  font-size: 17px;
   background-color: #f2f2f2;
 }
 .block label {
@@ -59,14 +59,14 @@
   margin-left: 12.5%;
 }
 .block {
-  margin-top: 5%;
+  margin-top: 1%;
 }
 
 .login-button-container {
   width: 75%;
   margin-left: 12.5%;
   font-size: 20px;
-  margin-top: 25%;
+  margin-top: 20%;
 }
 
 .login-page-logo {
@@ -77,4 +77,9 @@
   margin-left: auto;
   margin-right: auto;
   background-color: #dedede;
+}
+
+select {
+  height: 40px;
+  border-radius: 7px;
 }

@@ -21,9 +21,14 @@ function Products({ history }) {
     const loadProducts = async () => {
       setPage(page);
       const products = await api
-        .get(`/products?page=${page}&description=${description || ""}`, {
-          headers: { "x-access-token": sessionStorage.getItem("token") },
-        })
+        .get(
+          `/products?page=${page}&description=${
+            description || ""
+          }&filial=${sessionStorage.getItem("filial")}`,
+          {
+            headers: { "x-access-token": sessionStorage.getItem("token") },
+          }
+        )
         .then((response) => {
           return response.data;
         });
