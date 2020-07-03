@@ -106,7 +106,7 @@ function Component() {
       </div>
       <div className={disabled}></div>
       <div className={`${cart}`}>
-        {/*<Cart disableCart={() => disableCart()} />*/}
+        <Cart disableCart={() => disableCart()} />
       </div>
     </>
   );

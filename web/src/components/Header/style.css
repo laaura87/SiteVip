@@ -120,7 +120,7 @@ div.disabled {
   position: absolute;
   top: 0;
   left: 0;
-  height: 1480px;
+  height: 100%;
   width: 100%;
   background-color: #0d0d0d;
   opacity: 0.5;
@@ -140,7 +140,7 @@ div.cart {
   visibility: visible;
   top: 0;
   right: 0;
-  height: 1480px;
+  min-height: 100vmax;
   z-index: 99999999999;
   background-color: #f2f2f2;
   animation-name: cartSlide;

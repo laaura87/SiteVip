@@ -4,6 +4,7 @@ const ProdutoController = require("./controllers/ProdutoController");
 const CategoriaController = require("./controllers/CategoriaController");
 const UsuarioController = require("./controllers/UsuarioController");
 const FilialController = require("./controllers/FilialController");
+const CarrinhoController = require("./controllers/CarrinhoController");
 const auth = require("./services/auth");
 
 routes.get("/", (req, res) => {
@@ -20,5 +21,19 @@ routes.get("/rand", auth, ProdutoController.random);
 routes.get("/categories", auth, CategoriaController.index);
 
 routes.get("/filial", FilialController.index);
+
+routes.get("/cart", auth, CarrinhoController.index);
+routes.get("/cart/:filial/:codigo/:prodCodigo", auth, CarrinhoController.show);
+routes.post("/cart", auth, CarrinhoController.insert);
+routes.put(
+  "/cart/:filial/:codigo/:prodCodigo",
+  auth,
+  CarrinhoController.update
+);
+routes.delete(
+  "/cart/:filial/:codigo/:prodCodigo",
+  auth,
+  CarrinhoController.delete
+);
 
 module.exports = routes;

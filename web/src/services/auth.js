@@ -9,6 +9,7 @@ export const onSignIn = async (codigo, senha) => {
     .then(function (response) {
       if (response.data) {
         sessionStorage.setItem("token", response.data.token);
+        sessionStorage.setItem("codigo", response.data.codigo);
         return true;
       } else {
         return false;

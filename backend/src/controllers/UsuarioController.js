@@ -6,7 +6,7 @@ module.exports = {
   async login(req, res) {
     const cliente = await connection("CLIENTE_SENHA")
       .where("CLIE_CPFCNPJ", req.body.clieCpfCnpj)
-      .select("CLIE_CPFCNPJ", "SENHA_MD5")
+      .select("CLIE_CPFCNPJ", "SENHA_MD5", "CLIE_CODIGO")
       .catch(function (err) {
         console.log(err.message);
         return false;
@@ -37,6 +37,7 @@ module.exports = {
       );
 
       return res.status(200).json({
+        codigo: cliente[0].CLIE_CODIGO,
         token,
       });
     } else {
