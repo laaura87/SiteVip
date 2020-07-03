@@ -52,7 +52,7 @@ div.produtos {
 }
 
 div.produtos p {
-  padding-top: 40.5px;
+  padding-top: 56px;
 }
 
 div.contato {
@@ -158,5 +158,22 @@ div.default {
 
 a {
   text-decoration: none;
+  color: #0d0d0d;
+}
+.nav {
+  background-color: #8c2a32;
+  color: #f2f2f2;
+  overflow: auto;
+  white-space: nowrap;
+  height: 80px;
+}
+
+.navItem {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.navItem:hover {
+  cursor: pointer;
   color: #0d0d0d;
 }

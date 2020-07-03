@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from "../../services/api";
 import { onSignOut } from "../../services/auth";
+import Navbar from "react-bootstrap/Navbar";
 
 import "./style.css";
+import "react-perfect-scrollbar/dist/css/styles.css";
+import PerfectScrollbar from "react-perfect-scrollbar";
 import Cart from "../Cart";
 
 function Component() {
@@ -16,7 +19,7 @@ function Component() {
     const loadCategories = async () => {
       setCategories(
         await api
-          .get("/categories", {
+          .get(`/categories?filial=${sessionStorage.getItem("filial")}`, {
             headers: { "x-access-token": sessionStorage.getItem("token") },
           })
           .then((response) => {
@@ -89,21 +92,17 @@ function Component() {
           </div>
         </div>
       </header>
-      <div
+      {/*<div
         className={`${categoryHidden}`}
         onMouseOver={() => handleProdutoHoverUp()}
         onMouseOut={() => handleProdutoHoverDown()}
-      >
-        <div className="categoryContent">
-          {/*categories.map((category, index) => {
-            return (
-              <div key={index}>
-                <Link className="clickable">{category.SUB_GRP_DESCRICAO}</Link>
-              </div>
-            );
-          })*/}
-        </div>
-      </div>
+      >*/}
+      <Navbar collapseOnSelect expand="lg" className="nav">
+        {categories.map((category) => {
+          return <div className="navItem">{category.GRP_DESCRICAO}</div>;
+        })}
+      </Navbar>
+      {/*</div>*/}
       <div className={disabled}></div>
       <div className={`${cart}`}>
         <Cart disableCart={() => disableCart()} />

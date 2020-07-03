@@ -5,6 +5,7 @@ const CategoriaController = require("./controllers/CategoriaController");
 const UsuarioController = require("./controllers/UsuarioController");
 const FilialController = require("./controllers/FilialController");
 const CarrinhoController = require("./controllers/CarrinhoController");
+const VendaController = require("./controllers/VendaController");
 const auth = require("./services/auth");
 
 routes.get("/", (req, res) => {
@@ -35,5 +36,7 @@ routes.delete(
   auth,
   CarrinhoController.delete
 );
+
+routes.post("/checkout", auth, VendaController.insert);
 
 module.exports = routes;
