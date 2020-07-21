@@ -11,7 +11,7 @@ function Component({ name, price, image, id }) {
         <Link to={`/products/${id}`}>
           <img
             id="img"
-            src={"http://187.84.80.162/imagens/" + image}
+            src={"http://187.84.80.162:8082/imagens/" + image}
             alt="produto"
             className="image"
           />

@@ -48,8 +48,8 @@ function Detail({ match: { params } }) {
         setImages(
           data.product.PROD_IMAG.map((image) => {
             return {
-              original: `http://187.84.80.162/imagens/${image.PROD_IMAG_NOME}`,
-              thumbnail: `http://187.84.80.162/imagens/${image.PROD_IMAG_NOME}`,
+              original: `http://187.84.80.162:8082/imagens/${image.PROD_IMAG_NOME}`,
+              thumbnail: `http://187.84.80.162:8082/imagens/${image.PROD_IMAG_NOME}`,
               descriptionn: image.PROD_IMAG_DESCRICAO,
               thumbnailClass: "thumbContainer",
               sizes: { width: "100%", height: "490px" },

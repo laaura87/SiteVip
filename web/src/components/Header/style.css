@@ -157,6 +157,10 @@ div.default {
 }
 
 a {
+  color: #0d0d0d;
+}
+
+a:hover {
   text-decoration: none;
   color: #0d0d0d;
 }

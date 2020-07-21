@@ -6,7 +6,6 @@ import Navbar from "react-bootstrap/Navbar";
 
 import "./style.css";
 import "react-perfect-scrollbar/dist/css/styles.css";
-import PerfectScrollbar from "react-perfect-scrollbar";
 import Cart from "../Cart";
 
 function Component() {
@@ -64,11 +63,7 @@ function Component() {
                 />
               </Link>
             </div>
-            <div
-              className={`produtos clickable`}
-              onMouseOver={() => handleProdutoHoverUp()}
-              onMouseOut={() => handleProdutoHoverDown()}
-            >
+            <div className={`produtos clickable`}>
               <Link to="/products?page=1">
                 <p>PRODUTOS</p>
               </Link>
