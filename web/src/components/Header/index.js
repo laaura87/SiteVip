@@ -7,11 +7,12 @@ import Navbar from "react-bootstrap/Navbar";
 import "./style.css";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import Cart from "../Cart";
+import cn from "classnames";
 
 function Component() {
   const [categoryHidden, setCategoryHidden] = useState("container");
   const [disabled, setDisabled] = useState("");
-  const [cart, setCart] = useState("default");
+  const [cart, setCart] = useState(false);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -39,12 +40,21 @@ function Component() {
 
   const handleCartClick = () => {
     setDisabled("disabled");
-    setCart("cart");
+    setCart(true);
+    document.body.classList.add("no-scroll");
   };
 
   const disableCart = () => {
     setDisabled("");
-    setCart("default");
+    setCart(false);
+    document.body.classList.remove("no-scroll");
+  };
+
+  const horizontalScroll = (event) => {
+    var list = event.currentTarget.firstChild;
+    var delta = event.deltaX == 0 ? event.deltaY : event.deltaX;
+    list.scrollLeft += delta;
+    event.preventDefault();
   };
 
   return (
@@ -92,14 +102,26 @@ function Component() {
         onMouseOver={() => handleProdutoHoverUp()}
         onMouseOut={() => handleProdutoHoverDown()}
       >*/}
-      <Navbar collapseOnSelect expand="lg" className="nav">
-        {categories.map((category) => {
-          return <div className="navItem">{category.GRP_DESCRICAO}</div>;
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        id="container"
+        className="nav"
+        onWheel={(event) => {
+          horizontalScroll(event);
+        }}
+      >
+        {categories.map((category, index) => {
+          return (
+            <div key={index} className="navItem">
+              {category.GRP_DESCRICAO}
+            </div>
+          );
         })}
       </Navbar>
       {/*</div>*/}
       <div className={disabled}></div>
-      <div className={`${cart}`}>
+      <div className={cn({ cart: true, active: cart })}>
         <Cart disableCart={() => disableCart()} />
       </div>
     </>
