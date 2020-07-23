@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from "../../services/api";
 import { onSignOut } from "../../services/auth";
-import Navbar from "react-bootstrap/Navbar";
 
 import "./style.css";
 import "react-perfect-scrollbar/dist/css/styles.css";
@@ -102,23 +101,7 @@ function Component() {
         onMouseOver={() => handleProdutoHoverUp()}
         onMouseOut={() => handleProdutoHoverDown()}
       >*/}
-      <Navbar
-        collapseOnSelect
-        expand="lg"
-        id="container"
-        className="nav"
-        onWheel={(event) => {
-          horizontalScroll(event);
-        }}
-      >
-        {categories.map((category, index) => {
-          return (
-            <div key={index} className="navItem">
-              {category.GRP_DESCRICAO}
-            </div>
-          );
-        })}
-      </Navbar>
+
       {/*</div>*/}
       <div className={disabled}></div>
       <div className={cn({ cart: true, active: cart })}>

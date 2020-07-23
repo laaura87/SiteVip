@@ -40,9 +40,7 @@ div.product .buttonContainer {
 }
 
 div.product:hover {
-  border-width: 1px;
-  border-style: solid;
-  border-color: #dedede;
+  cursor: pointer;
 }
 
 div.product img:hover {

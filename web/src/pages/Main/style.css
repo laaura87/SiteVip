@@ -1,4 +1,4 @@
-div.bodyContainer {
+div.body-product-container {
   display: grid;
   grid-template-columns: 3fr 3fr 3fr 3fr;
   grid-column-gap: 15px;
@@ -8,43 +8,49 @@ div.bodyContainer {
   height: auto;
 }
 
-div.bodyContainer .banner {
-  margin-top: 40px;
-  height: 480px;
-  grid-column-start: 1;
-  grid-column-end: 5;
+div.big-category {
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: 6fr 6fr;
+  grid-column-gap: 15px;
+  margin-left: 10%;
+  margin-right: 10%;
+  width: 80%;
+  height: auto;
+}
+
+div.banner {
+  min-height: 100vh;
   position: relative;
 }
 
-div.bodyContainer .banner .effect {
+div.banner .title {
   position: absolute;
-  background-color: #8c2a32;
-  height: 100%;
-  width: 100%;
-  opacity: 0.65;
-  top: 0;
-}
-
-div.bodyContainer .banner .title {
-  position: absolute;
-  top: 0;
+  top: 30%;
   left: 10%;
   width: 80%;
   margin-top: 10px;
   font-family: "Roboto", sans-serif;
-  font-size: 32px;
+  font-size: 56px;
   color: #f2f2f2;
 }
 
-div.bodyContainer .banner .textBody {
+div.banner .textBody {
   position: absolute;
   top: 40%;
   left: 10%;
-  width: 40%;
+  width: 30%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
   font-family: "Roboto", sans-serif;
   font-size: 18px;
   color: #f2f2f2;
+}
+
+div.banner .main-form {
+  position: absolute;
+  top: 5%;
+  width: 100%;
+  align-items: center;
 }

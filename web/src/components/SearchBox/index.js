@@ -3,14 +3,14 @@ import "./style.css";
 
 import DefaultButton from "../DefaultButton";
 
-function Component() {
+function Component({ placeholder }) {
   return (
     <form className="search" method="GET" action="/products">
       <div className="inputContainer">
-        <input type="text" placeholder="Pesquisar Produto" name="description" />
+        <input type="text" placeholder={placeholder} name="description" />
       </div>
       <div className="searchContainer">
-        <DefaultButton text="Pesquisar" />
+        <button className="button">Buscar</button>
       </div>
     </form>
   );
