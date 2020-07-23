@@ -30,10 +30,14 @@ function Component({ name, price, image, id }) {
       <div className="price">
         {price.toLocaleString("pt-br", { style: "currency", currency: "BRL" })}
       </div>
-      <DefaultButton
-        text="Adicionar no Carrinho"
-        onClick={() => alert("huhuhuh")}
-      />
+      <div class="overlay">
+        <DefaultButton
+          text="Adicionar no Carrinho"
+          onClick={() => {
+            alert("lalalaly");
+          }}
+        />
+      </div>
     </div>
   );
 }

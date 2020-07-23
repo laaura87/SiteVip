@@ -53,6 +53,8 @@
   margin-left: 12.5%;
   font-size: 17px;
   background-color: #f2f2f2;
+  border-radius: 7px;
+  height: 35px;
 }
 .block label {
   display: block;

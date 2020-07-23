@@ -1,35 +1,44 @@
 div.product {
   margin-top: 120px;
-  height: 480px;
-  background-color: #dedede;
+  height: 380px;
+  background-color: #f2f2f2;
+  text-align: center;
+  position: relative;
 }
 
 div.product .image {
   width: 100%;
   height: 288px;
-  background-color: #f2f2f2;
+  background-color: #dedede;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 div.product .name {
+  position: absolute;
+  top: 290px;
   margin-top: 6px;
-  line-height: 23px;
+  line-height: 18px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  height: calc(3 * 23px);
+  height: calc(2 * 18px);
   word-wrap: break-word;
   font-family: "Roboto", sans-serif;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 div.product .price {
+  position: absolute;
+  top: 326px;
   width: 100%;
   height: 30px;
   font-family: "Roboto", sans-serif;
-  font-size: 24px;
-  margin-bottom: 20px;
+  font-size: 16px;
+  margin-bottom: 5px;
 }
 
 div.product .buttonContainer {
@@ -45,4 +54,19 @@ div.product:hover {
 
 div.product img:hover {
   cursor: pointer;
+}
+
+div.product .overlay {
+  position: absolute;
+  left: 0;
+  top: 230px;
+  overflow: hidden;
+  width: 0;
+  height: auto;
+  transition: 0.5s ease;
+  transition-delay: 0.1s;
+}
+
+div.product:hover .overlay {
+  width: 100%;
 }

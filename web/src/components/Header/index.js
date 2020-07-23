@@ -76,6 +76,15 @@ function Component() {
               <Link to="/products?page=1">
                 <p>PRODUTOS</p>
               </Link>
+              <div className="categories">
+                {categories.map((category, index) => {
+                  return (
+                    <p key={index}>
+                      <strong>{category.GRP_DESCRICAO}</strong>
+                    </p>
+                  );
+                })}
+              </div>
             </div>
             <div className="contato clickable">CONTATO</div>
             <div
