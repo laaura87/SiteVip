@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 
 import DefaultButton from "../DefaultButton";
 
-function Component({ name, price, image, id }) {
+function Component({
+  name,
+  price,
+  image,
+  id,
+  buttonClass,
+  buttonClick,
+  buttonName,
+}) {
+  const [overlay, setOverlay] = useState("overlay");
+
+  useEffect(() => {
+    const checkOverlay = () => {
+      buttonClass ? setOverlay("fixed") : setOverlay("overlay");
+    };
+    checkOverlay();
+  }, [buttonClass]);
+
   return (
     <div className="product">
       {image ? (
@@ -30,12 +47,11 @@ function Component({ name, price, image, id }) {
       <div className="price">
         {price.toLocaleString("pt-br", { style: "currency", currency: "BRL" })}
       </div>
-      <div class="overlay">
+      <div className={overlay}>
         <DefaultButton
-          text="Adicionar no Carrinho"
-          onClick={() => {
-            alert("lalalaly");
-          }}
+          text={buttonName}
+          className={buttonClass}
+          onClick={buttonClick}
         />
       </div>
     </div>

@@ -70,3 +70,12 @@ div.product .overlay {
 div.product:hover .overlay {
   width: 100%;
 }
+
+div.product .fixed {
+  position: absolute;
+  left: 0;
+  top: 230px;
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+}

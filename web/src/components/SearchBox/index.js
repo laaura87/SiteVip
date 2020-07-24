@@ -1,8 +1,6 @@
 import React from "react";
 import "./style.css";
 
-import DefaultButton from "../DefaultButton";
-
 function Component({ placeholder }) {
   return (
     <form className="search" method="GET" action="/products">

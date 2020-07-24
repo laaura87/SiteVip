@@ -14,3 +14,22 @@ button.button:hover {
   background-color: #720000;
   cursor: pointer;
 }
+
+.success {
+  background-color: #28a745;
+  border: none;
+}
+
+.success:hover {
+  background-color: #28a745 !important;
+}
+
+.warning {
+  background-color: #ffc107;
+  color: #0d0d0d;
+  border: none;
+}
+
+.warning:hover {
+  background-color: #ffc107 !important;
+}

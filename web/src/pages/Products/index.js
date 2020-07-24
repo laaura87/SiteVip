@@ -6,21 +6,65 @@ import Footer from "../../components/Footer";
 import Card from "../../components/Card";
 import SearchBox from "../../components/SearchBox";
 import DefaultButton from "../../components/DefaultButton";
+import WarningButton from "../../components/WarningButton";
+import SuccessButton from "../../components/SuccessButton";
 
 import api from "../../services/api";
 
 function Products({ history }) {
   const query = new URLSearchParams(window.location.search);
+  const description = query.get("description") || null;
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(query.get("page") || "1");
-  const [description, setDescription] = useState(
-    query.get("description") || null
-  );
+  const [buttonState, setButtonState] = useState([]);
+  const [cardButtonName, setCardButtonName] = useState([]);
+
+  const handleButtonclick = async (index, prodCodigo) => {
+    await api
+      .post(
+        "/cart",
+        {
+          filial: sessionStorage.getItem("filial"),
+          codigo: sessionStorage.getItem("codigo"),
+          prodCodigo,
+          prodQtd: 1,
+        },
+        {
+          headers: { "x-access-token": sessionStorage.getItem("token") },
+        }
+      )
+      .then((response) => {
+        if (response.data) {
+          setButtonState((state) =>
+            state.map((item, i) => (index === i ? "success" : item))
+          );
+          setCardButtonName((state) =>
+            state.map((item, i) => (index === i ? <SuccessButton /> : item))
+          );
+        } else {
+          setButtonState((state) =>
+            state.map((item, i) => (index === i ? "warning" : item))
+          );
+          setCardButtonName((state) =>
+            state.map((item, i) => (index === i ? <WarningButton /> : item))
+          );
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setButtonState((state) =>
+          state.map((item, i) => (index === i ? "warning" : item))
+        );
+        setCardButtonName((state) =>
+          state.map((item, i) => (index === i ? <WarningButton /> : item))
+        );
+      });
+  };
 
   useEffect(() => {
     const loadProducts = async () => {
       setPage(page);
-      const products = await api
+      await api
         .get(
           `/products?page=${page}&description=${
             description || ""
@@ -30,10 +74,12 @@ function Products({ history }) {
           }
         )
         .then((response) => {
+          setProducts(response.data);
+          setButtonState(response.data.map(() => ""));
+          setCardButtonName(response.data.map(() => "Adicionar no Carrinho"));
           return response.data;
         });
 
-      setProducts(products);
       window.scrollTo(0, 0);
     };
     loadProducts();
@@ -76,7 +122,7 @@ function Products({ history }) {
       <Header />
       <SearchBox />
       <div className="bodyContent">
-        {products.map((product) => {
+        {products.map((product, index) => {
           return (
             <Card
               key={product.PROD_CODIGO}
@@ -84,6 +130,11 @@ function Products({ history }) {
               name={product.PROD_DESCRICAO}
               price={product.PROD_PRECO_VENDA}
               image={product.PROD_IMAG_NOME}
+              buttonClass={buttonState[index]}
+              buttonClick={() => {
+                handleButtonclick(index, product.PROD_CODIGO);
+              }}
+              buttonName={cardButtonName[index]}
             />
           );
         })}

@@ -7,6 +7,8 @@ import Footer from "../../components/Footer";
 import Card from "../../components/Card";
 import ProductCounter from "../../components/ProductCounter";
 import DefaultButton from "../../components/DefaultButton";
+import WarningButton from "../../components/WarningButton";
+import SuccessButton from "../../components/SuccessButton";
 import api from "../../services/api";
 
 function Detail({ match: { params } }) {
@@ -20,6 +22,84 @@ function Detail({ match: { params } }) {
   const [images, setImages] = useState([{ description: null }]);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [quantity, setQuantity] = useState(1);
+  const [buttonState, setButtonState] = useState([]);
+  const [cardButtonName, setCardButtonName] = useState([]);
+  const [buttonStateUnique, setButtonStateUnique] = useState("");
+  const [cardButtonNameUnique, setCardButtonNameUnique] = useState(
+    "Adicionar no Carrinho"
+  );
+
+  const handleButtonclick = async (index, prodCodigo) => {
+    await api
+      .post(
+        "/cart",
+        {
+          filial: sessionStorage.getItem("filial"),
+          codigo: sessionStorage.getItem("codigo"),
+          prodCodigo,
+          prodQtd: 1,
+        },
+        {
+          headers: { "x-access-token": sessionStorage.getItem("token") },
+        }
+      )
+      .then((response) => {
+        if (response.data) {
+          setButtonState((state) =>
+            state.map((item, i) => (index === i ? "success" : item))
+          );
+          setCardButtonName((state) =>
+            state.map((item, i) => (index === i ? <SuccessButton /> : item))
+          );
+        } else {
+          setButtonState((state) =>
+            state.map((item, i) => (index === i ? "warning" : item))
+          );
+          setCardButtonName((state) =>
+            state.map((item, i) => (index === i ? <WarningButton /> : item))
+          );
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setButtonState((state) =>
+          state.map((item, i) => (index === i ? "warning" : item))
+        );
+        setCardButtonName((state) =>
+          state.map((item, i) => (index === i ? <WarningButton /> : item))
+        );
+      });
+  };
+
+  const handleSingleButtonclick = async (prodCodigo) => {
+    await api
+      .post(
+        "/cart",
+        {
+          filial: sessionStorage.getItem("filial"),
+          codigo: sessionStorage.getItem("codigo"),
+          prodCodigo,
+          prodQtd: quantity,
+        },
+        {
+          headers: { "x-access-token": sessionStorage.getItem("token") },
+        }
+      )
+      .then((response) => {
+        if (response.data) {
+          setButtonStateUnique("success");
+          setCardButtonNameUnique(<SuccessButton />);
+        } else {
+          setButtonStateUnique("warning");
+          setCardButtonNameUnique(<WarningButton />);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setButtonStateUnique("warning");
+        setCardButtonNameUnique(<WarningButton />);
+      });
+  };
 
   useEffect(() => {
     const loadProduct = async () => {
@@ -36,7 +116,6 @@ function Detail({ match: { params } }) {
           return response.data;
         });
       setProduct(data.product);
-      console.log(data);
       if (data.product.PROD_IMAG.length === 0) {
         setImages([
           {
@@ -59,6 +138,10 @@ function Detail({ match: { params } }) {
       }
 
       setRelatedProducts(data.relatedProducts);
+      setButtonState(data.relatedProducts.map(() => ""));
+      setCardButtonName(
+        data.relatedProducts.map(() => "Adicionar no Carrinho")
+      );
       window.scrollTo(0, 0);
     };
     loadProduct();
@@ -71,7 +154,7 @@ function Detail({ match: { params } }) {
 
   const decrement = () => {
     let tmp = quantity;
-    if (tmp == 1) {
+    if (tmp === 1) {
       setQuantity(tmp);
     } else {
       setQuantity(tmp - 1);
@@ -106,8 +189,9 @@ function Detail({ match: { params } }) {
             />
           </div>
           <DefaultButton
-            text="Adicionar ao Carrinho"
-            onClick={() => alert("uhuu")}
+            text={cardButtonNameUnique}
+            onClick={() => handleSingleButtonclick(product.PROD_CODIGO)}
+            className={buttonStateUnique}
           />
           <div className="description">
             <div className="name">{product.PROD_DESCRICAO}</div>
@@ -116,7 +200,7 @@ function Detail({ match: { params } }) {
         </div>
       </div>
       <div className="relatedProducts">
-        {relatedProducts.map((relatedProduct) => {
+        {relatedProducts.map((relatedProduct, index) => {
           return (
             <Card
               key={relatedProduct.PROD_CODIGO}
@@ -124,6 +208,11 @@ function Detail({ match: { params } }) {
               name={relatedProduct.PROD_DESCRICAO}
               price={relatedProduct.PROD_PRECO_VENDA}
               image={relatedProduct.PROD_IMAG_NOME}
+              buttonClass={buttonState[index]}
+              buttonClick={() => {
+                handleButtonclick(index, relatedProduct.PROD_CODIGO);
+              }}
+              buttonName={cardButtonName[index]}
             />
           );
         })}

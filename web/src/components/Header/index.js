@@ -9,7 +9,6 @@ import Cart from "../Cart";
 import cn from "classnames";
 
 function Component() {
-  const [categoryHidden, setCategoryHidden] = useState("container");
   const [disabled, setDisabled] = useState("");
   const [cart, setCart] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -29,14 +28,6 @@ function Component() {
     loadCategories();
   }, []);
 
-  const handleProdutoHoverUp = () => {
-    setCategoryHidden("animation");
-  };
-
-  const handleProdutoHoverDown = () => {
-    setCategoryHidden("container");
-  };
-
   const handleCartClick = () => {
     setDisabled("disabled");
     setCart(true);
@@ -47,13 +38,6 @@ function Component() {
     setDisabled("");
     setCart(false);
     document.body.classList.remove("no-scroll");
-  };
-
-  const horizontalScroll = (event) => {
-    var list = event.currentTarget.firstChild;
-    var delta = event.deltaX == 0 ? event.deltaY : event.deltaX;
-    list.scrollLeft += delta;
-    event.preventDefault();
   };
 
   return (
