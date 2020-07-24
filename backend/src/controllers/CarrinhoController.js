@@ -73,14 +73,45 @@ module.exports = {
   },
 
   async insert(req, res) {
+    const product = await connection("SITE_CARRINHO")
+      .where("FIL_CODIGO", req.body.filial)
+      .andWhere("CLIE_CODIGO", req.body.codigo)
+      .andWhere("PROD_CODIGO", req.body.prodCodigo)
+      .select("PROD_QTD")
+      .catch((err) => {
+        console.log(err);
+        return false;
+      });
+
+    if (product === false) {
+      return res.status(500).json({ error: true });
+    }
+    if (product.length === 0) {
+      const result = await connection("SITE_CARRINHO")
+        .insert({
+          FIL_CODIGO: req.body.filial,
+          CLIE_CODIGO: req.body.codigo,
+          PROD_CODIGO: req.body.prodCodigo,
+          PROD_QTD: req.body.prodQtd,
+        })
+        .returning("*")
+        .catch((err) => {
+          console.log(err);
+          return false;
+        });
+
+      if (result === false) return res.status(500).json({ error: true });
+      return res.status(200).json(result);
+    }
     const result = await connection("SITE_CARRINHO")
-      .insert({
+      .where({
         FIL_CODIGO: req.body.filial,
         CLIE_CODIGO: req.body.codigo,
         PROD_CODIGO: req.body.prodCodigo,
-        PROD_QTD: req.body.prodQtd,
       })
-      .returning("*")
+      .update({
+        PROD_QTD: parseInt(req.body.prodQtd) + parseInt(product[0].PROD_QTD),
+      })
       .catch((err) => {
         console.log(err);
         return false;
