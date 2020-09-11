@@ -31,3 +31,7 @@ export const isSignedIn = () => {
 
   return token !== null ? true : false;
 };
+
+export const getToken = () => {
+  return sessionStorage.getItem("token");
+};

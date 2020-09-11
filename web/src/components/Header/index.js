@@ -62,9 +62,19 @@ function Component() {
               </Link>
               <div className="categories">
                 {categories.map((category, index) => {
+                  const subgrpQueryString = category.SUBGRUPO.map((subgrp) => {
+                    return `${subgrp.SUB_GRP_DESCRICAO.replace(
+                      /\s/g,
+                      "_"
+                    ).replace(/\//g, "-")}`;
+                  }).toString();
                   return (
                     <p key={index}>
-                      <strong>{category.GRP_DESCRICAO}</strong>
+                      <strong>
+                        <Link to={`/products?category=${subgrpQueryString}`}>
+                          {category.GRP_DESCRICAO}
+                        </Link>
+                      </strong>
                     </p>
                   );
                 })}

@@ -129,7 +129,7 @@ div.disabled {
 
 div.cart {
   position: fixed;
-  width: 400px;
+  width: 700px;
   max-width: 100%;
   top: 0;
   right: 0;
@@ -178,4 +178,8 @@ body.no-scroll {
   display: grid;
   grid-template-columns: 2fr 2fr 2fr 2fr 2fr 2fr;
   grid-column-gap: 15px;
+}
+
+.categories p:hover {
+  text-decoration: underline;
 }

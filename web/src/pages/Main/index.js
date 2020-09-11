@@ -17,18 +17,12 @@ function Main() {
 
   const handleButtonclick = async (index, prodCodigo) => {
     await api
-      .post(
-        "/cart",
-        {
-          filial: sessionStorage.getItem("filial"),
-          codigo: sessionStorage.getItem("codigo"),
-          prodCodigo,
-          prodQtd: 1,
-        },
-        {
-          headers: { "x-access-token": sessionStorage.getItem("token") },
-        }
-      )
+      .post("/cart", {
+        filial: sessionStorage.getItem("filial"),
+        codigo: sessionStorage.getItem("codigo"),
+        prodCodigo,
+        prodQtd: 1,
+      })
       .then((response) => {
         if (response.data) {
           setButtonState((state) =>
@@ -85,6 +79,7 @@ function Main() {
           width="100%"
           height="100%"
         />
+        <div className="darker"></div>
         <div className="main-form">
           <SearchBox placeholder="Do que você está precisando hoje?" />
         </div>

@@ -8,31 +8,35 @@ import SearchBox from "../../components/SearchBox";
 import DefaultButton from "../../components/DefaultButton";
 import WarningButton from "../../components/WarningButton";
 import SuccessButton from "../../components/SuccessButton";
+import useSWR from "swr";
+import { fetcher } from "../../services/api";
 
 import api from "../../services/api";
 
-function Products({ history }) {
-  const query = new URLSearchParams(window.location.search);
+function Products({ history, location }) {
+  console.log(location);
+  const query = new URLSearchParams(location.search);
   const description = query.get("description") || null;
-  const [products, setProducts] = useState([]);
+  const categories = query.get("category") || "";
   const [page, setPage] = useState(query.get("page") || "1");
   const [buttonState, setButtonState] = useState([]);
   const [cardButtonName, setCardButtonName] = useState([]);
+  const { data: products } = useSWR(
+    `products?page=${page}&description=${
+      description || ""
+    }&category=${categories}&filial=${sessionStorage.getItem("filial")}`,
+    { fetcher }
+  );
+  console.log(products);
 
   const handleButtonclick = async (index, prodCodigo) => {
     await api
-      .post(
-        "/cart",
-        {
-          filial: sessionStorage.getItem("filial"),
-          codigo: sessionStorage.getItem("codigo"),
-          prodCodigo,
-          prodQtd: 1,
-        },
-        {
-          headers: { "x-access-token": sessionStorage.getItem("token") },
-        }
-      )
+      .post("/cart", {
+        filial: sessionStorage.getItem("filial"),
+        codigo: sessionStorage.getItem("codigo"),
+        prodCodigo,
+        prodQtd: 1,
+      })
       .then((response) => {
         if (response.data) {
           setButtonState((state) =>
@@ -62,41 +66,25 @@ function Products({ history }) {
   };
 
   useEffect(() => {
-    const loadProducts = async () => {
-      setPage(page);
-      await api
-        .get(
-          `/products?page=${page}&description=${
-            description || ""
-          }&filial=${sessionStorage.getItem("filial")}`,
-          {
-            headers: { "x-access-token": sessionStorage.getItem("token") },
-          }
-        )
-        .then((response) => {
-          setProducts(response.data);
-          setButtonState(response.data.map(() => ""));
-          setCardButtonName(response.data.map(() => "Adicionar no Carrinho"));
-          return response.data;
-        });
+    setButtonState(products?.map(() => ""));
+    setCardButtonName(products?.map(() => "Adicionar no Carrinho"));
 
-      window.scrollTo(0, 0);
-    };
-    loadProducts();
-  }, [page, description]);
+    window.scrollTo(0, 0);
+  }, [products]);
 
   const nextPage = () => {
     let search;
-    description
+    description || categories
       ? (search = `?page=${(
           parseInt(page) + 1
-        ).toString()}&description=${description}`)
+        ).toString()}&description=${description}&category=${categories}`)
       : (search = `?page=${(parseInt(page) + 1).toString()}`);
+    console.log(search);
+    setPage((parseInt(page) + 1).toString());
     history.push({
       pathname: "/products",
       search,
     });
-    setPage((parseInt(page) + 1).toString());
   };
 
   const previousPage = () => {
@@ -107,7 +95,9 @@ function Products({ history }) {
       description
         ? (search = `?page=${(
             parseInt(page) - 1
-          ).toString()}&description=${description}`)
+          ).toString()}&description=${description}&category=${categories}&filial=${sessionStorage.getItem(
+            "filial"
+          )}`)
         : (search = `?page=${(parseInt(page) - 1).toString()}`);
       history.push({
         pathname: "/products",
@@ -122,7 +112,7 @@ function Products({ history }) {
       <Header />
       <SearchBox />
       <div className="bodyContent">
-        {products.map((product, index) => {
+        {products?.map((product, index) => {
           return (
             <Card
               key={product.PROD_CODIGO}
@@ -130,11 +120,11 @@ function Products({ history }) {
               name={product.PROD_DESCRICAO}
               price={product.PROD_PRECO_VENDA}
               image={product.PROD_IMAG_NOME}
-              buttonClass={buttonState[index]}
+              buttonClass={buttonState?.[index]}
               buttonClick={() => {
                 handleButtonclick(index, product.PROD_CODIGO);
               }}
-              buttonName={cardButtonName[index]}
+              buttonName={cardButtonName?.[index]}
             />
           );
         })}

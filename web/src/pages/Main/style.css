@@ -24,6 +24,16 @@ div.banner {
   position: relative;
 }
 
+div.banner .darker {
+  background-color: #0d0d0d;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 div.banner .title {
   position: absolute;
   top: 30%;
