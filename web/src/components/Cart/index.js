@@ -93,7 +93,7 @@ function Component({ disableCart }) {
         })
         .catch((err) => {
           console.log(err);
-          alert("Deu merda, te vira aí boy");
+          //alert("Deu merda, te vira aí boy");
         });
     };
     loadProducts();

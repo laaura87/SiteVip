@@ -5,7 +5,7 @@ function ButtonBuy() {
   return (
     <Container>
       <button>
-        Adicionar ao carrinho{" "}
+        <p>Adicionar ao carrinho </p>
         <span>
           <FaCartPlus color="white" size={24} />
         </span>

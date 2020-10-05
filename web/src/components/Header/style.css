@@ -1,12 +1,12 @@
 div.header {
-  background-color: #dedede;
+  background-color: white;
   height: 135px;
   width: 100%;
   z-index: 10000;
 }
 
 div.container {
-  background-color: #dedede;
+  background-color: white;
   height: 260px;
   width: 100%;
   position: absolute;
@@ -31,7 +31,7 @@ div.categoryContent {
   margin-left: 10%;
   margin-right: 10%;
   height: 100%;
-  background-color: #dedede;
+  background-color: white;
   font-family: "Roboto", sans-serif;
   color: #0d0d0d;
   z-index: 50000;
@@ -104,7 +104,7 @@ img.logo {
 }
 
 .animation {
-  background-color: #dedede;
+  background-color: white;
   height: auto;
   position: absolute;
   top: 135px;
@@ -136,7 +136,7 @@ div.cart {
   bottom: 0;
   visibility: hidden;
   z-index: 99999999999;
-  background-color: #f2f2f2;
+  background-color: white;
   overflow: auto;
   transform: translateX(100%);
   transition: all 0.7s ease;

@@ -47,13 +47,15 @@ function Component({
       <div className="price">
         {price.toLocaleString("pt-br", { style: "currency", currency: "BRL" })}
       </div>
+      {/*
       <div className={overlay}>
-        <DefaultButton
-          text={buttonName}
-          className={buttonClass}
-          onClick={buttonClick}
-        />
-      </div>
+          <DefaultButton
+            text={buttonName}
+            className={buttonClass}
+            onClick={buttonClick}
+          />
+        </div>
+     */}
     </div>
   );
 }

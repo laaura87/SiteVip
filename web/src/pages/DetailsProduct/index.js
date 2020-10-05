@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import ImageGallery from "react-image-gallery";
-import { DetailsProducts, ContainerProduct } from "./styles";
+import { DetailsProducts, ContainerProduct, RelatedProducts } from "./styles";
 import { FaCheckCircle } from "react-icons/fa";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import ButtonBuy from "../../components/ButtonBuy";
+import Card from "../../components/Card";
 
 import api from "../../services/api";
 
@@ -19,6 +20,7 @@ function Detail({ match: { params } }) {
   });
 
   const [images, setImages] = useState([{ description: null }]);
+  const [relatedProducts, setRelatedProducts] = useState([]);
 
   useEffect(() => {
     const loadProduct = async () => {
@@ -55,7 +57,7 @@ function Detail({ match: { params } }) {
           })
         );
       }
-
+      setRelatedProducts(data.relatedProducts);
       window.scrollTo(0, 0);
     };
     loadProduct();
@@ -77,34 +79,53 @@ function Detail({ match: { params } }) {
         </div>
         <DetailsProducts>
           <h1>{product.PROD_DESCRICAO}</h1>
+          <div>
+            <div className="disp">
+              <span>
+                <FaCheckCircle color={"green"} size={24} />
+              </span>
+              <p>PRODUTO DISPONÍVEL</p>
+            </div>
 
-          <div className="disp">
-            <span>
-              <FaCheckCircle color={"green"} size={24} />
-            </span>
-            <p>PRODUTO DISPONÍVEL</p>
-          </div>
-
-          <div className="price">
-            {product.PROD_PRECO_VENDA.toLocaleString("pt-br", {
-              style: "currency",
-              currency: "BRL",
-            })}
-            <p>
-              Ou até em 10x de{" "}
-              {(product.PROD_PRECO_VENDA / 10).toLocaleString("pt-br", {
+            <div className="price">
+              {product.PROD_PRECO_VENDA.toLocaleString("pt-br", {
                 style: "currency",
                 currency: "BRL",
-              })}{" "}
-              no cartão
-            </p>
-          </div>
+              })}
+              <p>
+                Ou até em 10x de{" "}
+                {(product.PROD_PRECO_VENDA / 10).toLocaleString("pt-br", {
+                  style: "currency",
+                  currency: "BRL",
+                })}{" "}
+                no cartão
+              </p>
+            </div>
 
-          <div className="buy-button">
-            <ButtonBuy></ButtonBuy>
+            <div className="buy-button">
+              <ButtonBuy></ButtonBuy>
+            </div>
           </div>
         </DetailsProducts>
       </ContainerProduct>
+
+      <RelatedProducts>
+        <h1>Produtos relacionados</h1>
+        <div className="relatedProducts">
+          {relatedProducts.map((relatedProduct, index) => {
+            return (
+              <Card
+                key={relatedProduct.PROD_CODIGO}
+                id={relatedProduct.PROD_CODIGO}
+                name={relatedProduct.PROD_DESCRICAO}
+                price={relatedProduct.PROD_PRECO_VENDA}
+                image={relatedProduct.PROD_IMAG_NOME}
+              />
+            );
+          })}
+        </div>
+      </RelatedProducts>
+
       <Footer />
     </>
   );
