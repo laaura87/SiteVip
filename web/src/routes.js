@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Main from "./pages/Main";
 import Products from "./pages/Products";
 import Detail from "./pages/Detail";
+import DetailsProduct from "./pages/DetailsProduct";
 
 const Routes = () => {
   return (
@@ -37,7 +38,7 @@ const Routes = () => {
           path="/products/:prodCodigo"
           render={(props) =>
             isSignedIn() ? (
-              <Detail {...props} />
+              <DetailsProduct {...props} />
             ) : (
               <Redirect to={{ pathname: "/" }} />
             )

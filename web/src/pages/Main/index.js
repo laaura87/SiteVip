@@ -83,13 +83,16 @@ function Main() {
         <div className="main-form">
           <SearchBox placeholder="Do que você está precisando hoje?" />
         </div>
-        <div className="title">
-          <p>Tudo que você precisa em um só lugar</p>
-        </div>
-        <div className="textBody">
-          Oferecemos uma quantidade extremamente diversificada de produtos que
-          irão atender às suas necessidades e as da sua empresa. Venha conferir
-          todo o nosso catálogo e teremos o maior prazer em lhe atender
+        <div className="text-content">
+          <div className="title">
+            <p>Tudo que você precisa em um só lugar</p>
+          </div>
+          <div className="textBody">
+            Oferecemos uma quantidade extremamente diversificada de produtos que
+            irão atender às suas necessidades e as da sua empresa. Venha
+            conferir todo o nosso catálogo e teremos o maior prazer em lhe
+            atender
+          </div>
         </div>
       </div>
       <div className="big-category">

@@ -18,6 +18,10 @@ form.search .inputContainer input {
   height: 60px;
   width: 100%;
   border-radius: 7px;
+  padding: 8px;
+  border: none;
+  text-align: center;
+  outline: none;
   font-family: "Roboto", "Sans-serif";
   font-size: 20px;
   color: #0d0d0d;
@@ -33,4 +37,10 @@ form.search .searchContainer .button {
   height: 60px;
   font-family: "Roboto", "Sans-serif";
   font-size: 20px;
+}
+
+@media (min-width: 768px) {
+  .inputContainer input {
+    font-size: 14px;
+  }
 }

@@ -21,12 +21,14 @@ function Products({ history, location }) {
   const [page, setPage] = useState(query.get("page") || "1");
   const [buttonState, setButtonState] = useState([]);
   const [cardButtonName, setCardButtonName] = useState([]);
+
   const { data: products } = useSWR(
     `products?page=${page}&description=${
       description || ""
     }&category=${categories}&filial=${sessionStorage.getItem("filial")}`,
     { fetcher }
   );
+
   console.log(products);
 
   const handleButtonclick = async (index, prodCodigo) => {

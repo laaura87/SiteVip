@@ -19,6 +19,7 @@ function Detail({ match: { params } }) {
     SUB_GRP_DESCRICAO: "",
     PROD_QTD_ATUAL: "",
   });
+
   const [images, setImages] = useState([{ description: null }]);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [quantity, setQuantity] = useState(1);
@@ -160,6 +161,7 @@ function Detail({ match: { params } }) {
       setQuantity(tmp - 1);
     }
   };
+
   return (
     <>
       <Header />
@@ -174,6 +176,7 @@ function Detail({ match: { params } }) {
             disableSwipe={true}
           />
         </div>
+
         <div className="info">
           <div className="price">
             {product.PROD_PRECO_VENDA.toLocaleString("pt-br", {
@@ -181,6 +184,7 @@ function Detail({ match: { params } }) {
               currency: "BRL",
             })}
           </div>
+
           <div className="quantity">
             <ProductCounter
               value={quantity}
@@ -188,17 +192,20 @@ function Detail({ match: { params } }) {
               subValue={() => decrement()}
             />
           </div>
+
           <DefaultButton
             text={cardButtonNameUnique}
             onClick={() => handleSingleButtonclick(product.PROD_CODIGO)}
             className={buttonStateUnique}
           />
+
           <div className="description">
             <div className="name">{product.PROD_DESCRICAO}</div>
             <div className="detail">{images[0].descriptionn || ""}</div>
           </div>
         </div>
       </div>
+
       <div className="relatedProducts">
         {relatedProducts.map((relatedProduct, index) => {
           return (
@@ -217,6 +224,7 @@ function Detail({ match: { params } }) {
           );
         })}
       </div>
+
       <Footer />
     </>
   );
