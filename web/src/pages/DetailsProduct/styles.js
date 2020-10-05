@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ContainerProduct = styled.div`
   width: 80%;
   max-height: 800px;
-  margin: 60px auto;
+  margin: 20px auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 25px;
@@ -21,12 +21,13 @@ export const ContainerProduct = styled.div`
 export const DetailsProducts = styled.div`
   background-color: #22314a;
   border-radius: 8px;
-
+  height: 60%;
+  margin-top: 80px;
   h1 {
     color: white;
     font-size: 22px;
     text-align: center;
-    margin: 10px 0;
+    margin: 30px 0 10px 0;
   }
 
   .disp {
