@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ImageGallery from "react-image-gallery";
 import "./style.css";
+import ReactImageZoom from "react-image-zoom";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -167,14 +168,12 @@ function Detail({ match: { params } }) {
       <Header />
       <div className="productContainer">
         <div className="imgContainer">
-          <ImageGallery
-            items={images}
-            showNav={false}
-            showPlayButton={false}
-            showFullscreenButton={false}
-            onErrorImageURL={`${process.env.PUBLIC_URL}/images/no-image.png`}
-            disableSwipe={true}
-          />
+          <ReactImageZoom
+            width={490}
+            height={490}
+            img={images}
+            zoomPosition="original"
+          ></ReactImageZoom>
         </div>
 
         <div className="info">

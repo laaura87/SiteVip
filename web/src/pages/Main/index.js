@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
 
+import { Carousel } from "react-bootstrap";
+
 import Header from "../../components/Header";
 import Card from "../../components/Card";
+import CardGrid from "../../components/CardGrid";
 import Footer from "../../components/Footer";
-import SearchBox from "../../components/SearchBox";
 import api from "../../services/api";
-import CategoryBanner from "../../components/CategoryBanner";
 import WarningButton from "../../components/WarningButton";
 import SuccessButton from "../../components/SuccessButton";
+
+import { Container, GridContainerProducts } from "./styles.js";
 
 function Main() {
   const [products, setProducts] = useState([]);
@@ -72,53 +75,49 @@ function Main() {
   return (
     <>
       <Header />
-      <div className="banner">
-        <img
-          src={process.env.PUBLIC_URL + "/images/banner.jpg"}
-          alt="banner"
-          width="100%"
-          height="100%"
-        />
-        <div className="darker"></div>
-        <div className="main-form">
-          <SearchBox placeholder="Do que você está precisando hoje?" />
-        </div>
-        <div className="text-content">
-          <div className="title">
-            <p>Tudo que você precisa em um só lugar</p>
-          </div>
-          <div className="textBody">
-            Oferecemos uma quantidade extremamente diversificada de produtos que
-            irão atender às suas necessidades e as da sua empresa. Venha
-            conferir todo o nosso catálogo e teremos o maior prazer em lhe
-            atender
-          </div>
-        </div>
-      </div>
-      <div className="big-category">
-        <CategoryBanner image="mobile-phone.jpg" name="Celulares" />
-        <CategoryBanner image="laptop.jpg" name="Computadores" />
-        <CategoryBanner image="tv.jpg" name="Televisões" />
-        <CategoryBanner image="acessories.jpg" name="Acessórios" />
-      </div>
-      <div className="body-product-container">
+      <Container>
+        <Carousel>
+          <Carousel.Item>
+            <img src="mobile-phone.jpg" width={490} className="d-block w-100" />
+            <Carousel.Caption>
+              <h3>Celulares</h3>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img src="laptop.jpg" className="d-block w-100" />
+            <Carousel.Caption>
+              <h3>Notebooks</h3>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img src="tv.jpg" className="d-block w-100" />
+            <Carousel.Caption>
+              <h3>Televisão</h3>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img src="acessories.jpg" className="d-block w-100" />
+            <Carousel.Caption>
+              <h3>Acessórios</h3>
+            </Carousel.Caption>
+          </Carousel.Item>
+        </Carousel>
+      </Container>
+
+      <GridContainerProducts>
         {products.map((product, index) => {
           return (
-            <Card
+            <CardGrid
               name={product.PROD_DESCRICAO}
               price={product.PROD_PRECO_VENDA}
               id={product.PROD_CODIGO}
               key={product.PROD_CODIGO}
               image={product.PROD_IMAG_NOME}
-              buttonClass={buttonState[index]}
-              buttonClick={() => {
-                handleButtonclick(index, product.PROD_CODIGO);
-              }}
-              buttonName={cardButtonName[index]}
             />
           );
         })}
-      </div>
+      </GridContainerProducts>
+
       <Footer />
     </>
   );

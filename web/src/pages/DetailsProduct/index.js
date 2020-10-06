@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ImageGallery from "react-image-gallery";
+import ReactImageZoom from "react-image-zoom";
+
 import { DetailsProducts, ContainerProduct, RelatedProducts } from "./styles";
 import { FaCheckCircle } from "react-icons/fa";
 
@@ -52,11 +54,12 @@ function Detail({ match: { params } }) {
               thumbnail: `http://187.84.80.162:8082/imagens/${image.PROD_IMAG_NOME}`,
               descriptionn: image.PROD_IMAG_DESCRICAO,
               thumbnailClass: "thumbContainer",
-              sizes: { width: "100%", height: "490px" },
+              sizes: { width: "490px", height: "490px" },
             };
           })
         );
       }
+      console.log(images);
       setRelatedProducts(data.relatedProducts);
       window.scrollTo(0, 0);
     };

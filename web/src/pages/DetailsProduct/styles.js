@@ -12,13 +12,13 @@ export const ContainerProduct = styled.div`
 
   .img-container {
     margin: 0 auto;
-    width: 100%;
+    width: 490px;
     overflow: hidden;
-    height: 600px;
+    height: 490px;
     box-sizing: border-box;
     img {
       width: 100%;
-      height: 400px;
+      height: 100%;
       object-fit: cover;
       overflow: hidden;
     }

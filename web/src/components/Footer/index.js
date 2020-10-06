@@ -1,11 +1,11 @@
 import React from "react";
-import "./style.css";
+import { Container } from "./styles";
 
 function Component() {
   return (
-    <footer>
+    <Container>
       <p>© 2020 Copyright: CSM Tecnologia da Informação</p>
-    </footer>
+    </Container>
   );
 }
 
