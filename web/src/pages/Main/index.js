@@ -4,7 +4,6 @@ import "./style.css";
 import { Carousel } from "react-bootstrap";
 
 import Header from "../../components/Header";
-import Card from "../../components/Card";
 import CardGrid from "../../components/CardGrid";
 import Footer from "../../components/Footer";
 import api from "../../services/api";
@@ -17,42 +16,6 @@ function Main() {
   const [products, setProducts] = useState([]);
   const [buttonState, setButtonState] = useState([]);
   const [cardButtonName, setCardButtonName] = useState([]);
-
-  const handleButtonclick = async (index, prodCodigo) => {
-    await api
-      .post("/cart", {
-        filial: sessionStorage.getItem("filial"),
-        codigo: sessionStorage.getItem("codigo"),
-        prodCodigo,
-        prodQtd: 1,
-      })
-      .then((response) => {
-        if (response.data) {
-          setButtonState((state) =>
-            state.map((item, i) => (index === i ? "success" : item))
-          );
-          setCardButtonName((state) =>
-            state.map((item, i) => (index === i ? <SuccessButton /> : item))
-          );
-        } else {
-          setButtonState((state) =>
-            state.map((item, i) => (index === i ? "warning" : item))
-          );
-          setCardButtonName((state) =>
-            state.map((item, i) => (index === i ? <WarningButton /> : item))
-          );
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        setButtonState((state) =>
-          state.map((item, i) => (index === i ? "warning" : item))
-        );
-        setCardButtonName((state) =>
-          state.map((item, i) => (index === i ? <WarningButton /> : item))
-        );
-      });
-  };
 
   useEffect(() => {
     const loadProducts = async () => {
