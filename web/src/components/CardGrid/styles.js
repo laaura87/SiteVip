@@ -1,31 +1,33 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  margin: 0 auto;
   background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 3px;
+  border-radius: 6px;
   border: 1px solid black;
   margin-bottom: 20px;
   margin-top: 20px;
   box-shadow: 11px 10px 35px -26px rgba(0, 0, 0, 0.75);
-  padding: 8px;
+  padding: 2px;
+  width: 70%;
   img {
     margin-top: 5px;
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
     border: 0.2px solid grey;
   }
 
   h3 {
-    margin-top: 5px;
+    margin-top: 12px;
     text-align: center;
-    font-size: 28px;
+    font-size: 18px;
   }
 
   p {
-    font-size: 34px;
+    font-size: 18px;
     color: green;
   }
 
@@ -33,9 +35,10 @@ export const Container = styled.div`
     margin-bottom: 10px;
     display: flex;
     align-items: center;
-    width: 100%;
+    width: 100% !important;
     p {
-      font-size: 16px;
+      text-align: center;
+      font-size: 14px;
       color: white;
     }
   }
