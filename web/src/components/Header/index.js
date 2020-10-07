@@ -91,7 +91,6 @@ function Component() {
   }, []);
 
   let login;
-  console.log(isSignedIn());
   if (isSignedIn()) {
     login = (
       <div
