@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from "../../services/api";
+
 import { onSignOut } from "../../services/auth";
 
 import { slide as Menu } from "react-burger-menu";
 import "react-perfect-scrollbar/dist/css/styles.css";
-import { FaSearch, FaBars } from "react-icons/fa";
-import { Header, InputSearch, MenuDropDown } from "./styles";
+import { FaSearch, FaPhone, FaSignOutAlt } from "react-icons/fa";
+import {
+  Container,
+  Header,
+  InputSearch,
+  MenuDropDown,
+  SubHeader,
+} from "./styles";
 
 var styles = {
   bmBurgerButton: {
@@ -84,49 +91,67 @@ function Component() {
 
   return (
     <>
-      <Header>
-        <div className="logo">
-          <Link to="/home">
-            <img
-              className="logo"
-              src={`${process.env.PUBLIC_URL}/images/vip_logo.png`}
-              alt="Logo"
-              width="120"
-              height="120"
-            />
-          </Link>
-        </div>
+      <Container>
+        <SubHeader>
+          <div>
+            <FaPhone />
+            (81) 210 -7300
+          </div>
+          <div
+            onClick={() => {
+              onSignOut();
+              window.location.href = "/";
+            }}
+            className="exit"
+          >
+            <FaSignOutAlt></FaSignOutAlt>
+            Logout
+          </div>
+        </SubHeader>
+        <Header>
+          <div className="logo">
+            <Link to="/home">
+              <img
+                className="logo"
+                src={`${process.env.PUBLIC_URL}/images/vip_logo.png`}
+                alt="Logo"
+                width="120"
+                height="120"
+              />
+            </Link>
+          </div>
 
-        <form action="" method="get">
-          <InputSearch>
-            <input type="text" placeholder="Buscar por produto"></input>
-            <span>
-              <button type="submit" className="button-input">
-                <FaSearch></FaSearch>
-              </button>
-            </span>
-          </InputSearch>
-        </form>
+          <form action="" method="get">
+            <InputSearch>
+              <input type="text" placeholder="Buscar por produto"></input>
+              <span>
+                <button type="submit" className="button-input">
+                  <FaSearch></FaSearch>
+                </button>
+              </span>
+            </InputSearch>
+          </form>
 
-        <MenuDropDown>
-          <Menu styles={styles} right>
-            <h1>Categorias</h1>
-            {categories.map((category, index) => {
-              const subgrpQueryString = category.SUBGRUPO.map((subgrp) => {
-                return `${subgrp.SUB_GRP_DESCRICAO.replace(/\s/g, "_").replace(
-                  /\//g,
-                  "-"
-                )}`;
-              }).toString();
-              return (
-                <Link to={`/products?category=${subgrpQueryString}`}>
-                  {category.GRP_DESCRICAO}
-                </Link>
-              );
-            })}
-          </Menu>
-        </MenuDropDown>
-      </Header>
+          <MenuDropDown>
+            <Menu styles={styles} right>
+              <h1>Categorias</h1>
+              {categories.map((category, index) => {
+                const subgrpQueryString = category.SUBGRUPO.map((subgrp) => {
+                  return `${subgrp.SUB_GRP_DESCRICAO.replace(
+                    /\s/g,
+                    "_"
+                  ).replace(/\//g, "-")}`;
+                }).toString();
+                return (
+                  <Link to={`/products?category=${subgrpQueryString}`}>
+                    {category.GRP_DESCRICAO}
+                  </Link>
+                );
+              })}
+            </Menu>
+          </MenuDropDown>
+        </Header>
+      </Container>
     </>
   );
 }
