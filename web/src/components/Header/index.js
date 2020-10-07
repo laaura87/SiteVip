@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from "../../services/api";
 
-import { onSignOut } from "../../services/auth";
+import { onSignOut, isSignedIn } from "../../services/auth";
 
 import { slide as Menu } from "react-burger-menu";
 import "react-perfect-scrollbar/dist/css/styles.css";
@@ -90,6 +90,30 @@ function Component() {
     loadCategories();
   }, []);
 
+  let login;
+  console.log(isSignedIn());
+  if (isSignedIn()) {
+    console.log(`oi`);
+    let login = (
+      <div
+        onClick={() => {
+          onSignOut();
+          window.location.href = "/";
+        }}
+      >
+        <FaSignOutAlt></FaSignOutAlt>
+        Logout
+      </div>
+    );
+  } else {
+    login = (
+      <div>
+        <FaUserAlt></FaUserAlt>
+        Entrar
+      </div>
+    );
+  }
+
   return (
     <>
       <Container>
@@ -98,22 +122,7 @@ function Component() {
             <FaPhone />
             (81) 2103-7300
           </div>
-          <div className="exit">
-            <div>
-              <FaUserAlt></FaUserAlt>
-              Entrar
-            </div>
-
-            <div
-              onClick={() => {
-                onSignOut();
-                window.location.href = "/";
-              }}
-            >
-              <FaSignOutAlt></FaSignOutAlt>
-              Logout
-            </div>
-          </div>
+          <div className="exit">{login}</div>
         </SubHeader>
         <Header>
           <div className="logo">
