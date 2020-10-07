@@ -51,7 +51,13 @@ var styles = {
     padding: "0.8em",
   },
   bmItem: {
-    display: "inline-block",
+    display: "flex",
+    flexDirection: "column",
+    marginTop: "5px",
+    fontSize: "18px",
+    borderTop: "1px solid white",
+    textAlign: "center",
+    outline: "none",
   },
   bmOverlay: {
     background: "rgba(0, 0, 0, 0.3)",
@@ -104,6 +110,7 @@ function Component() {
 
         <MenuDropDown>
           <Menu styles={styles} right>
+            <h1>Categorias</h1>
             {categories.map((category, index) => {
               const subgrpQueryString = category.SUBGRUPO.map((subgrp) => {
                 return `${subgrp.SUB_GRP_DESCRICAO.replace(/\s/g, "_").replace(

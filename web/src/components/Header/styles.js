@@ -35,7 +35,9 @@ export const InputSearch = styled.span`
 `;
 
 export const MenuDropDown = styled.div`
-  ul {
-    list-style: none;
+  h1 {
+    border-top: none !important;
+
+    color: white;
   }
 `;
