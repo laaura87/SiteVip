@@ -3,9 +3,60 @@ import { Link } from "react-router-dom";
 import api from "../../services/api";
 import { onSignOut } from "../../services/auth";
 
+import { slide as Menu } from "react-burger-menu";
 import "react-perfect-scrollbar/dist/css/styles.css";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaBars } from "react-icons/fa";
 import { Header, InputSearch, MenuDropDown } from "./styles";
+
+var styles = {
+  bmBurgerButton: {
+    position: "absolute",
+    width: "36px",
+    height: "30px",
+    right: "24px",
+    top: "64px",
+  },
+  bmBurgerBars: {
+    background: "#373a47",
+  },
+  bmBurgerBarsHover: {
+    background: "#a90000",
+  },
+  bmCrossButton: {
+    height: "24px",
+    width: "24px",
+  },
+  bmCross: {
+    background: "#bdc3c7",
+  },
+  bmMenuWrap: {
+    position: "fixed",
+    top: "0",
+    bottom: "0",
+    height: "100%",
+  },
+  bmMenu: {
+    background: "#373a47",
+    position: "fixed",
+    top: "0",
+    bottom: "0",
+    padding: "2.5em 1.5em 0",
+    fontSize: "1.15em",
+  },
+  bmMorphShape: {
+    fill: "#373a47",
+  },
+  bmItemList: {
+    color: "#b8b7ad",
+    padding: "0.8em",
+  },
+  bmItem: {
+    display: "inline-block",
+  },
+  bmOverlay: {
+    background: "rgba(0, 0, 0, 0.3)",
+  },
+};
 
 function Component() {
   const [categories, setCategories] = useState([]);
@@ -42,7 +93,7 @@ function Component() {
 
         <form action="" method="get">
           <InputSearch>
-            <input type="text" placeholder="Buscar produto"></input>
+            <input type="text" placeholder="Buscar por produto"></input>
             <span>
               <button type="submit" className="button-input">
                 <FaSearch></FaSearch>
@@ -51,7 +102,23 @@ function Component() {
           </InputSearch>
         </form>
 
-        <MenuDropDown></MenuDropDown>
+        <MenuDropDown>
+          <Menu styles={styles} right>
+            {categories.map((category, index) => {
+              const subgrpQueryString = category.SUBGRUPO.map((subgrp) => {
+                return `${subgrp.SUB_GRP_DESCRICAO.replace(/\s/g, "_").replace(
+                  /\//g,
+                  "-"
+                )}`;
+              }).toString();
+              return (
+                <Link to={`/products?category=${subgrpQueryString}`}>
+                  {category.GRP_DESCRICAO}
+                </Link>
+              );
+            })}
+          </Menu>
+        </MenuDropDown>
       </Header>
     </>
   );

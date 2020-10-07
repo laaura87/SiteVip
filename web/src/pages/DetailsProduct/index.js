@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import ImageGallery from "react-image-gallery";
-import ReactImageZoom from "react-image-zoom";
 
 import { DetailsProducts, ContainerProduct, RelatedProducts } from "./styles";
 import { FaCheckCircle } from "react-icons/fa";
