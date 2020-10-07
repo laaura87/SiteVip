@@ -93,8 +93,7 @@ function Component() {
   let login;
   console.log(isSignedIn());
   if (isSignedIn()) {
-    console.log(`oi`);
-    let login = (
+    login = (
       <div
         onClick={() => {
           onSignOut();
