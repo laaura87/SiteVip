@@ -7,7 +7,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import ButtonBuy from "../../components/ButtonBuy";
-import Card from "../../components/Card";
+import CardGrid from "../../components/CardGrid";
 
 import api from "../../services/api";
 
@@ -58,7 +58,6 @@ function Detail({ match: { params } }) {
           })
         );
       }
-      console.log(images);
       setRelatedProducts(data.relatedProducts);
       window.scrollTo(0, 0);
     };
@@ -116,7 +115,7 @@ function Detail({ match: { params } }) {
         <div className="relatedProducts">
           {relatedProducts.map((relatedProduct, index) => {
             return (
-              <Card
+              <CardGrid
                 key={relatedProduct.PROD_CODIGO}
                 id={relatedProduct.PROD_CODIGO}
                 name={relatedProduct.PROD_DESCRICAO}

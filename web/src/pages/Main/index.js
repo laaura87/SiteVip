@@ -7,15 +7,11 @@ import Header from "../../components/Header";
 import CardGrid from "../../components/CardGrid";
 import Footer from "../../components/Footer";
 import api from "../../services/api";
-import WarningButton from "../../components/WarningButton";
-import SuccessButton from "../../components/SuccessButton";
 
 import { Container, GridContainerProducts } from "./styles.js";
 
 function Main() {
   const [products, setProducts] = useState([]);
-  const [buttonState, setButtonState] = useState([]);
-  const [cardButtonName, setCardButtonName] = useState([]);
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -25,8 +21,6 @@ function Main() {
         })
         .then((response) => {
           setProducts(response.data);
-          setButtonState(response.data.map(() => ""));
-          setCardButtonName(response.data.map(() => "Adicionar no Carrinho"));
         })
         .catch((err) => {
           console.log(err);
@@ -41,25 +35,25 @@ function Main() {
       <Container>
         <Carousel>
           <Carousel.Item>
-            <img src="mobile-phone.jpg" width={490} className="d-block w-100" />
+            <img src="mobile-phone.jpg" alt="Celulares" />
             <Carousel.Caption>
               <h3>Celulares</h3>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img src="laptop.jpg" className="d-block w-100" />
+            <img src="laptop.jpg" alt="Notebooks" />
             <Carousel.Caption>
               <h3>Notebooks</h3>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img src="tv.jpg" className="d-block w-100" />
+            <img src="tv.jpg" alt="Televisores" />
             <Carousel.Caption>
               <h3>Televisão</h3>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img src="acessories.jpg" className="d-block w-100" />
+            <img src="acessories.jpg" alt="Acessorios" />
             <Carousel.Caption>
               <h3>Acessórios</h3>
             </Carousel.Caption>

@@ -7,7 +7,6 @@ import { isSignedIn } from "./services/auth";
 import Login from "./pages/Login";
 import Main from "./pages/Main";
 import Products from "./pages/Products";
-import Detail from "./pages/Detail";
 import DetailsProduct from "./pages/DetailsProduct";
 
 const Routes = () => {
