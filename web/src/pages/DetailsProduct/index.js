@@ -73,7 +73,7 @@ function Detail({ match: { params } }) {
   let disp, dispButton;
 
   console.log(product.PROD_QTD_ATUAL);
-  if (product.PROD_QTD_ATUAL > 10) {
+  if (product.PROD_QTD_ATUAL > 0) {
     disp = <ProductDisp />;
     dispButton = <ButtonBuy />;
   } else {
@@ -87,7 +87,7 @@ function Detail({ match: { params } }) {
       <Header />
       <ContainerProduct>
         <div className="img-container">
-          <img src={images} alt="" srcset="" />
+          <img src={images} alt="" />
         </div>
         <DetailsProducts>
           <h1>{product.PROD_DESCRICAO}</h1>

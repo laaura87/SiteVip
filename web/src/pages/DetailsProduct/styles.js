@@ -3,9 +3,9 @@ import styled from "styled-components";
 export const Container = styled.div``;
 
 export const ContainerProduct = styled.div`
-  width: 65%;
+  width: 70%;
   margin: 20px auto;
-  height: 600px;
+  height: 450px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 25px;
@@ -18,24 +18,33 @@ export const ContainerProduct = styled.div`
   .img-container {
     background-color: white;
     margin: auto auto;
-    width: 490px;
+    width: 400px;
     overflow: hidden;
     box-sizing: border-box;
-    height: 490px;
+    height: 400px;
+
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       overflow: hidden;
     }
+
     .image-gallery-thumbnail-image img {
       width: 100% !important;
     }
   }
 
+  @media (max-width: 1000px) {
+    img {
+      width: 300px;
+      height: 300px;
+    }
+  }
+
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    height: 900px;
+    height: 800px;
   }
 
   @media (max-width: 420px) {
@@ -89,20 +98,35 @@ export const RelatedProducts = styled.div`
     text-align: center;
     margin-bottom: 20px;
   }
+
   p {
     font-size: 16px;
   }
+
   .relatedProducts {
     width: 90%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
     margin: 20px auto;
     div {
       width: 100%;
     }
   }
 
+  @media (max-width: 955px) {
+    .relatedProducts {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    div {
+      grid-template-columns: 1fr;
+    }
+  }
+
   @media (max-width: 768px) {
+    .relatedProducts {
+      grid-template-columns: repeat(2, 1fr);
+    }
     div {
       grid-template-columns: 1fr;
     }
@@ -111,6 +135,9 @@ export const RelatedProducts = styled.div`
   @media (max-width: 420px) {
     h1 {
       font-size: 16px;
+    }
+    .relatedProducts {
+      grid-template-columns: 1fr;
     }
     .relatedProducts button {
       width: 80% !important;

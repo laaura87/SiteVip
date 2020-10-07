@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  position: relative;
   margin: 0 auto;
   background-color: white;
   display: flex;
@@ -13,6 +14,10 @@ export const Container = styled.div`
   box-shadow: 11px 10px 35px -26px rgba(0, 0, 0, 0.75);
   padding: 2px;
   width: 40%;
+
+  button {
+    bottom: 0;
+  }
 
   img {
     margin-top: 5px;
@@ -35,7 +40,7 @@ export const Container = styled.div`
   }
 
   button {
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     display: flex;
     align-items: center;
     width: 100% !important;
@@ -63,11 +68,8 @@ export const Container = styled.div`
 export const ImageDiv = styled.div`
   width: 90%;
   margin: 0 auto;
-
-  @media (max-width: 420px) {
-    a {
-      display: flex;
-      justify-content: center;
-    }
+  a {
+    display: flex;
+    justify-content: center;
   }
 `;
