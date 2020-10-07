@@ -63,6 +63,10 @@ export const Container = styled.div`
       justify-content: center;
     }
   }
+  .details {
+    color: grey;
+    margin-bottom: 6px;
+  }
 `;
 
 export const ImageDiv = styled.div`

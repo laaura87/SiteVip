@@ -31,6 +31,9 @@ function CardGrid({ name, price, image, id }) {
       <p>
         {price.toLocaleString("pt-br", { style: "currency", currency: "BRL" })}
       </p>
+      <Link to={`/products/${id}`} className="details">
+        Ver detalhes do produto
+      </Link>
       <ButtonBuy />
     </Container>
   );

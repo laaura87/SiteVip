@@ -62,7 +62,7 @@ function Main() {
       </Container>
 
       <GridContainerProducts>
-        {products.map((product, index) => {
+        {products.map((product) => {
           return (
             <CardGrid
               name={product.PROD_DESCRICAO}
