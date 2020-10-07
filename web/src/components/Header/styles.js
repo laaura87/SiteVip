@@ -19,10 +19,16 @@ export const SubHeader = styled.div`
   }
 
   .exit {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .exit div {
     cursor: pointer;
   }
 
-  .exit:hover {
+  .exit div:hover {
     color: #212529;
     text-decoration: underline;
     transition: 0.2s;
@@ -31,38 +37,49 @@ export const SubHeader = styled.div`
 
 export const Header = styled.header`
   width: 90%;
-  margin: 10px auto;
-  margin-top: 10px;
+  margin: 28px auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  div:nth-child(1) {
+    width: 20%;
+  }
+
   img {
-    width: 90px;
-    height: 90px;
+    width: 50px;
+    height: 50px;
   }
 `;
 
-export const InputSearch = styled.span`
-  display: flex;
-  margin-right: 20px;
-  input {
-    padding: 6px;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-    border: 1px solid black;
-    outline: none;
-  }
-  .button-input {
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
+export const InputSearch = styled.div`
+  width: 80%;
+  margin-left: 18px;
+  box-sizing: border-box;
 
-    border-radius: 0;
+  form {
+    display: flex;
+    input {
+      padding: 6px;
+      width: 100%;
+      border: 1px solid black;
+      outline: none;
+    }
+  }
+
+  .button-input {
+    border-radius: 0%;
     padding: 6px;
     background-color: #22314a;
+  }
+  .bg-hover :hover {
+    background-color: #38507a;
+    transition: 0.2s;
   }
 `;
 
 export const MenuDropDown = styled.div`
+  width: 20%;
   h1 {
     border-top: none !important;
 

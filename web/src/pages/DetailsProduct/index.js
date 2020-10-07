@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
-import ImageGallery from "react-image-gallery";
+//import ImageGallery from "react-image-gallery";
 
-import { DetailsProducts, ContainerProduct, RelatedProducts } from "./styles";
-import { FaCheckCircle } from "react-icons/fa";
+import {
+  DetailsProducts,
+  ContainerProduct,
+  RelatedProducts,
+  Container,
+} from "./styles";
 
+import ProductUnavailable from "../../components/ProductUnavailable";
+import ProductDisp from "../../components/ProductDisp";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import ButtonBuy from "../../components/ButtonBuy";
@@ -64,29 +70,29 @@ function Detail({ match: { params } }) {
     loadProduct();
   }, [params.prodCodigo]);
 
+  let disp, dispButton;
+
+  console.log(product.PROD_QTD_ATUAL);
+  if (product.PROD_QTD_ATUAL > 10) {
+    disp = <ProductDisp />;
+    dispButton = <ButtonBuy />;
+  } else {
+    disp = <ProductUnavailable />;
+    dispButton = " ";
+  }
+
   return (
     <>
+      <Container></Container>
       <Header />
       <ContainerProduct>
         <div className="img-container">
-          <ImageGallery
-            items={images}
-            showNav={false}
-            showPlayButton={false}
-            showFullscreenButton={false}
-            onErrorImageURL={`${process.env.PUBLIC_URL}/images/no-image.png`}
-            disableSwipe={true}
-          />
+          <img src={images} alt="" srcset="" />
         </div>
         <DetailsProducts>
           <h1>{product.PROD_DESCRICAO}</h1>
           <div>
-            <div className="disp">
-              <span>
-                <FaCheckCircle color={"green"} size={24} />
-              </span>
-              <p>PRODUTO DISPONÍVEL</p>
-            </div>
+            {disp}
 
             <div className="price">
               {product.PROD_PRECO_VENDA.toLocaleString("pt-br", {
@@ -103,9 +109,7 @@ function Detail({ match: { params } }) {
               </p>
             </div>
 
-            <div className="buy-button">
-              <ButtonBuy></ButtonBuy>
-            </div>
+            <div className="buy-button">{dispButton}</div>
           </div>
         </DetailsProducts>
       </ContainerProduct>
@@ -133,3 +137,13 @@ function Detail({ match: { params } }) {
 }
 
 export default Detail;
+
+//Cod caso precise
+/* <ImageGallery
+            items={images}
+            showNav={false}
+            showPlayButton={false}
+            showFullscreenButton={false}
+            onErrorImageURL={`${process.env.PUBLIC_URL}/images/no-image.png`}
+            disableSwipe={true}
+          /> */

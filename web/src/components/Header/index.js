@@ -6,7 +6,7 @@ import { onSignOut } from "../../services/auth";
 
 import { slide as Menu } from "react-burger-menu";
 import "react-perfect-scrollbar/dist/css/styles.css";
-import { FaSearch, FaPhone, FaSignOutAlt } from "react-icons/fa";
+import { FaSearch, FaPhone, FaSignOutAlt, FaUserAlt } from "react-icons/fa";
 import {
   Container,
   Header,
@@ -20,8 +20,8 @@ var styles = {
     position: "absolute",
     width: "36px",
     height: "30px",
-    right: "24px",
-    top: "64px",
+    right: "12px",
+    top: "76px",
   },
   bmBurgerBars: {
     background: "#373a47",
@@ -49,6 +49,7 @@ var styles = {
     bottom: "0",
     padding: "2.5em 1.5em 0",
     fontSize: "1.15em",
+    width: "90%",
   },
   bmMorphShape: {
     fill: "#373a47",
@@ -97,15 +98,21 @@ function Component() {
             <FaPhone />
             (81) 2103-7300
           </div>
-          <div
-            onClick={() => {
-              onSignOut();
-              window.location.href = "/";
-            }}
-            className="exit"
-          >
-            <FaSignOutAlt></FaSignOutAlt>
-            Logout
+          <div className="exit">
+            <div>
+              <FaUserAlt></FaUserAlt>
+              Entrar
+            </div>
+
+            <div
+              onClick={() => {
+                onSignOut();
+                window.location.href = "/";
+              }}
+            >
+              <FaSignOutAlt></FaSignOutAlt>
+              Logout
+            </div>
           </div>
         </SubHeader>
         <Header>
@@ -121,16 +128,16 @@ function Component() {
             </Link>
           </div>
 
-          <form action="" method="get">
-            <InputSearch>
+          <InputSearch>
+            <form action="" method="get">
               <input type="text" placeholder="Buscar por produto"></input>
-              <span>
+              <span class="bg-hover">
                 <button type="submit" className="button-input">
                   <FaSearch></FaSearch>
                 </button>
               </span>
-            </InputSearch>
-          </form>
+            </form>
+          </InputSearch>
 
           <MenuDropDown>
             <Menu styles={styles} right>
