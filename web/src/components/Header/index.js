@@ -95,7 +95,7 @@ function Component() {
         <SubHeader>
           <div>
             <FaPhone />
-            (81) 210 -7300
+            (81) 2103-7300
           </div>
           <div
             onClick={() => {

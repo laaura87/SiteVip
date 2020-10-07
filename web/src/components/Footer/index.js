@@ -43,7 +43,7 @@ function Footer() {
               <span>
                 <FaPhone />
               </span>
-              (81) 2103 - 7300
+              (81) 2103-7300
             </li>
           </ul>
         </div>
