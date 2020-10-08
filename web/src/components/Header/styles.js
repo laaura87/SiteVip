@@ -18,12 +18,6 @@ export const SubHeader = styled.div`
     margin-right: 5px;
   }
 
-  .exit {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
   .exit div {
     cursor: pointer;
   }
@@ -46,11 +40,14 @@ export const Header = styled.header`
     width: 20%;
   }
 
-  img {
-    width: 50px;
-    height: 50px;
+  .logo {
+    width: 20%;
+    img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+    }
   }
-
   .open-menu {
     margin-left: 16px;
     cursor: pointer;
@@ -60,11 +57,15 @@ export const Header = styled.header`
     color: #800000;
     transition: 0.2s;
   }
+  @media (min-width: 768px) {
+    .open-menu {
+      display: none;
+    }
+  }
 `;
 
 export const InputSearch = styled.div`
   width: 80%;
-  margin-left: 18px;
   box-sizing: border-box;
 
   form {
