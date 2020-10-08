@@ -12,6 +12,7 @@ import {
   FaUserAlt,
   FaBars,
   FaTimes,
+  FaShoppingCart,
 } from "react-icons/fa";
 
 import {
@@ -21,8 +22,6 @@ import {
   MenuDropDown,
   SubHeader,
 } from "./styles";
-
-import "./styles-menu.css";
 
 function Component() {
   const [categories, setCategories] = useState([]);
@@ -98,6 +97,7 @@ function Component() {
               </span>
             </form>
           </InputSearch>
+          <FaShoppingCart size={32} className="shopping-cart" />
           <FaBars
             size={32}
             className="open-menu"

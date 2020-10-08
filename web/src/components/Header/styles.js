@@ -57,6 +57,16 @@ export const Header = styled.header`
     color: #800000;
     transition: 0.2s;
   }
+
+  .shopping-cart {
+    cursor: pointer;
+  }
+
+  .shopping-cart:hover {
+    color: #800000;
+    transition: 0.2s;
+  }
+
   @media (min-width: 768px) {
     .open-menu {
       display: none;
@@ -65,7 +75,7 @@ export const Header = styled.header`
 `;
 
 export const InputSearch = styled.div`
-  width: 80%;
+  width: 60%;
   box-sizing: border-box;
 
   form {
@@ -86,6 +96,10 @@ export const InputSearch = styled.div`
   .bg-hover :hover {
     background-color: #38507a;
     transition: 0.2s;
+  }
+
+  @media (min-width: 768px) {
+    width: 70%;
   }
 `;
 
