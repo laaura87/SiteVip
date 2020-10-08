@@ -3,10 +3,17 @@ import { Link } from "react-router-dom";
 import api from "../../services/api";
 
 import { onSignOut, isSignedIn } from "../../services/auth";
+import cn from "classnames";
 
-import { slide as Menu } from "react-burger-menu";
-import "react-perfect-scrollbar/dist/css/styles.css";
-import { FaSearch, FaPhone, FaSignOutAlt, FaUserAlt } from "react-icons/fa";
+import {
+  FaSearch,
+  FaPhone,
+  FaSignOutAlt,
+  FaUserAlt,
+  FaBars,
+  FaTimes,
+} from "react-icons/fa";
+
 import {
   Container,
   Header,
@@ -15,65 +22,11 @@ import {
   SubHeader,
 } from "./styles";
 
-var styles = {
-  bmBurgerButton: {
-    position: "absolute",
-    width: "36px",
-    height: "30px",
-    right: "12px",
-    top: "76px",
-  },
-  bmBurgerBars: {
-    background: "#373a47",
-  },
-  bmBurgerBarsHover: {
-    background: "#a90000",
-  },
-  bmCrossButton: {
-    height: "24px",
-    width: "24px",
-  },
-  bmCross: {
-    background: "#bdc3c7",
-  },
-  bmMenuWrap: {
-    position: "fixed",
-    top: "0",
-    bottom: "0",
-    height: "100%",
-  },
-  bmMenu: {
-    background: "#373a47",
-    position: "fixed",
-    top: "0",
-    bottom: "0",
-    padding: "2.5em 1.5em 0",
-    fontSize: "1.15em",
-    width: "90%",
-  },
-  bmMorphShape: {
-    fill: "#373a47",
-  },
-  bmItemList: {
-    color: "#b8b7ad",
-    padding: "0.8em",
-  },
-  bmItem: {
-    display: "flex",
-    flexDirection: "column",
-    marginTop: "5px",
-    fontSize: "18px",
-    borderTop: "1px solid white",
-    textAlign: "center",
-    outline: "none",
-  },
-  bmOverlay: {
-    background: "rgba(0, 0, 0, 0.3)",
-  },
-};
+import "./styles-menu.css";
 
 function Component() {
   const [categories, setCategories] = useState([]);
+  const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
     const loadCategories = async () => {
@@ -145,24 +98,39 @@ function Component() {
               </span>
             </form>
           </InputSearch>
+          <FaBars
+            size={32}
+            className="open-menu"
+            onClick={() => setShowMenu(!showMenu)}
+          />
 
-          <MenuDropDown>
-            <Menu styles={styles} right>
-              <h1>Categorias</h1>
-              {categories.map((category, index) => {
-                const subgrpQueryString = category.SUBGRUPO.map((subgrp) => {
-                  return `${subgrp.SUB_GRP_DESCRICAO.replace(
-                    /\s/g,
-                    "_"
-                  ).replace(/\//g, "-")}`;
-                }).toString();
-                return (
-                  <Link to={`/products?category=${subgrpQueryString}`}>
-                    {category.GRP_DESCRICAO}
-                  </Link>
-                );
-              })}
-            </Menu>
+          <MenuDropDown className={cn({ active: showMenu })}>
+            <nav>
+              <div>
+                <h1>Categorias</h1>
+                {categories.map((category) => {
+                  const subgrpQueryString = category.SUBGRUPO.map((subgrp) => {
+                    return `${subgrp.SUB_GRP_DESCRICAO.replace(
+                      /\s/g,
+                      "_"
+                    ).replace(/\//g, "-")}`;
+                  }).toString();
+                  return (
+                    <Link to={`/products?category=${subgrpQueryString}`}>
+                      {category.GRP_DESCRICAO}
+                    </Link>
+                  );
+                })}{" "}
+              </div>
+            </nav>
+
+            <div>
+              <FaTimes
+                className="close-button-menu"
+                size={24}
+                onClick={() => setShowMenu(false)}
+              />
+            </div>
           </MenuDropDown>
         </Header>
       </Container>
@@ -189,3 +157,21 @@ export default Component;
 //     </p>
 //   );
 // })}
+
+/* { <Menu>
+              <h1>Categorias</h1>
+              {categories.map((category) => {
+                const subgrpQueryString = category.SUBGRUPO.map((subgrp) => {
+                  return `${subgrp.SUB_GRP_DESCRICAO.replace(
+                    /\s/g,
+                    "_"
+                  ).replace(/\//g, "-")}`;
+                }).toString();
+                return (
+                  <Link to={`/products?category=${subgrpQueryString}`}>
+                    {category.GRP_DESCRICAO}
+                  </Link>
+                );
+              })} 
+        <Menu />
+              */

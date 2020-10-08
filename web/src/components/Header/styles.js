@@ -50,6 +50,16 @@ export const Header = styled.header`
     width: 50px;
     height: 50px;
   }
+
+  .open-menu {
+    margin-left: 16px;
+    cursor: pointer;
+  }
+
+  .open-menu:hover {
+    color: #800000;
+    transition: 0.2s;
+  }
 `;
 
 export const InputSearch = styled.div`
@@ -79,10 +89,54 @@ export const InputSearch = styled.div`
 `;
 
 export const MenuDropDown = styled.div`
-  width: 20%;
-  h1 {
-    border-top: none !important;
+  width: 15%;
+  background-color: #373a47;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 60%;
+  z-index: 50;
+  height: 100%;
+  padding: 2em;
+  transform: translateX(100%);
+  transition: all 0.2s;
+  overflow-y: auto;
 
+  nav {
+    overflow-x: hidden;
+  }
+
+  div a {
+    color: white !important;
+    display: flex;
+    flex-direction: column;
+  }
+
+  div h1 {
     color: white;
+    font-size: 24px;
+    margin-top: 8px;
+  }
+
+  .bg-mask-menu {
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 100%;
+    z-index: 50;
+  }
+
+  .close-button-menu {
+    cursor: pointer;
+    color: white;
+    position: fixed;
+    top: 12px;
+    right: 36px;
+  }
+
+  &.active {
+    transform: translateX(0);
   }
 `;

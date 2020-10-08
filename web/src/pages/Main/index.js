@@ -36,27 +36,15 @@ function Main() {
         <Carousel>
           <Carousel.Item>
             <img src="mobile-phone.jpg" alt="Celulares" />
-            <Carousel.Caption>
-              <h3>Celulares</h3>
-            </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
             <img src="laptop.jpg" alt="Notebooks" />
-            <Carousel.Caption>
-              <h3>Notebooks</h3>
-            </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
             <img src="tv.jpg" alt="Televisores" />
-            <Carousel.Caption>
-              <h3>Televisão</h3>
-            </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
             <img src="acessories.jpg" alt="Acessorios" />
-            <Carousel.Caption>
-              <h3>Acessórios</h3>
-            </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
       </Container>
