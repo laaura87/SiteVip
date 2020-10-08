@@ -116,6 +116,13 @@ export const MenuDropDown = styled.div`
     color: white;
     font-size: 24px;
     margin-top: 8px;
+    margin-bottom: 10px;
+  }
+
+  .link-menu {
+    font-size: 14px;
+    border-top: 1px solid grey;
+    padding: 2px;
   }
 
   .bg-mask-menu {

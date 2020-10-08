@@ -116,9 +116,11 @@ function Component() {
                     ).replace(/\//g, "-")}`;
                   }).toString();
                   return (
-                    <Link to={`/products?category=${subgrpQueryString}`}>
-                      {category.GRP_DESCRICAO}
-                    </Link>
+                    <div className="link-menu">
+                      <Link to={`/products?category=${subgrpQueryString}`}>
+                        {category.GRP_DESCRICAO}
+                      </Link>
+                    </div>
                   );
                 })}{" "}
               </div>

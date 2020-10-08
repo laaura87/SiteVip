@@ -2,10 +2,14 @@ const connection = require("../connection");
 
 module.exports = {
   async index(req, res) {
+    let { category } = req.query;
+
+    console.log(category);
     let description;
     req.query.description
       ? (description = req.query.description.toUpperCase())
       : (description = "%");
+
     const produtos = await connection("SIAC_TS.VW_PRODUTO")
       .where("FIL_CODIGO", req.query.filial || 0)
       .andWhere("PROD_ATIVO", "S")
@@ -34,6 +38,7 @@ module.exports = {
         console.log(err);
         return false;
       });
+
     if (produtos === false)
       return res.status(500).json({ err: "Erro do servidor" });
 
@@ -214,7 +219,7 @@ module.exports = {
       )
       .orderByRaw("dbms_random. value")
       .distinct()
-      .limit(4)
+      .limit(8)
       .catch((err) => {
         console.log(err);
         return false;

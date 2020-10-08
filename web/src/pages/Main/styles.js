@@ -11,23 +11,41 @@ export const Container = styled.div`
 export const GridContainerProducts = styled.div`
   width: 90%;
   margin: 0 auto;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+
   div {
     width: 100%;
   }
-  @media (min-width: 768px) {
-    display: grid;
-    gap: 20px;
-    grid-template-columns: repeat(4, 1fr);
-  }
-  @media (min-width: 480px) {
+
+  @media (max-width: 100px) {
     display: grid;
     gap: 20px;
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (min-width: 320px) {
+  @media (max-width: 512px) {
     display: grid;
-    gap: 20px;
     grid-template-columns: 1fr;
   }
 `;
+
+export const EffectText = styled.div`
+  h1 {
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+  }
+`;
+
+export const ContainerBody = styled.div`
+  width: 90%;
+  margin: 20px auto;
+
+  display: grid;
+  grid-template-columns: 25% 75%;
+  gap: 40px;
+`;
+export const LeftSection = styled.div``;
+export const RightSection = styled.div``;

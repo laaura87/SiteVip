@@ -46,7 +46,19 @@ export const Container = styled.footer`
   }
 
   .copy {
-    margin-top: 50px;
-    margin-bottom: 0px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
+export const ContainerLinks = styled.div`
+  @media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
   }
 `;
