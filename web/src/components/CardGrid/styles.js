@@ -13,7 +13,7 @@ export const Container = styled.div`
   margin-top: 20px;
   box-shadow: 11px 10px 35px -26px rgba(0, 0, 0, 0.75);
   padding: 2px;
-  width: 40%;
+  width: 100%;
 
   button {
     bottom: 0;

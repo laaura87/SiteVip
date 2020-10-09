@@ -1,10 +1,25 @@
 import styled from "styled-components";
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  width: 90%;
+  margin: 20px auto;
+
+  display: grid;
+  grid-template-columns: 25% 75%;
+  gap: 40px;
+  @media (max-width: 1000px) {
+    grid-template-columns: 30% 70%;
+    gap: 10px;
+  }
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 0px;
+  }
+`;
 
 export const ContainerProduct = styled.div`
-  width: 70%;
-  margin: 20px auto;
+  width: 80%;
+  margin: 0 auto;
   height: 450px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -18,31 +33,32 @@ export const ContainerProduct = styled.div`
   .img-container {
     background-color: white;
     margin: auto auto;
-    width: 400px;
-    overflow: hidden;
-    box-sizing: border-box;
-    height: 400px;
-
+    width: 350px;
+    height: 350px;
+    position: relative;
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      overflow: hidden;
     }
+  }
 
-    .image-gallery-thumbnail-image img {
-      width: 100% !important;
+  @media (max-width: 1300px) {
+    .img-containter {
+      width: 290px !important;
+      height: 290px !important;
+      img {
+        width: 100px;
+        height: 100px;
+      }
     }
   }
 
   @media (max-width: 1000px) {
-    img {
-      width: 300px;
-      height: 300px;
-    }
+    grid-template-columns: 1fr;
+    height: 800px;
   }
-
-  @media (max-width: 768px) {
+  /* @media (max-width: 768px) {
     grid-template-columns: 1fr;
     height: 800px;
   }
@@ -60,7 +76,7 @@ export const ContainerProduct = styled.div`
         font-size: 16px;
       }
     }
-  }
+  } */
 `;
 
 export const DetailsProducts = styled.div`
@@ -93,6 +109,8 @@ export const DetailsProducts = styled.div`
 `;
 
 export const RelatedProducts = styled.div`
+  width: 90%;
+  margin: 0 auto;
   h1 {
     color: white;
     text-align: center;
@@ -112,6 +130,10 @@ export const RelatedProducts = styled.div`
     div {
       width: 100%;
     }
+  }
+
+  .react-multiple-carousel__arrow {
+    width: 10px;
   }
 
   @media (max-width: 955px) {
@@ -147,3 +169,7 @@ export const RelatedProducts = styled.div`
     }
   }
 `;
+
+export const LeftSide = styled.div``;
+
+export const RightSide = styled.div``;
