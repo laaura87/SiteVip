@@ -15,7 +15,7 @@ routes.get("/", (req, res) => {
 });
 routes.post("/login", UsuarioController.login);
 
-routes.get("/products", ProdutoController.index);
+routes.get("/products", auth, ProdutoController.index);
 
 routes.get("/products/:prodCodigo", auth, ProdutoController.show);
 
@@ -25,7 +25,7 @@ routes.get("/categories", auth, CategoriaController.index);
 
 routes.get("/filial", FilialController.index);
 
-routes.get("/cart", auth, CarrinhoController.index);
+routes.get("/cart", CarrinhoController.index);
 
 routes.get("/cart/:filial/:codigo/:prodCodigo", auth, CarrinhoController.show);
 

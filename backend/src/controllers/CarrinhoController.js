@@ -10,6 +10,7 @@ module.exports = {
         console.log(err);
         return false;
       });
+
     if (cartProducts === false) return res.status(500).json({ error: true });
     if (cartProducts.length === 0) return res.status(404).json({ error: true });
 
