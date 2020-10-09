@@ -20,7 +20,9 @@ import {
 
 function Main() {
   const [products, setProducts] = useState([]);
+
   //verificar os erros em relacao a responsividade :)
+
   useEffect(() => {
     const loadProducts = async () => {
       await api
