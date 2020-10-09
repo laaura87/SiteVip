@@ -10,6 +10,7 @@ import {
   Container,
   LeftSide,
   RightSide,
+  SeeToo,
 } from "./styles";
 
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -32,7 +33,7 @@ function Detail({ match: { params } }) {
     SUB_GRP_DESCRICAO: "",
     PROD_QTD_ATUAL: "",
   });
-  const [activeItemIndex, setActiveItemIndex] = useState(0);
+  const [products, setProducts] = useState([]);
   const [images, setImages] = useState([{ description: null }]);
   const [relatedProducts, setRelatedProducts] = useState([]);
 
@@ -71,6 +72,22 @@ function Detail({ match: { params } }) {
     loadProduct();
   }, [params.prodCodigo]);
 
+  useEffect(() => {
+    const loadProducts = async () => {
+      await api
+        .get(`/rand?filial=${sessionStorage.getItem("filial")}`, {
+          headers: { "x-access-token": sessionStorage.getItem("token") },
+        })
+        .then((response) => {
+          setProducts(response.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    loadProducts();
+  }, []);
+
   //disponibilidade do produto
   let disp, dispButton;
   if (product.PROD_QTD_ATUAL > 0) {
@@ -101,19 +118,6 @@ function Detail({ match: { params } }) {
     },
   };
 
-  const productsRelated = relatedProducts.map((relatedProduct, index) => {
-    return (
-      <CardGrid
-        key={relatedProduct.PROD_CODIGO}
-        id={relatedProduct.PROD_CODIGO}
-        name={relatedProduct.PROD_DESCRICAO}
-        price={relatedProduct.PROD_PRECO_VENDA}
-        image={relatedProduct.PROD_IMAG_NOME}
-      />
-    );
-  });
-
-  console.log(productsRelated);
   return (
     <>
       <Header />
@@ -168,17 +172,14 @@ function Detail({ match: { params } }) {
             <div>
               <Carousel
                 responsive={responsive}
-                swipeable={false}
-                draggable={false}
                 showDots={false}
                 responsive={responsive}
                 ssr={true}
                 infinite={true}
                 keyBoardControl={true}
-                customTransition="all .5"
                 transitionDuration={500}
                 containerClass="carousel-container"
-                itemClass="image-item"
+               
               >
                 {relatedProducts.map((relatedProduct, index) => {
                   return (
@@ -194,6 +195,36 @@ function Detail({ match: { params } }) {
               </Carousel>
             </div>
           </RelatedProducts>
+
+          <SeeToo>
+            <h1>Veja também</h1>
+
+            <div>
+              <Carousel
+                responsive={responsive}
+                showDots={false}
+                responsive={responsive}
+                ssr={true}
+                infinite={true}
+                keyBoardControl={true}
+                transitionDuration={500}
+                containerClass="carousel-container"
+               
+              >
+                {products.map((product) => {
+                  return (
+                    <CardGrid
+                      name={product.PROD_DESCRICAO}
+                      price={product.PROD_PRECO_VENDA}
+                      id={product.PROD_CODIGO}
+                      key={product.PROD_CODIGO}
+                      image={product.PROD_IMAG_NOME}
+                    />
+                  );
+                })}
+              </Carousel>
+            </div>
+          </SeeToo>
         </RightSide>
       </Container>
       <Footer />
