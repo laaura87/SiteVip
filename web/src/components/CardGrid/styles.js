@@ -4,9 +4,8 @@ export const Container = styled.div`
   position: relative;
   margin: 0 auto;
   background-color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-rows: 40% 18% 8% 10%;
   border-radius: 6px;
   border: 1px solid black;
   margin-bottom: 20px;
@@ -14,20 +13,18 @@ export const Container = styled.div`
   box-shadow: 11px 10px 35px -26px rgba(0, 0, 0, 0.75);
   padding: 2px;
   width: 100%;
-
-  button {
-    bottom: 0;
-  }
+  height: 100%;
+  text-align: center;
 
   img {
-    margin-top: 5px;
-    width: 200px;
-    height: 200px;
+    margin-top: 3px;
+    width: 160px;
+    height: 160px;
     border: 0.2px solid grey;
   }
 
   h3 {
-    margin-top: 12px;
+    margin-top: 20px;
     text-align: center;
     font-size: 18px;
   }
@@ -43,7 +40,7 @@ export const Container = styled.div`
     margin-bottom: 0px;
     display: flex;
     align-items: center;
-    width: 100% !important;
+    width: 80% !important;
     p {
       text-align: center;
       font-size: 14px;

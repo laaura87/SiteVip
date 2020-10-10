@@ -4,9 +4,7 @@ import "./style.css";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import CardGrid from "../../components/CardGrid";
-import DefaultButton from "../../components/DefaultButton";
-import WarningButton from "../../components/WarningButton";
-import SuccessButton from "../../components/SuccessButton";
+
 import useSWR from "swr";
 import { fetcher } from "../../services/api";
 
@@ -25,8 +23,6 @@ function Products({ history, location }) {
     }&category=${categories}&filial=${sessionStorage.getItem("filial")}`,
     { fetcher }
   );
-
-  console.log(`era pra ser os produtos ` + products);
 
   return (
     <>
