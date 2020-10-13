@@ -60,7 +60,7 @@ export const ContainerProduct = styled.div`
     grid-template-columns: 1fr;
     height: 800px;
   }
-  /* @media (max-width: 768px) {
+  @media (max-width: 768px) {
     grid-template-columns: 1fr;
     height: 800px;
   }
@@ -78,7 +78,7 @@ export const ContainerProduct = styled.div`
         font-size: 16px;
       }
     }
-  } */
+  }
 `;
 
 export const DetailsProducts = styled.div`
@@ -113,6 +113,7 @@ export const DetailsProducts = styled.div`
 export const RelatedProducts = styled.div`
   width: 90%;
   margin: 0 auto;
+
   h1 {
     margin-top: 20px;
     color: white;
@@ -125,11 +126,11 @@ export const RelatedProducts = styled.div`
     margin-top: 10px;
   }
 
-  .react-multiple-carousel__arrow {
-    width: 10px;
-  }
-  .react-multi-carousel-item {
-    margin: 0 15px;
+  .layout-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
   }
 
   @media (max-width: 955px) {
@@ -148,28 +149,6 @@ export const RelatedProducts = styled.div`
     h1 {
       font-size: 16px;
     }
-  }
-`;
-
-export const SeeToo = styled.div`
-  width: 90%;
-  margin: 0 auto;
-  h1 {
-    margin-top: 20px;
-    color: white;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  p {
-    font-size: 16px;
-  }
-
-  .react-multiple-carousel__arrow {
-    width: 10px;
-  }
-  .react-multi-carousel-item {
-    margin: 0 15px;
   }
 `;
 

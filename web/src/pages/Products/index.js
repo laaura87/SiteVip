@@ -11,7 +11,6 @@ import { fetcher } from "../../services/api";
 import api from "../../services/api";
 
 function Products({ history, location }) {
-  console.log(`location ` + location);
   const query = new URLSearchParams(location.search);
   const description = query.get("description") || null;
   const categories = query.get("category") || "";
@@ -23,6 +22,8 @@ function Products({ history, location }) {
     }&category=${categories}&filial=${sessionStorage.getItem("filial")}`,
     { fetcher }
   );
+
+  console.log(sessionStorage);
 
   return (
     <>

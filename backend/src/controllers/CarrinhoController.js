@@ -12,7 +12,8 @@ module.exports = {
       });
 
     if (cartProducts === false) return res.status(500).json({ error: true });
-    if (cartProducts.length === 0) return res.status(404).json({ error: true });
+    if (cartProducts.length === 0)
+      return res.status(404).json({ error: "Nenhum produto encontrado." });
 
     const promiseProducts = cartProducts.map(async (product) => {
       const info = await connection("SIAC_TS.VW_PRODUTO")

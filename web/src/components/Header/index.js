@@ -15,17 +15,21 @@ import {
   FaShoppingCart,
 } from "react-icons/fa";
 
+import CartContent from "../CartContent";
+
 import {
   Container,
   Header,
   InputSearch,
   MenuDropDown,
   SubHeader,
+  CartModal,
 } from "./styles";
 
 function Component() {
   const [categories, setCategories] = useState([]);
   const [showMenu, setShowMenu] = useState(false);
+  const [showCart, setShowCart] = useState(false);
 
   useEffect(() => {
     const loadCategories = async () => {
@@ -97,7 +101,25 @@ function Component() {
               </span>
             </form>
           </InputSearch>
-          <FaShoppingCart size={32} className="shopping-cart" />
+          <FaShoppingCart
+            size={32}
+            className="shopping-cart"
+            onClick={() => setShowCart(!showCart)}
+          />
+
+          <CartModal className={cn({ active: showCart })}>
+            <CartContent />
+
+            <div>
+              <FaTimes
+                className="close-button-menu"
+                size={24}
+                color="white"
+                onClick={() => setShowCart(false)}
+              />
+            </div>
+          </CartModal>
+
           <FaBars
             size={32}
             className="open-menu"

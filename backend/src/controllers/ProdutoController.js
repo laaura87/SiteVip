@@ -4,7 +4,6 @@ module.exports = {
   async index(req, res) {
     let { category } = req.query;
 
-    console.log(category);
     let description;
     req.query.description
       ? (description = req.query.description.toUpperCase())

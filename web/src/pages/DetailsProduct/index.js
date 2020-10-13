@@ -11,7 +11,6 @@ import {
   Container,
   LeftSide,
   RightSide,
-  SeeToo,
 } from "./styles";
 
 import ProductUnavailable from "../../components/ProductUnavailable";
@@ -147,28 +146,20 @@ function Detail({ match: { params } }) {
 
           <RelatedProducts>
             <h1>Produtos relacionados</h1>
-            <div></div>
-          </RelatedProducts>
-
-          <SeeToo>
-            <h1>Veja também</h1>
-
-            <div>
-              <Slider {...settings}>
-                {relatedProducts.map((relatedProduct) => {
-                  return (
-                    <CardGrid
-                      key={relatedProduct.PROD_CODIGO}
-                      id={relatedProduct.PROD_CODIGO}
-                      name={relatedProduct.PROD_DESCRICAO}
-                      price={relatedProduct.PROD_PRECO_VENDA}
-                      image={relatedProduct.PROD_IMAG_NOME}
-                    />
-                  );
-                })}
-              </Slider>
+            <div className="layout-grid">
+              {relatedProducts.map((relatedProduct) => {
+                return (
+                  <CardGrid
+                    key={relatedProduct.PROD_CODIGO}
+                    id={relatedProduct.PROD_CODIGO}
+                    name={relatedProduct.PROD_DESCRICAO}
+                    price={relatedProduct.PROD_PRECO_VENDA}
+                    image={relatedProduct.PROD_IMAG_NOME}
+                  />
+                );
+              })}
             </div>
-          </SeeToo>
+          </RelatedProducts>
         </RightSide>
       </Container>
       <Footer />
