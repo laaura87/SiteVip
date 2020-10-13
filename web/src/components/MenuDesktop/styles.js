@@ -3,14 +3,16 @@ import styled from "styled-components";
 export const Container = styled.div`
   background-color: white;
   border-radius: 6px;
-  padding: 2em;
+  padding: 1.5em;
   box-sizing: border-box;
   nav {
     color: black;
     h1 {
       font-size: 24px;
       text-align: center;
+      letter-spacing: 3px;
       margin-bottom: 10px;
+      text-transform: uppercase;
     }
 
     a {
@@ -42,7 +44,13 @@ export const Container = styled.div`
       }
     }
   }
+
   @media (max-width: 850px) {
+    nav {
+      h1 {
+        font-size: 18px;
+      }
+    }
     .link-menu {
       a {
         font-size: 14px;
@@ -50,6 +58,7 @@ export const Container = styled.div`
       }
     }
   }
+
   @media (max-width: 768px) {
     display: none;
   }

@@ -10,10 +10,10 @@ export const Container = styled.div`
 
 export const GridContainerProducts = styled.div`
   width: 90%;
-  margin: 0 auto;
+  margin: 10px auto;
   display: grid;
   gap: 20px;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 
   div {
     width: 100%;

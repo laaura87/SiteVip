@@ -5,10 +5,10 @@ export const Container = styled.div`
   margin: 20px auto;
 
   display: grid;
-  grid-template-columns: 25% 75%;
+  grid-template-columns: 1fr 3fr;
   gap: 40px;
   @media (max-width: 1000px) {
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 3fr 7fr;
     gap: 10px;
   }
   @media (max-width: 768px) {
@@ -18,6 +18,7 @@ export const Container = styled.div`
 `;
 
 export const ContainerProduct = styled.div`
+  box-sizing: border-box;
   width: 80%;
   margin: 0 auto;
   height: 450px;
@@ -36,6 +37,7 @@ export const ContainerProduct = styled.div`
     width: 350px;
     height: 350px;
     position: relative;
+
     img {
       width: 100%;
       height: 100%;
@@ -44,6 +46,9 @@ export const ContainerProduct = styled.div`
   }
 
   @media (max-width: 1300px) {
+  }
+
+  @media (max-width: 1000px) {
     .img-containter {
       width: 290px !important;
       height: 290px !important;
@@ -52,9 +57,6 @@ export const ContainerProduct = styled.div`
         height: 100px;
       }
     }
-  }
-
-  @media (max-width: 1000px) {
     grid-template-columns: 1fr;
     height: 800px;
   }
@@ -120,6 +122,7 @@ export const RelatedProducts = styled.div`
 
   p {
     font-size: 16px;
+    margin-top: 10px;
   }
 
   .react-multiple-carousel__arrow {
@@ -167,24 +170,6 @@ export const SeeToo = styled.div`
   }
   .react-multi-carousel-item {
     margin: 0 15px;
-  }
-
-  @media (max-width: 955px) {
-    div {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 768px) {
-    div {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 420px) {
-    h1 {
-      font-size: 16px;
-    }
   }
 `;
 

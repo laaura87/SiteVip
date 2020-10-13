@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import ReactImageMagnify from "react-image-magnify";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
+
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import {
   DetailsProducts,
@@ -12,8 +13,6 @@ import {
   RightSide,
   SeeToo,
 } from "./styles";
-
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 import ProductUnavailable from "../../components/ProductUnavailable";
 import ProductDisp from "../../components/ProductDisp";
@@ -99,23 +98,13 @@ function Detail({ match: { params } }) {
   }
 
   //carousel
-  const responsive = {
-    superLargeDesktop: {
-      breakpoint: { max: 4000, min: 3000 },
-      items: 4,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 2,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
+  var settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 2,
+    initialSlide: 0,
   };
 
   return (
@@ -128,20 +117,9 @@ function Detail({ match: { params } }) {
         <RightSide>
           <ContainerProduct>
             <div className="img-container">
-              <ReactImageMagnify
-                {...{
-                  smallImage: {
-                    isFluidWidth: true,
-                    src: images,
-                  },
-                  largeImage: {
-                    src: images,
-                    width: 1200,
-                    height: 1800,
-                  },
-                }}
-              />
+              <img src={images} alt="" />
             </div>
+
             <DetailsProducts>
               <h1>{product.PROD_DESCRICAO}</h1>
               <div>
@@ -169,19 +147,15 @@ function Detail({ match: { params } }) {
 
           <RelatedProducts>
             <h1>Produtos relacionados</h1>
+            <div></div>
+          </RelatedProducts>
+
+          <SeeToo>
+            <h1>Veja também</h1>
+
             <div>
-              <Carousel
-                responsive={responsive}
-                showDots={false}
-                responsive={responsive}
-                ssr={true}
-                infinite={true}
-                keyBoardControl={true}
-                transitionDuration={500}
-                containerClass="carousel-container"
-               
-              >
-                {relatedProducts.map((relatedProduct, index) => {
+              <Slider {...settings}>
+                {relatedProducts.map((relatedProduct) => {
                   return (
                     <CardGrid
                       key={relatedProduct.PROD_CODIGO}
@@ -192,37 +166,7 @@ function Detail({ match: { params } }) {
                     />
                   );
                 })}
-              </Carousel>
-            </div>
-          </RelatedProducts>
-
-          <SeeToo>
-            <h1>Veja também</h1>
-
-            <div>
-              <Carousel
-                responsive={responsive}
-                showDots={false}
-                responsive={responsive}
-                ssr={true}
-                infinite={true}
-                keyBoardControl={true}
-                transitionDuration={500}
-                containerClass="carousel-container"
-               
-              >
-                {products.map((product) => {
-                  return (
-                    <CardGrid
-                      name={product.PROD_DESCRICAO}
-                      price={product.PROD_PRECO_VENDA}
-                      id={product.PROD_CODIGO}
-                      key={product.PROD_CODIGO}
-                      image={product.PROD_IMAG_NOME}
-                    />
-                  );
-                })}
-              </Carousel>
+              </Slider>
             </div>
           </SeeToo>
         </RightSide>
