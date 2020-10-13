@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Main from "./pages/Main";
 import Products from "./pages/Products";
 import DetailsProduct from "./pages/DetailsProduct";
+import Cart from "./pages/Cart";
 
 const Routes = () => {
   return (
@@ -41,6 +42,14 @@ const Routes = () => {
             ) : (
               <Redirect to={{ pathname: "/" }} />
             )
+          }
+        />
+
+        <Route
+          exact
+          path="/cart"
+          render={(props) =>
+            isSignedIn() ? <Cart /> : <Redirect to={{ pathname: "/" }} />
           }
         />
       </Switch>

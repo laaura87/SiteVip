@@ -101,24 +101,13 @@ function Component() {
               </span>
             </form>
           </InputSearch>
-          <FaShoppingCart
-            size={32}
-            className="shopping-cart"
-            onClick={() => setShowCart(!showCart)}
-          />
-
-          <CartModal className={cn({ active: showCart })}>
-            <CartContent />
-
-            <div>
-              <FaTimes
-                className="close-button-menu"
-                size={24}
-                color="white"
-                onClick={() => setShowCart(false)}
-              />
-            </div>
-          </CartModal>
+          <Link to="/cart">
+            <FaShoppingCart
+              size={32}
+              className="shopping-cart"
+              onClick={() => setShowCart(!showCart)}
+            />
+          </Link>
 
           <FaBars
             size={32}

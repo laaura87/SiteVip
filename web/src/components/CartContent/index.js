@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaCartPlus } from "react-icons/fa";
-import { Container, CarEmpty } from "./styles";
+import { Container, CarEmpty, ContainerProducts } from "./styles";
 
 import { Link } from "react-router-dom";
 
@@ -8,7 +8,6 @@ import api from "../../services/api";
 
 function CartContent() {
   const [cartProducts, setCartProducts] = useState([]);
-  const [insertProducts, setInsertProducts] = useState();
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -27,6 +26,8 @@ function CartContent() {
     };
     loadProducts();
   }, []);
+
+  console.log(cartProducts);
 
   if (cartProducts.length === 0) {
     return (
@@ -49,7 +50,29 @@ function CartContent() {
     );
   }
 
-  return <Container></Container>;
+  return (
+    <Container>
+      <h1>
+        {" "}
+        <FaCartPlus size={20} color="white" />
+        Produtos adicionados ao carrinho
+      </h1>
+      {cartProducts.map((product) => {
+        return (
+          <ContainerProducts>
+            <img src="https://via.placeholder.com/80" alt="" />
+            <p className="name-product">{product.PROD_DESCRICAO}</p>
+            <p>
+              {product.PROD_PRECO_VENDA.toLocaleString("pt-br", {
+                style: "currency",
+                currency: "BRL",
+              })}
+            </p>
+          </ContainerProducts>
+        );
+      })}
+    </Container>
+  );
 }
 
 export default CartContent;

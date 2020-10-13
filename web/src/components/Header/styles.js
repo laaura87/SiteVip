@@ -5,6 +5,10 @@ export const Container = styled.div`
   background-color: white;
   height: 160px;
   padding: 5px;
+
+  .shopping-cart {
+    color: #171d4b;
+  }
 `;
 
 export const SubHeader = styled.div`
@@ -148,31 +152,6 @@ export const MenuDropDown = styled.div`
     right: 36px;
   }
 
-  &.active {
-    transform: translateX(0);
-  }
-`;
-
-export const CartModal = styled.div`
-  background-color: #373a47;
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 30%;
-  z-index: 50;
-  height: 100%;
-  padding: 2em;
-  transform: translateX(100%);
-  transition: all 0.2s;
-  overflow-y: auto;
-
-  .close-button-menu {
-    cursor: pointer;
-    color: white;
-    position: fixed;
-    top: 12px;
-    right: 36px;
-  }
   &.active {
     transform: translateX(0);
   }

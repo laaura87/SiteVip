@@ -96,16 +96,6 @@ function Detail({ match: { params } }) {
     dispButton = " ";
   }
 
-  //carousel
-  var settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 2,
-    slidesToScroll: 2,
-    initialSlide: 0,
-  };
-
   return (
     <>
       <Header />

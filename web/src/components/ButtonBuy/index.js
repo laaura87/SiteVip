@@ -5,6 +5,7 @@ import { FaCartPlus } from "react-icons/fa";
 import api from "../../services/api";
 
 function ButtonBuy({ id }) {
+  console.log(sessionStorage);
   //adicao ao carrinho (teste)
   async function insertItems(prodCodigo, value) {
     console.log("entra na funcao");
