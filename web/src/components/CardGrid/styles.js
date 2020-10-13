@@ -5,7 +5,7 @@ export const Container = styled.div`
   margin: 0 auto;
   background-color: white;
   display: grid;
-  grid-template-rows: 40% 18% 8% 10%;
+  grid-template-rows: 40% 25% 8% 10%;
   border-radius: 6px;
   border: 1px solid black;
   margin-bottom: 20px;

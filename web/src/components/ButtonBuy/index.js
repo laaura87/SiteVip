@@ -1,10 +1,34 @@
 import React from "react";
 import { Container } from "./styles";
 import { FaCartPlus } from "react-icons/fa";
-function ButtonBuy() {
+
+import api from "../../services/api";
+
+function ButtonBuy({ id }) {
+  //adicao ao carrinho (teste)
+  async function insertItems(prodCodigo, value) {
+    console.log("entra na funcao");
+    await api
+      .put(
+        `/cart/${sessionStorage.getItem("filial")}/${sessionStorage.getItem(
+          "codigo"
+        )}/${prodCodigo}`,
+        {
+          prodQtd: value,
+        }
+      )
+      .then(() => {
+        alert("Item adicionado com sucesso!");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Erro ao carregar carrinho");
+      });
+  }
+
   return (
     <Container>
-      <button>
+      <button onClick={() => insertItems(id, 1)}>
         <p>Adicionar ao carrinho </p>
         <span>
           <FaCartPlus color="white" size={24} />

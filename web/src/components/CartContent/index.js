@@ -8,6 +8,7 @@ import api from "../../services/api";
 
 function CartContent() {
   const [cartProducts, setCartProducts] = useState([]);
+  const [insertProducts, setInsertProducts] = useState();
 
   useEffect(() => {
     const loadProducts = async () => {

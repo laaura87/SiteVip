@@ -34,7 +34,7 @@ function CardGrid({ name, price, image, id }) {
       <Link to={`/products/${id}`} className="details">
         Ver detalhes do produto
       </Link>
-      <ButtonBuy />
+      <ButtonBuy id={id} />
     </Container>
   );
 }
