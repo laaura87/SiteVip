@@ -11,6 +11,13 @@ function ButtonBuy({ id }) {
   const toastId = React.useRef(null);
 
   async function insertItems(prodCodigo, value) {
+    console.log(
+      `qttd: ${value}, filial: ${sessionStorage.getItem(
+        "filial"
+      )}, codigo: ${sessionStorage.getItem(
+        "codigo"
+      )}, prodCodigo; ${prodCodigo}`
+    );
     await api
       .post("/cart", {
         prodQtd: value,
@@ -35,7 +42,7 @@ function ButtonBuy({ id }) {
         alert("Erro ao carregar carrinho");
       });
   }
-
+  console.log(id);
   return (
     <Container>
       <button onClick={() => insertItems(id, 1)}>

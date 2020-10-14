@@ -88,16 +88,6 @@ function Detail({ match: { params } }) {
     loadProducts();
   }, []);
 
-  //disponibilidade do produto
-  let disp, dispButton;
-  if (product.PROD_QTD_ATUAL > 0) {
-    disp = <ProductDisp id={product.PROD_CODIGO} />;
-    dispButton = <ButtonBuy />;
-  } else {
-    disp = <ProductUnavailable />;
-    dispButton = <ButtonUnavailable />;
-  }
-
   return (
     <>
       <Header />
@@ -114,7 +104,9 @@ function Detail({ match: { params } }) {
             <DetailsProducts>
               <h1>{product.PROD_DESCRICAO}</h1>
               <div>
-                {disp}
+                {product.PROD_QTD_ATUAL > 0 && <ProductDisp />}
+
+                {product.PROD_QTD_ATUAL == 0 && <ProductUnavailable />}
 
                 <div className="price">
                   {product.PROD_PRECO_VENDA.toLocaleString("pt-br", {
@@ -131,7 +123,13 @@ function Detail({ match: { params } }) {
                   </p>
                 </div>
 
-                <div className="buy-button">{dispButton}</div>
+                <div className="buy-button">
+                  {product.PROD_QTD_ATUAL > 0 && (
+                    <ButtonBuy id={product.PROD_CODIGO} />
+                  )}
+
+                  {product.PROD_QTD_ATUAL == 0 && <ButtonUnavailable />}
+                </div>
               </div>
             </DetailsProducts>
           </ContainerProduct>
