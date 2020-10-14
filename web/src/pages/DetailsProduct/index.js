@@ -98,7 +98,7 @@ function Detail({ match: { params } }) {
         <RightSide>
           <ContainerProduct>
             <div className="img-container">
-              <img src={images} alt="" />
+              <img id="img" src={images} className="image" />
             </div>
 
             <DetailsProducts>
