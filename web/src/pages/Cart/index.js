@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { FaCartPlus } from "react-icons/fa";
-import { Container, CarEmpty, ContainerProducts } from "./styles";
+import { FaCartPlus, FaWindowClose, FaShoppingCart } from "react-icons/fa";
+import {
+  Container,
+  CarEmpty,
+  ContainerProducts,
+  Grid,
+  ContainerSub,
+  Finish,
+} from "./styles";
 
 import { Link } from "react-router-dom";
 
@@ -28,6 +35,30 @@ function Cart() {
     };
     loadProducts();
   }, []);
+
+  async function handleDelete(prodCodigo) {
+    await api
+      .delete(
+        `/cart/${sessionStorage.getItem("filial")}/${sessionStorage.getItem(
+          "codigo"
+        )}/${prodCodigo}`
+      )
+      .then(() => {
+        alert("Produto removido com sucesso!");
+        window.location.reload(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Erro ao remover produto!");
+      });
+  }
+
+  //Contanto o subtotal
+  let sub = 0;
+  const subtotal = cartProducts.map((product) => {
+    sub += product.PROD_PRECO_VENDA * product.PROD_QTD;
+    return sub;
+  });
 
   if (cartProducts.length === 0) {
     return (
@@ -58,20 +89,77 @@ function Cart() {
     <>
       <Header />
       <Container>
-        {cartProducts.map((product) => {
-          return (
-            <ContainerProducts>
-              <img src="https://via.placeholder.com/80" alt="" />
-              <p className="name-product">{product.PROD_DESCRICAO}</p>
-              <p>
-                {product.PROD_PRECO_VENDA.toLocaleString("pt-br", {
-                  style: "currency",
-                  currency: "BRL",
-                })}
-              </p>
-            </ContainerProducts>
-          );
-        })}
+        <Grid width="100%">
+          <thead>
+            <tr>
+              <th width="50%">Produtos</th>
+              <th>Valor Unitário</th>
+              <th>Quantidade</th>
+              <th>Subtotal</th>
+              <th>Excluir</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {cartProducts.map((product) => {
+              return (
+                <ContainerProducts>
+                  <td width="50%" className="product-container">
+                    <img src="https://via.placeholder.com/80" alt="" />
+                    <p className="name-product">{product.PROD_DESCRICAO}</p>
+                  </td>
+                  <td>
+                    <p>
+                      {product.PROD_PRECO_VENDA.toLocaleString("pt-br", {
+                        style: "currency",
+                        currency: "BRL",
+                      })}
+                    </p>
+                  </td>
+                  <td>
+                    <p>{product.PROD_QTD}</p>
+                  </td>
+                  <td>
+                    <p>
+                      {(
+                        product.PROD_QTD * product.PROD_PRECO_VENDA
+                      ).toLocaleString("pt-br", {
+                        style: "currency",
+                        currency: "BRL",
+                      })}
+                    </p>
+                  </td>
+                  <td>
+                    <FaWindowClose
+                      color="red"
+                      size={18}
+                      onClick={() => handleDelete(product.PROD_CODIGO)}
+                    />
+                  </td>
+                </ContainerProducts>
+              );
+            })}
+          </tbody>
+        </Grid>
+
+        <ContainerSub>
+          <div>
+            <p>Subtotal: </p>
+            <p>
+              {sub.toLocaleString("pt-br", {
+                style: "currency",
+                currency: "BRL",
+              })}
+            </p>
+          </div>
+        </ContainerSub>
+
+        <Finish>
+          <p>Finalizar Pedido</p>
+          <span>
+            <FaShoppingCart />
+          </span>
+        </Finish>
       </Container>
       <Footer />
     </>
