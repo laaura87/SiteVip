@@ -73,6 +73,7 @@ function Main() {
                   id={product.PROD_CODIGO}
                   key={product.PROD_CODIGO}
                   image={product.PROD_IMAG_NOME}
+                  quantity={product.PROD_QTD_ATUAL}
                 />
               );
             })}

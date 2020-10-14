@@ -8,6 +8,8 @@ import {
   ContainerSub,
   Finish,
 } from "./styles";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { Link } from "react-router-dom";
 
@@ -17,6 +19,7 @@ import Footer from "../../components/Footer";
 
 function Cart() {
   const [cartProducts, setCartProducts] = useState([]);
+  const toastId = React.useRef(null);
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -44,7 +47,17 @@ function Cart() {
         )}/${prodCodigo}`
       )
       .then(() => {
-        alert("Produto removido com sucesso!");
+        if (!toast.isActive(toastId.current)) {
+          toast.error("Produto removido com sucesso!", {
+            position: "top-center",
+            autoClose: 5000,
+            closeOnClick: true,
+            hideProgressBar: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+
         window.location.reload(false);
       })
       .catch((err) => {
@@ -136,6 +149,15 @@ function Cart() {
                       onClick={() => handleDelete(product.PROD_CODIGO)}
                     />
                   </td>
+                  <ToastContainer
+                    position="top-center"
+                    hideProgressBar
+                    autoClose={5000}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    draggable
+                  />
                 </ContainerProducts>
               );
             })}

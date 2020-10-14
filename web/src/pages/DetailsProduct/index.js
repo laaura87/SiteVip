@@ -18,6 +18,8 @@ import ProductDisp from "../../components/ProductDisp";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import ButtonBuy from "../../components/ButtonBuy";
+import ButtonUnavailable from "../../components/ButtonUnavailable";
+
 import CardGrid from "../../components/CardGrid";
 import MenuDesktop from "../../components/MenuDesktop";
 
@@ -89,11 +91,11 @@ function Detail({ match: { params } }) {
   //disponibilidade do produto
   let disp, dispButton;
   if (product.PROD_QTD_ATUAL > 0) {
-    disp = <ProductDisp />;
+    disp = <ProductDisp id={product.PROD_CODIGO} />;
     dispButton = <ButtonBuy />;
   } else {
     disp = <ProductUnavailable />;
-    dispButton = " ";
+    dispButton = <ButtonUnavailable />;
   }
 
   return (
@@ -145,6 +147,7 @@ function Detail({ match: { params } }) {
                     name={relatedProduct.PROD_DESCRICAO}
                     price={relatedProduct.PROD_PRECO_VENDA}
                     image={relatedProduct.PROD_IMAG_NOME}
+                    quantity={relatedProduct.PROD_QTD_ATUAL}
                   />
                 );
               })}

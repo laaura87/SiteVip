@@ -1,10 +1,15 @@
 import React from "react";
 import { Container } from "./styles";
 import { FaCartPlus } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 import api from "../../services/api";
 
 function ButtonBuy({ id }) {
+  const toastId = React.useRef(null);
+
   async function insertItems(prodCodigo, value) {
     await api
       .post("/cart", {
@@ -14,7 +19,16 @@ function ButtonBuy({ id }) {
         prodCodigo: prodCodigo,
       })
       .then(() => {
-        alert("Item adicionado com sucesso!");
+        if (!toast.isActive(toastId.current)) {
+          toast.success("Produto adicionado com sucesso!", {
+            position: "top-center",
+            autoClose: 5000,
+            closeOnClick: true,
+            hideProgressBar: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -30,6 +44,16 @@ function ButtonBuy({ id }) {
           <FaCartPlus color="white" size={24} />
         </span>
       </button>
+      <ToastContainer
+        position="top-center"
+        hideProgressBar
+        autoClose={5000}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        draggable
+        limit={1}
+      />
     </Container>
   );
 }

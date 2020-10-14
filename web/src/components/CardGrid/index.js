@@ -1,8 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Container, ImageDiv } from "./styles";
+
 import ButtonBuy from "../ButtonBuy/index";
-function CardGrid({ name, price, image, id }) {
+import ButtonUnavailable from "../ButtonUnavailable";
+
+function CardGrid({ name, price, image, id, quantity }) {
+  let button;
+  if (quantity > 0) {
+    button = <ButtonBuy id={id} />;
+  } else {
+    button = <ButtonUnavailable />;
+  }
+
   return (
     <Container>
       <ImageDiv>
@@ -34,7 +44,7 @@ function CardGrid({ name, price, image, id }) {
       <Link to={`/products/${id}`} className="details">
         Ver detalhes do produto
       </Link>
-      <ButtonBuy id={id} />
+      {button}
     </Container>
   );
 }

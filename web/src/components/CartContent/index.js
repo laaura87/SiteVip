@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { FaCartPlus } from "react-icons/fa";
 import { Container, CarEmpty, ContainerProducts } from "./styles";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { Link } from "react-router-dom";
 
