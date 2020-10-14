@@ -5,19 +5,14 @@ import { FaCartPlus } from "react-icons/fa";
 import api from "../../services/api";
 
 function ButtonBuy({ id }) {
-  console.log(sessionStorage);
-  //adicao ao carrinho (teste)
   async function insertItems(prodCodigo, value) {
-    console.log("entra na funcao");
     await api
-      .put(
-        `/cart/${sessionStorage.getItem("filial")}/${sessionStorage.getItem(
-          "codigo"
-        )}/${prodCodigo}`,
-        {
-          prodQtd: value,
-        }
-      )
+      .post("/cart", {
+        prodQtd: value,
+        filial: sessionStorage.getItem("filial"),
+        codigo: sessionStorage.getItem("codigo"),
+        prodCodigo: prodCodigo,
+      })
       .then(() => {
         alert("Item adicionado com sucesso!");
       })
