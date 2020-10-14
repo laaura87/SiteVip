@@ -42,7 +42,6 @@ function ButtonBuy({ id }) {
         alert("Erro ao carregar carrinho");
       });
   }
-  console.log(id);
   return (
     <Container>
       <button onClick={() => insertItems(id, 1)}>

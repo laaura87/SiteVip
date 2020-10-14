@@ -268,4 +268,6 @@ module.exports = {
     await Promise.all(imageProducts).then((results) => (result = results));
     return res.json(result);
   },
+
+  async search(req, res) {},
 };
