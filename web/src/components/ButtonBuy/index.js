@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "./styles";
 import { FaCartPlus } from "react-icons/fa";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -11,13 +11,6 @@ function ButtonBuy({ id }) {
   const toastId = React.useRef(null);
 
   async function insertItems(prodCodigo, value) {
-    console.log(
-      `qttd: ${value}, filial: ${sessionStorage.getItem(
-        "filial"
-      )}, codigo: ${sessionStorage.getItem(
-        "codigo"
-      )}, prodCodigo; ${prodCodigo}`
-    );
     await api
       .post("/cart", {
         prodQtd: value,
@@ -42,6 +35,7 @@ function ButtonBuy({ id }) {
         alert("Erro ao carregar carrinho");
       });
   }
+
   return (
     <Container>
       <button onClick={() => insertItems(id, 1)}>
@@ -50,16 +44,6 @@ function ButtonBuy({ id }) {
           <FaCartPlus color="white" size={24} />
         </span>
       </button>
-      <ToastContainer
-        position="top-center"
-        hideProgressBar
-        autoClose={5000}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        draggable
-        limit={1}
-      />
     </Container>
   );
 }

@@ -8,7 +8,7 @@ import {
   ContainerSub,
   Finish,
 } from "./styles";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { Link } from "react-router-dom";
@@ -149,15 +149,6 @@ function Cart() {
                       onClick={() => handleDelete(product.PROD_CODIGO)}
                     />
                   </td>
-                  <ToastContainer
-                    position="top-center"
-                    hideProgressBar
-                    autoClose={5000}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    draggable
-                  />
                 </ContainerProducts>
               );
             })}
