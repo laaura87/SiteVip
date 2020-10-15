@@ -30,23 +30,40 @@ function Cart() {
   const [cartProducts, setCartProducts] = useState([]);
   const toastId = React.useRef(null);
 
-  useEffect(() => {
-    const loadProducts = async () => {
-      api
-        .get(
-          `/cart?filial=${sessionStorage.getItem(
-            "filial"
-          )}&codigo=${sessionStorage.getItem("codigo")}`
-        )
-        .then((response) => {
-          setCartProducts(response.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    loadProducts();
-  }, []);
+  // useEffect(() => {
+  //   const loadProducts = async () => {
+  //     api
+  //       .get(
+  //         `/cart?filial=${sessionStorage.getItem(
+  //           "filial"
+  //         )}&codigo=${sessionStorage.getItem("codigo")}`
+  //       )
+  //       .then((response) => {
+  //         setCartProducts(response.data);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   };
+  //   loadProducts();
+  // }, []);
+
+  const loadProducts = () => {
+    api
+      .get(
+        `/cart?filial=${sessionStorage.getItem(
+          "filial"
+        )}&codigo=${sessionStorage.getItem("codigo")}`
+      )
+      .then((response) => {
+        setCartProducts(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  React.useEffect(loadProducts, []);
 
   async function handleDelete(prodCodigo) {
     await api
@@ -67,7 +84,7 @@ function Cart() {
           });
         }
 
-        window.location.reload(false);
+        loadProducts();
       })
       .catch((err) => {
         console.log(err);
@@ -76,7 +93,6 @@ function Cart() {
   }
 
   async function handleEdit(prodCodigo, value) {
-    console.log(prodCodigo, value);
     await api
       .put(
         `/cart/${sessionStorage.getItem("filial")}/${sessionStorage.getItem(
@@ -86,11 +102,10 @@ function Cart() {
           prodQtd: value,
         }
       )
-      .then((response) => console.log(response))
+      .then(loadProducts())
       .catch((err) => console.log(err));
   }
 
-  useEffect(() => {}, [cartProducts]);
   //contando o subtotal
   let sub = 0;
   const subtotal = cartProducts.map((product) => {
@@ -140,6 +155,7 @@ function Cart() {
                     <div className="counter-product">
                       <span>
                         <FaMinus
+                          size={14}
                           onClick={() =>
                             handleEdit(
                               product.PROD_CODIGO,
@@ -151,6 +167,7 @@ function Cart() {
                       <input type="text" value={product.PROD_QTD} />
                       <span>
                         <FaPlus
+                          size={14}
                           onClick={() =>
                             handleEdit(
                               product.PROD_CODIGO,
