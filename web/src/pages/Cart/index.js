@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import {
   FaCartPlus,
   FaWindowClose,
@@ -18,6 +19,7 @@ import {
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import InputNumber from "react-input-number";
 
 import { Link } from "react-router-dom";
 
@@ -29,24 +31,6 @@ import CartEmpty from "../../components/CartEmpty";
 function Cart() {
   const [cartProducts, setCartProducts] = useState([]);
   const toastId = React.useRef(null);
-
-  // useEffect(() => {
-  //   const loadProducts = async () => {
-  //     api
-  //       .get(
-  //         `/cart?filial=${sessionStorage.getItem(
-  //           "filial"
-  //         )}&codigo=${sessionStorage.getItem("codigo")}`
-  //       )
-  //       .then((response) => {
-  //         setCartProducts(response.data);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   };
-  //   loadProducts();
-  // }, []);
 
   const loadProducts = () => {
     api
@@ -106,7 +90,6 @@ function Cart() {
       .catch((err) => console.log(err));
   }
 
-  //contando o subtotal
   let sub = 0;
   const subtotal = cartProducts.map((product) => {
     sub += product.PROD_PRECO_VENDA * product.PROD_QTD;
@@ -154,27 +137,42 @@ function Cart() {
                   <td align="center" className="center-product">
                     <div className="counter-product">
                       <span>
-                        <FaMinus
-                          size={14}
-                          onClick={() =>
-                            handleEdit(
-                              product.PROD_CODIGO,
-                              product.PROD_QTD - 1
-                            )
-                          }
-                        />
+                        {product.PROD_QTD > 1 && (
+                          <FaMinus
+                            size={14}
+                            onClick={() =>
+                              handleEdit(
+                                product.PROD_CODIGO,
+                                product.PROD_QTD - 1
+                              )
+                            }
+                          />
+                        )}
+
+                        {product.PROD_QTD == 1 && (
+                          <FaMinus size={14} className="not-available" />
+                        )}
                       </span>
-                      <input type="text" value={product.PROD_QTD} />
+                      <InputNumber
+                        max={product.PROD_QTD_ATUAL}
+                        value={product.PROD_QTD}
+                      />
+
                       <span>
-                        <FaPlus
-                          size={14}
-                          onClick={() =>
-                            handleEdit(
-                              product.PROD_CODIGO,
-                              product.PROD_QTD + 1
-                            )
-                          }
-                        />
+                        {product.PROD_QTD + 1 > product.PROD_QTD_ATUAL && (
+                          <FaPlus size={14} className="not-available" />
+                        )}
+                        {product.PROD_QTD + 1 <= product.PROD_QTD_ATUAL && (
+                          <FaPlus
+                            size={14}
+                            onClick={() =>
+                              handleEdit(
+                                product.PROD_CODIGO,
+                                product.PROD_QTD + 1
+                              )
+                            }
+                          />
+                        )}
                       </span>
                     </div>
                   </td>

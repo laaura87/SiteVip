@@ -43,6 +43,11 @@ export const ContainerProducts = styled.tr`
       border: none;
     }
   }
+
+  .not-available {
+    cursor: default;
+    color: grey;
+  }
 `;
 
 export const Grid = styled.table`
