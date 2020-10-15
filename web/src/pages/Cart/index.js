@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { FaCartPlus, FaWindowClose, FaShoppingCart } from "react-icons/fa";
+import {
+  FaCartPlus,
+  FaWindowClose,
+  FaShoppingCart,
+  FaPlus,
+  FaMinus,
+} from "react-icons/fa";
+
 import {
   Container,
   CarEmpty,
@@ -8,6 +15,7 @@ import {
   ContainerSub,
   Finish,
 } from "./styles";
+
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -16,6 +24,7 @@ import { Link } from "react-router-dom";
 import api from "../../services/api";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import CartEmpty from "../../components/CartEmpty";
 
 function Cart() {
   const [cartProducts, setCartProducts] = useState([]);
@@ -66,36 +75,34 @@ function Cart() {
       });
   }
 
-  //Contanto o subtotal
+  async function handleEdit(prodCodigo, value) {
+    console.log(prodCodigo, value);
+    await api
+      .put(
+        `/cart/${sessionStorage.getItem("filial")}/${sessionStorage.getItem(
+          "codigo"
+        )}/${prodCodigo}`,
+        {
+          prodQtd: value,
+        }
+      )
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
+  }
+
+  useEffect(() => {}, [cartProducts]);
+  //contando o subtotal
   let sub = 0;
   const subtotal = cartProducts.map((product) => {
     sub += product.PROD_PRECO_VENDA * product.PROD_QTD;
     return sub;
   });
 
+  if (!cartProducts) {
+  }
+
   if (cartProducts.length === 0) {
-    return (
-      <>
-        <Header />
-        <CarEmpty>
-          <h1>
-            {" "}
-            <FaCartPlus size={20} color="white" />
-            Produtos adicionados ao carrinho
-          </h1>
-          <div>
-            <p>O carrinho está vazio :(</p>
-            <p> Deseja olhar outros produtos?</p>
-            <Link to="/home">
-              <span>
-                <FaCartPlus size={20} color="white" /> Continuar comprando
-              </span>
-            </Link>
-          </div>
-        </CarEmpty>
-        <Footer />
-      </>
-    );
+    return <CartEmpty />;
   }
 
   return (
@@ -107,7 +114,7 @@ function Cart() {
             <tr>
               <th width="50%">Produtos</th>
               <th>Valor Unitário</th>
-              <th>Quantidade</th>
+              <th className="quantity-name">Quantidade</th>
               <th>Subtotal</th>
               <th>Excluir</th>
             </tr>
@@ -129,8 +136,30 @@ function Cart() {
                       })}
                     </p>
                   </td>
-                  <td>
-                    <p>{product.PROD_QTD}</p>
+                  <td align="center" className="center-product">
+                    <div className="counter-product">
+                      <span>
+                        <FaMinus
+                          onClick={() =>
+                            handleEdit(
+                              product.PROD_CODIGO,
+                              product.PROD_QTD - 1
+                            )
+                          }
+                        />
+                      </span>
+                      <input type="text" value={product.PROD_QTD} />
+                      <span>
+                        <FaPlus
+                          onClick={() =>
+                            handleEdit(
+                              product.PROD_CODIGO,
+                              product.PROD_QTD + 1
+                            )
+                          }
+                        />
+                      </span>
+                    </div>
                   </td>
                   <td>
                     <p>
