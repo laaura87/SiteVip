@@ -81,7 +81,9 @@ function Cart() {
           prodQtd: value,
         }
       )
-      .then(loadProducts())
+      .then(() => {
+        loadProducts();
+      })
       .catch((err) => console.log(err));
   }
 
