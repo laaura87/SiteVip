@@ -17,9 +17,19 @@ import {
   LeftSection,
   RightSection,
 } from "./styles.js";
+import { useAxios } from "../../hooks/useAxios";
 
 function Main() {
   const [products, setProducts] = useState([]);
+
+  const { data } = useAxios(
+    `/rand?filial=${sessionStorage.getItem("filial")}`,
+    {
+      headers: { "x-access-token": sessionStorage.getItem("token") },
+    }
+  );
+
+  console.log(data);
 
   useEffect(() => {
     const loadProducts = async () => {

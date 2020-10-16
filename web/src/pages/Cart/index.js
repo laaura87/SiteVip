@@ -1,16 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-import {
-  FaCartPlus,
-  FaWindowClose,
-  FaShoppingCart,
-  FaPlus,
-  FaMinus,
-} from "react-icons/fa";
+import { FaWindowClose, FaShoppingCart, FaPlus, FaMinus } from "react-icons/fa";
 
 import {
   Container,
-  CarEmpty,
   ContainerProducts,
   Grid,
   ContainerSub,
