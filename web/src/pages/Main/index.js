@@ -58,16 +58,28 @@ function Main() {
           <Container>
             <Carousel>
               <Carousel.Item>
-                <img src="banner1.png" alt="Multilaser Xpad" />
+                <img
+                  src="https://via.placeholder.com/600x300"
+                  alt="Multilaser Xpad"
+                />
               </Carousel.Item>
               <Carousel.Item>
-                <img src="banner2.png" alt="Multilaser Escova Eletrica" />
+                <img
+                  src="https://via.placeholder.com/600x300"
+                  alt="Multilaser Escova Eletrica"
+                />
               </Carousel.Item>
               <Carousel.Item>
-                <img src="banner3.png" alt="Monitor Acer 23.6pol" />
+                <img
+                  src="https://via.placeholder.com/600x300"
+                  alt="Monitor Acer 23.6pol"
+                />
               </Carousel.Item>
               <Carousel.Item>
-                <img src="banner4.png" alt="OEX Cooler fan" />
+                <img
+                  src="https://via.placeholder.com/600x300"
+                  alt="OEX Cooler fan"
+                />
               </Carousel.Item>
             </Carousel>
           </Container>

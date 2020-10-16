@@ -21,6 +21,7 @@ import api from "../../services/api";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import CartEmpty from "../../components/CartEmpty";
+import Loading from "../../components/Loading";
 
 function Cart() {
   const [cartProducts, setCartProducts] = useState([]);
@@ -94,9 +95,14 @@ function Cart() {
   });
 
   if (!cartProducts) {
-  }
-
-  if (cartProducts.length === 0) {
+    return (
+      <>
+        <Header />
+        <Loading />
+        <Footer />
+      </>
+    );
+  } else if (cartProducts.length == 0) {
     return <CartEmpty />;
   }
 

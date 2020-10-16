@@ -6,6 +6,10 @@ export const Container = styled.div`
     height: 100%;
     object-fit: cover;
   }
+  .carousel-inner {
+    height: 500px;
+    object-fit: cover;
+  }
 `;
 
 export const GridContainerProducts = styled.div`
