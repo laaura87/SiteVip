@@ -70,22 +70,6 @@ function Detail({ match: { params } }) {
     loadProduct();
   }, [params.prodCodigo]);
 
-  useEffect(() => {
-    const loadProducts = async () => {
-      await api
-        .get(`/rand?filial=${sessionStorage.getItem("filial")}`, {
-          headers: { "x-access-token": sessionStorage.getItem("token") },
-        })
-        .then((response) => {
-          setProducts(response.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    loadProducts();
-  }, []);
-
   return (
     <>
       <Header />
@@ -157,25 +141,3 @@ function Detail({ match: { params } }) {
 }
 
 export default Detail;
-
-//Cod caso precise
-/* <ImageGallery
-            items={images}
-            showNav={false}
-            showPlayButton={false}
-            showFullscreenButton={false}
-            onErrorImageURL={`${process.env.PUBLIC_URL}/images/no-image.png`}
-            disableSwipe={true}
-          /> */
-
-// {relatedProducts.map((relatedProduct, index) => {
-//   return (
-//     <CardGrid
-//       key={relatedProduct.PROD_CODIGO}
-//       id={relatedProduct.PROD_CODIGO}
-//       name={relatedProduct.PROD_DESCRICAO}
-//       price={relatedProduct.PROD_PRECO_VENDA}
-//       image={relatedProduct.PROD_IMAG_NOME}
-//     />
-//   );
-// })}
