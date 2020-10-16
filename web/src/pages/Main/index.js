@@ -58,16 +58,16 @@ function Main() {
           <Container>
             <Carousel>
               <Carousel.Item>
-                <img src="mobile-phone.jpg" alt="Celulares" />
+                <img src="banner1.png" alt="Multilaser Xpad" />
               </Carousel.Item>
               <Carousel.Item>
-                <img src="laptop.jpg" alt="Notebooks" />
+                <img src="banner2.png" alt="Multilaser Escova Eletrica" />
               </Carousel.Item>
               <Carousel.Item>
-                <img src="tv.jpg" alt="Televisores" />
+                <img src="banner3.png" alt="Monitor Acer 23.6pol" />
               </Carousel.Item>
               <Carousel.Item>
-                <img src="acessories.jpg" alt="Acessorios" />
+                <img src="banner4.png" alt="OEX Cooler fan" />
               </Carousel.Item>
             </Carousel>
           </Container>
