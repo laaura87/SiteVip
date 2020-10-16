@@ -1,12 +1,18 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  background-color: white;
+export const ContainerAll = styled.div`
   width: 90%;
-  min-height: 600px;
-  margin: 20px auto;
-  border-radius: 8px;
+  height: 100%;
+  background-color: white;
+  margin: 5px auto;
   box-shadow: 14px 15px 20px -20px rgba(0, 0, 0, 0.75);
+  border-radius: 8px;
+`;
+
+export const Container = styled.div`
+  width: 90%;
+  margin: 20px auto;
+  padding: 6px;
 `;
 
 export const ContainerProducts = styled.tr`
@@ -20,8 +26,13 @@ export const ContainerProducts = styled.tr`
     display: flex;
     width: 100%;
     align-items: center;
-
+    a {
+      display: flex;
+      align-items: center;
+    }
     img {
+      width: 110px;
+      height: 110px;
       margin-right: 20px;
     }
   }
@@ -85,8 +96,8 @@ export const ContainerSub = styled.div`
   margin-top: 15px;
   margin-right: 20px;
   background-color: #fcf8e3;
-  padding: 2em;
   float: right;
+  height: 40px;
   width: 20%;
   border: 1px solid #eceeef;
   div {

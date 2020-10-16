@@ -34,7 +34,7 @@ function Detail({ match: { params } }) {
     PROD_QTD_ATUAL: "",
   });
   const [products, setProducts] = useState([]);
-  const [images, setImages] = useState([{ description: null }]);
+  const [images, setImages] = useState([]);
   const [relatedProducts, setRelatedProducts] = useState([]);
 
   useEffect(() => {
@@ -49,17 +49,15 @@ function Detail({ match: { params } }) {
           }
         )
         .then((response) => {
+          console.log(response.data);
           return response.data;
         });
       setProduct(data.product);
-
-      if (data.product.PROD_IMAG.length === 0) {
-        setImages([
-          {
-            original: `${process.env.PUBLIC_URL}/images/no-image.png`,
-            thumbnailClass: "thumbHide",
-          },
-        ]);
+      if (
+        data.product.PROD_IMAG.length == 0 ||
+        data.product.PROD_IMAG == undefined
+      ) {
+        setImages(`${process.env.PUBLIC_URL}/images/no-image.png`);
       } else {
         setImages(
           `http://187.84.80.162:8082/imagens/${params.prodCodigo}_1.jpg`

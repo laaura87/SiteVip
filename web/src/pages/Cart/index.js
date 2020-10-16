@@ -4,6 +4,7 @@ import { FaWindowClose, FaShoppingCart, FaPlus, FaMinus } from "react-icons/fa";
 
 import {
   Container,
+  ContainerAll,
   ContainerProducts,
   Grid,
   ContainerSub,
@@ -23,6 +24,7 @@ import CartEmpty from "../../components/CartEmpty";
 
 function Cart() {
   const [cartProducts, setCartProducts] = useState([]);
+  const [images, setImages] = useState([]);
   const toastId = React.useRef(null);
 
   const loadProducts = () => {
@@ -33,6 +35,7 @@ function Cart() {
         )}&codigo=${sessionStorage.getItem("codigo")}`
       )
       .then((response) => {
+        console.log(response.data);
         setCartProducts(response.data);
       })
       .catch((err) => {
@@ -99,118 +102,141 @@ function Cart() {
   return (
     <>
       <Header />
-      <Container>
-        <Grid width="100%">
-          <thead>
-            <tr>
-              <th width="50%">Produtos</th>
-              <th>Valor Unitário</th>
-              <th className="quantity-name">Quantidade</th>
-              <th>Subtotal</th>
-              <th>Excluir</th>
-            </tr>
-          </thead>
+      <ContainerAll>
+        <Container>
+          <Grid width="100%">
+            <thead>
+              <tr>
+                <th width="50%">Produtos</th>
+                <th>Valor Unitário</th>
+                <th className="quantity-name">Quantidade</th>
+                <th>Subtotal</th>
+                <th>Excluir</th>
+              </tr>
+            </thead>
 
-          <tbody>
-            {cartProducts.map((product) => {
-              return (
-                <ContainerProducts>
-                  <td width="50%" className="product-container">
-                    <img src="https://via.placeholder.com/80" alt="" />
-                    <p className="name-product">{product.PROD_DESCRICAO}</p>
-                  </td>
-                  <td>
-                    <p>
-                      {product.PROD_PRECO_VENDA.toLocaleString("pt-br", {
-                        style: "currency",
-                        currency: "BRL",
-                      })}
-                    </p>
-                  </td>
-                  <td align="center" className="center-product">
-                    <div className="counter-product">
-                      <span>
-                        {product.PROD_QTD > 1 && (
-                          <FaMinus
-                            size={14}
-                            onClick={() =>
-                              handleEdit(
-                                product.PROD_CODIGO,
-                                product.PROD_QTD - 1
-                              )
+            <tbody>
+              {cartProducts.map((product, index) => {
+                {
+                  console.log(product.PROD_IMAG[index]);
+
+                  console.log(product.PROD_IMAG);
+                }
+                return (
+                  <ContainerProducts>
+                    <td width="50%" className="product-container">
+                      <Link to={`/products/${product.PROD_CODIGO}`}>
+                        {product.PROD_IMAG.length == 0 ? (
+                          <img
+                            src={
+                              process.env.PUBLIC_URL + "/images/no-image.png"
                             }
+                            alt={product.PROD_DESCRICAO.slice(0, 18)}
+                          />
+                        ) : (
+                          <img
+                            src={`http://187.84.80.162:8082/imagens/${product.PROD_IMAG}`}
+                            alt={product.PROD_DESCRICAO.slice(0, 18)}
                           />
                         )}
+                        <p className="name-product">{product.PROD_DESCRICAO}</p>
+                      </Link>
+                      <Link to={`/products/${product.PROD_CODIGO}`}></Link>
+                    </td>
+                    <td>
+                      <p>
+                        {product.PROD_PRECO_VENDA.toLocaleString("pt-br", {
+                          style: "currency",
+                          currency: "BRL",
+                        })}
+                      </p>
+                    </td>
+                    <td align="center" className="center-product">
+                      <div className="counter-product">
+                        <span>
+                          {product.PROD_QTD > 1 && (
+                            <FaMinus
+                              size={14}
+                              onClick={() =>
+                                handleEdit(
+                                  product.PROD_CODIGO,
+                                  product.PROD_QTD - 1
+                                )
+                              }
+                            />
+                          )}
 
-                        {product.PROD_QTD == 1 && (
-                          <FaMinus size={14} className="not-available" />
-                        )}
-                      </span>
-                      <InputNumber
-                        max={product.PROD_QTD_ATUAL}
-                        value={product.PROD_QTD}
+                          {product.PROD_QTD == 1 && (
+                            <FaMinus size={14} className="not-available" />
+                          )}
+                        </span>
+                        <InputNumber
+                          max={product.PROD_QTD_ATUAL}
+                          value={product.PROD_QTD}
+                        />
+
+                        <span>
+                          {product.PROD_QTD + 1 > product.PROD_QTD_ATUAL && (
+                            <FaPlus size={14} className="not-available" />
+                          )}
+                          {product.PROD_QTD + 1 <= product.PROD_QTD_ATUAL && (
+                            <FaPlus
+                              size={14}
+                              onClick={() =>
+                                handleEdit(
+                                  product.PROD_CODIGO,
+                                  product.PROD_QTD + 1
+                                )
+                              }
+                            />
+                          )}
+                        </span>
+                      </div>
+                    </td>
+                    <td>
+                      <p>
+                        {(
+                          product.PROD_QTD * product.PROD_PRECO_VENDA
+                        ).toLocaleString("pt-br", {
+                          style: "currency",
+                          currency: "BRL",
+                        })}
+                      </p>
+                    </td>
+                    <td>
+                      <FaWindowClose
+                        color="red"
+                        size={18}
+                        onClick={() => handleDelete(product.PROD_CODIGO)}
                       />
-
-                      <span>
-                        {product.PROD_QTD + 1 > product.PROD_QTD_ATUAL && (
-                          <FaPlus size={14} className="not-available" />
-                        )}
-                        {product.PROD_QTD + 1 <= product.PROD_QTD_ATUAL && (
-                          <FaPlus
-                            size={14}
-                            onClick={() =>
-                              handleEdit(
-                                product.PROD_CODIGO,
-                                product.PROD_QTD + 1
-                              )
-                            }
-                          />
-                        )}
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <p>
-                      {(
-                        product.PROD_QTD * product.PROD_PRECO_VENDA
-                      ).toLocaleString("pt-br", {
-                        style: "currency",
-                        currency: "BRL",
-                      })}
-                    </p>
-                  </td>
-                  <td>
-                    <FaWindowClose
-                      color="red"
-                      size={18}
-                      onClick={() => handleDelete(product.PROD_CODIGO)}
-                    />
-                  </td>
-                </ContainerProducts>
-              );
-            })}
-          </tbody>
-        </Grid>
-
-        <ContainerSub>
-          <div>
-            <p>Subtotal: </p>
-            <p>
-              {sub.toLocaleString("pt-br", {
-                style: "currency",
-                currency: "BRL",
+                    </td>
+                  </ContainerProducts>
+                );
               })}
-            </p>
-          </div>
-        </ContainerSub>
+            </tbody>
+          </Grid>
 
-        <Finish>
-          <p>Finalizar Pedido</p>
-          <span>
-            <FaShoppingCart />
-          </span>
-        </Finish>
-      </Container>
+          <ContainerSub>
+            <div>
+              <p>Subtotal: </p>
+              <p>
+                {sub.toLocaleString("pt-br", {
+                  style: "currency",
+                  currency: "BRL",
+                })}
+              </p>
+            </div>
+          </ContainerSub>
+
+          <Finish>
+            <p>Finalizar Pedido</p>
+            <span>
+              <FaShoppingCart />
+            </span>
+          </Finish>
+        </Container>
+      </ContainerAll>
+
       <Footer />
     </>
   );

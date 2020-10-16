@@ -52,7 +52,7 @@ module.exports = {
     await Promise.all(promisedImageProducts).then(function (results) {
       imageProducts = results;
     });
-
+    console.log(imageProducts);
     return res.status(200).json(imageProducts);
   },
 
