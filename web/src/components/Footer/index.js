@@ -54,18 +54,33 @@ function Footer() {
             <ul className="social">
               <li>
                 <span>
-                  <FaInstagram size={24} />
+                  <a
+                    target="_blank"
+                    href="https://www.instagram.com/vipinformatica/?hl=pt-br"
+                  >
+                    <FaInstagram size={24} />
+                  </a>
                 </span>
               </li>
               <li>
                 <span>
-                  <FaFacebook size={24} />
+                  <a
+                    target="_blank"
+                    href="https://pt-br.facebook.com/vipinformatica.net/"
+                  >
+                    <FaFacebook size={24} />
+                  </a>
                 </span>
               </li>
 
               <li>
                 <span>
-                  <FaWhatsapp size={24} />
+                  <a
+                    target="_blank"
+                    href="https://api.whatsapp.com/send?phone=5581995480041&text=Ol%C3%A1%C3%A1%2C%20gostaria%20de%20fazer%20um%20pedido"
+                  >
+                    <FaWhatsapp size={24} />
+                  </a>
                 </span>
               </li>
             </ul>

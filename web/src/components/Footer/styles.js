@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const Container = styled.footer`
   background-color: white;
   width: 100%;
-
   div {
+    padding-bottom: 8px;
     padding-top: 8px;
   }
 
@@ -38,11 +38,14 @@ export const Container = styled.footer`
   }
 
   .social {
-    margin: 0 auto;
-    width: 40%;
+    margin-left: 0 !important;
+    width: 90%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    svg {
+      margin-left: 5px;
+    }
   }
 
   .copy {
