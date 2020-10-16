@@ -38,6 +38,7 @@ module.exports = {
       const info = await connection("SIAC_TS.VW_PRODUTO_IMAGEM")
         .where("PROD_CODIGO", product.PROD_CODIGO)
         .select("PROD_IMAG_NOME");
+
       return {
         PROD_CODIGO: product.PROD_CODIGO,
         PROD_QTD: product.PROD_QTD,
@@ -49,10 +50,11 @@ module.exports = {
     });
 
     let imageProducts;
+
     await Promise.all(promisedImageProducts).then(function (results) {
       imageProducts = results;
     });
-    console.log(imageProducts);
+
     return res.status(200).json(imageProducts);
   },
 

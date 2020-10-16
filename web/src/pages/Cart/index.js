@@ -24,7 +24,7 @@ import CartEmpty from "../../components/CartEmpty";
 
 function Cart() {
   const [cartProducts, setCartProducts] = useState([]);
-  const [images, setImages] = useState([]);
+
   const toastId = React.useRef(null);
 
   const loadProducts = () => {
@@ -35,7 +35,6 @@ function Cart() {
         )}&codigo=${sessionStorage.getItem("codigo")}`
       )
       .then((response) => {
-        console.log(response.data);
         setCartProducts(response.data);
       })
       .catch((err) => {
@@ -117,16 +116,11 @@ function Cart() {
 
             <tbody>
               {cartProducts.map((product, index) => {
-                {
-                  console.log(product.PROD_IMAG[index]);
-
-                  console.log(product.PROD_IMAG);
-                }
                 return (
                   <ContainerProducts>
                     <td width="50%" className="product-container">
                       <Link to={`/products/${product.PROD_CODIGO}`}>
-                        {product.PROD_IMAG.length == 0 ? (
+                        {product.PROD_IMAG[0] == undefined ? (
                           <img
                             src={
                               process.env.PUBLIC_URL + "/images/no-image.png"
@@ -135,7 +129,7 @@ function Cart() {
                           />
                         ) : (
                           <img
-                            src={`http://187.84.80.162:8082/imagens/${product.PROD_IMAG}`}
+                            src={`http://187.84.80.162:8082/imagens/${product.PROD_IMAG[0].PROD_IMAG_NOME}`}
                             alt={product.PROD_DESCRICAO.slice(0, 18)}
                           />
                         )}
