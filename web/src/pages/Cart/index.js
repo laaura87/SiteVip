@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import InputNumber from "react-input-number";
 
 import { FaWindowClose, FaShoppingCart, FaPlus, FaMinus } from "react-icons/fa";
-
 import {
   Container,
   ContainerAll,
@@ -11,12 +14,7 @@ import {
   Finish,
 } from "./styles";
 
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import InputNumber from "react-input-number";
-
-import { Link } from "react-router-dom";
-
+import useAxios from '../../hooks/useAxios'
 import api from "../../services/api";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -27,6 +25,10 @@ function Cart() {
   const [cartProducts, setCartProducts] = useState([]);
 
   const toastId = React.useRef(null);
+
+
+  const 
+
 
   const loadProducts = () => {
     api
