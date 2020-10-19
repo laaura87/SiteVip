@@ -7,6 +7,7 @@ export const Container = styled.div`
   padding: 5px;
 
   .shopping-cart {
+    margin-left: 12px;
     color: #171d4b;
   }
 `;
@@ -40,12 +41,8 @@ export const Header = styled.header`
   align-items: center;
   justify-content: space-between;
 
-  div:nth-child(1) {
-    width: 20%;
-  }
-
   .logo {
-    width: 20%;
+    width: 14%;
     img {
       width: 80px;
       height: 80px;
@@ -79,7 +76,7 @@ export const Header = styled.header`
 `;
 
 export const InputSearch = styled.div`
-  width: 60%;
+  width: 50%;
   box-sizing: border-box;
 
   form {

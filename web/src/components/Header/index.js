@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import api from "../../services/api";
+import { useAxios } from "../../hooks/useAxios";
 
 import { onSignOut, isSignedIn } from "../../services/auth";
+import MenuDrop from "../MenuDrop";
 import cn from "classnames";
 
 import {
@@ -15,36 +16,23 @@ import {
   FaShoppingCart,
 } from "react-icons/fa";
 
-import CartContent from "../CartContent";
-
 import {
   Container,
   Header,
   InputSearch,
   MenuDropDown,
   SubHeader,
-  CartModal,
 } from "./styles";
 
 function Component() {
-  const [categories, setCategories] = useState([]);
   const [showMenu, setShowMenu] = useState(false);
-  const [showCart, setShowCart] = useState(false);
 
-  useEffect(() => {
-    const loadCategories = async () => {
-      setCategories(
-        await api
-          .get(`/categories?filial=${sessionStorage.getItem("filial")}`, {
-            headers: { "x-access-token": sessionStorage.getItem("token") },
-          })
-          .then((response) => {
-            return response.data;
-          })
-      );
-    };
-    loadCategories();
-  }, []);
+  const { data } = useAxios(
+    `/categories?filial=${sessionStorage.getItem("filial")}`,
+    {
+      headers: { "x-access-token": sessionStorage.getItem("token") },
+    }
+  );
 
   let login;
   if (isSignedIn()) {
@@ -91,6 +79,8 @@ function Component() {
             </Link>
           </div>
 
+          <MenuDrop />
+
           <InputSearch>
             <form action="" method="get">
               <input type="text" placeholder="Buscar por produto"></input>
@@ -101,12 +91,9 @@ function Component() {
               </span>
             </form>
           </InputSearch>
+
           <Link to="/cart">
-            <FaShoppingCart
-              size={32}
-              className="shopping-cart"
-              onClick={() => setShowCart(!showCart)}
-            />
+            <FaShoppingCart size={32} className="shopping-cart" />
           </Link>
 
           <FaBars
@@ -114,12 +101,11 @@ function Component() {
             className="open-menu"
             onClick={() => setShowMenu(!showMenu)}
           />
-
           <MenuDropDown className={cn({ active: showMenu })}>
             <nav>
               <div>
                 <h1>Categorias</h1>
-                {categories.map((category) => {
+                {data?.map((category) => {
                   const subgrpQueryString = category.SUBGRUPO.map((subgrp) => {
                     return `${subgrp.SUB_GRP_DESCRICAO.replace(
                       /\s/g,
