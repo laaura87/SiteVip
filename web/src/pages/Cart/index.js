@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import { mutate as mutateGlobal } from "swr";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import InputNumber from "react-input-number";
@@ -14,7 +15,7 @@ import {
   Finish,
 } from "./styles";
 
-import useAxios from '../../hooks/useAxios'
+import { useAxios } from "../../hooks/useAxios";
 import api from "../../services/api";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -22,30 +23,13 @@ import CartEmpty from "../../components/CartEmpty";
 import Loading from "../../components/Loading";
 
 function Cart() {
-  const [cartProducts, setCartProducts] = useState([]);
+  const { data, mutate } = useAxios(
+    `/cart?filial=${sessionStorage.getItem(
+      "filial"
+    )}&codigo=${sessionStorage.getItem("codigo")}`
+  );
 
   const toastId = React.useRef(null);
-
-
-  const 
-
-
-  const loadProducts = () => {
-    api
-      .get(
-        `/cart?filial=${sessionStorage.getItem(
-          "filial"
-        )}&codigo=${sessionStorage.getItem("codigo")}`
-      )
-      .then((response) => {
-        setCartProducts(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  React.useEffect(loadProducts, []);
 
   async function handleDelete(prodCodigo) {
     await api
@@ -65,8 +49,6 @@ function Cart() {
             progress: undefined,
           });
         }
-
-        loadProducts();
       })
       .catch((err) => {
         console.log(err);
@@ -75,7 +57,7 @@ function Cart() {
   }
 
   async function handleEdit(prodCodigo, value) {
-    await api
+    api
       .put(
         `/cart/${sessionStorage.getItem("filial")}/${sessionStorage.getItem(
           "codigo"
@@ -84,19 +66,26 @@ function Cart() {
           prodQtd: value,
         }
       )
-      .then(() => {
-        loadProducts();
-      })
       .catch((err) => console.log(err));
+
+    const cartEdited = data?.map((product) => {
+      if (product.PROD_CODIGO === prodCodigo) {
+        return { ...product, PROD_QTD: value };
+      }
+      return product;
+    });
+
+    console.log(cartEdited);
+    mutate(cartEdited, false);
   }
 
   let sub = 0;
-  const subtotal = cartProducts.map((product) => {
+  const subtotal = data?.map((product) => {
     sub += product.PROD_PRECO_VENDA * product.PROD_QTD;
     return sub;
   });
 
-  if (!cartProducts) {
+  if (!data) {
     return (
       <>
         <Header />
@@ -104,7 +93,7 @@ function Cart() {
         <Footer />
       </>
     );
-  } else if (cartProducts.length == 0) {
+  } else if (data.length == 0) {
     return <CartEmpty />;
   }
 
@@ -125,31 +114,31 @@ function Cart() {
             </thead>
 
             <tbody>
-              {cartProducts.map((product, index) => {
+              {data.map((data, index) => {
                 return (
                   <ContainerProducts>
                     <td width="50%" className="product-container">
-                      <Link to={`/products/${product.PROD_CODIGO}`}>
-                        {product.PROD_IMAG[0] == undefined ? (
+                      <Link to={`/products/${data.PROD_CODIGO}`}>
+                        {data.PROD_IMAG[0] == undefined ? (
                           <img
                             src={
                               process.env.PUBLIC_URL + "/images/no-image.png"
                             }
-                            alt={product.PROD_DESCRICAO.slice(0, 18)}
+                            alt={data.PROD_DESCRICAO.slice(0, 18)}
                           />
                         ) : (
                           <img
-                            src={`http://187.84.80.162:8082/imagens/${product.PROD_IMAG[0].PROD_IMAG_NOME}`}
-                            alt={product.PROD_DESCRICAO.slice(0, 18)}
+                            src={`http://187.84.80.162:8082/imagens/${data.PROD_IMAG[0].PROD_IMAG_NOME}`}
+                            alt={data.PROD_DESCRICAO.slice(0, 18)}
                           />
                         )}
-                        <p className="name-product">{product.PROD_DESCRICAO}</p>
+                        <p className="name-product">{data.PROD_DESCRICAO}</p>
                       </Link>
-                      <Link to={`/products/${product.PROD_CODIGO}`}></Link>
+                      <Link to={`/products/${data.PROD_CODIGO}`}></Link>
                     </td>
                     <td>
                       <p>
-                        {product.PROD_PRECO_VENDA.toLocaleString("pt-br", {
+                        {data.PROD_PRECO_VENDA.toLocaleString("pt-br", {
                           style: "currency",
                           currency: "BRL",
                         })}
@@ -158,39 +147,33 @@ function Cart() {
                     <td align="center" className="center-product">
                       <div className="counter-product">
                         <span>
-                          {product.PROD_QTD > 1 && (
+                          {data.PROD_QTD > 1 && (
                             <FaMinus
                               size={14}
                               onClick={() =>
-                                handleEdit(
-                                  product.PROD_CODIGO,
-                                  product.PROD_QTD - 1
-                                )
+                                handleEdit(data.PROD_CODIGO, data.PROD_QTD - 1)
                               }
                             />
                           )}
 
-                          {product.PROD_QTD == 1 && (
+                          {data.PROD_QTD == 1 && (
                             <FaMinus size={14} className="not-available" />
                           )}
                         </span>
                         <InputNumber
-                          max={product.PROD_QTD_ATUAL}
-                          value={product.PROD_QTD}
+                          max={data.PROD_QTD_ATUAL}
+                          value={data.PROD_QTD}
                         />
 
                         <span>
-                          {product.PROD_QTD + 1 > product.PROD_QTD_ATUAL && (
+                          {data.PROD_QTD + 1 > data.PROD_QTD_ATUAL && (
                             <FaPlus size={14} className="not-available" />
                           )}
-                          {product.PROD_QTD + 1 <= product.PROD_QTD_ATUAL && (
+                          {data.PROD_QTD + 1 <= data.PROD_QTD_ATUAL && (
                             <FaPlus
                               size={14}
                               onClick={() =>
-                                handleEdit(
-                                  product.PROD_CODIGO,
-                                  product.PROD_QTD + 1
-                                )
+                                handleEdit(data.PROD_CODIGO, data.PROD_QTD + 1)
                               }
                             />
                           )}
@@ -199,19 +182,20 @@ function Cart() {
                     </td>
                     <td>
                       <p>
-                        {(
-                          product.PROD_QTD * product.PROD_PRECO_VENDA
-                        ).toLocaleString("pt-br", {
-                          style: "currency",
-                          currency: "BRL",
-                        })}
+                        {(data.PROD_QTD * data.PROD_PRECO_VENDA).toLocaleString(
+                          "pt-br",
+                          {
+                            style: "currency",
+                            currency: "BRL",
+                          }
+                        )}
                       </p>
                     </td>
                     <td>
                       <FaWindowClose
                         color="red"
                         size={18}
-                        onClick={() => handleDelete(product.PROD_CODIGO)}
+                        onClick={() => handleDelete(data.PROD_CODIGO)}
                       />
                     </td>
                   </ContainerProducts>

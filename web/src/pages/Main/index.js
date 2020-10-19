@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import { Carousel } from "react-bootstrap";
+import { useAxios } from "../../hooks/useAxios";
 
 import Header from "../../components/Header";
 import CardGrid from "../../components/CardGrid";
 import Footer from "../../components/Footer";
 import MenuDesktop from "../../components/MenuDesktop";
-
-import api from "../../services/api";
 
 import {
   Container,
@@ -17,35 +16,14 @@ import {
   LeftSection,
   RightSection,
 } from "./styles.js";
-import { useAxios } from "../../hooks/useAxios";
 
 function Main() {
-  const [products, setProducts] = useState([]);
-
   const { data } = useAxios(
     `/rand?filial=${sessionStorage.getItem("filial")}`,
     {
       headers: { "x-access-token": sessionStorage.getItem("token") },
     }
   );
-
-  console.log(data);
-
-  useEffect(() => {
-    const loadProducts = async () => {
-      await api
-        .get(`/rand?filial=${sessionStorage.getItem("filial")}`, {
-          headers: { "x-access-token": sessionStorage.getItem("token") },
-        })
-        .then((response) => {
-          setProducts(response.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    loadProducts();
-  }, []);
 
   return (
     <>
@@ -87,7 +65,7 @@ function Main() {
             <h1>As melhores ofertas</h1>
           </EffectText>
           <GridContainerProducts>
-            {products.map((product) => {
+            {data?.map((product) => {
               return (
                 <CardGrid
                   name={product.PROD_DESCRICAO}

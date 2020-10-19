@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
 import {
   DetailsProducts,
   ContainerProduct,
@@ -23,53 +19,17 @@ import ButtonUnavailable from "../../components/ButtonUnavailable";
 import CardGrid from "../../components/CardGrid";
 import MenuDesktop from "../../components/MenuDesktop";
 
-import api from "../../services/api";
+import { useAxios } from "../../hooks/useAxios";
 
 function Detail({ match: { params } }) {
-  const [product, setProduct] = useState({
-    PROD_CODIGO: "",
-    PROD_DESCRICAO: "",
-    PROD_PRECO_VENDA: "",
-    SUB_GRP_DESCRICAO: "",
-    PROD_QTD_ATUAL: "",
-  });
-  const [products, setProducts] = useState([]);
-  const [images, setImages] = useState([]);
-  const [relatedProducts, setRelatedProducts] = useState([]);
+  const { data } = useAxios(
+    `/products/${params.prodCodigo}?filial=${sessionStorage.getItem("filial")}`,
+    {
+      headers: { "x-access-token": sessionStorage.getItem("token") },
+    }
+  );
 
-  useEffect(() => {
-    const loadProduct = async () => {
-      const data = await api
-        .get(
-          `/products/${params.prodCodigo}?filial=${sessionStorage.getItem(
-            "filial"
-          )}`,
-          {
-            headers: { "x-access-token": sessionStorage.getItem("token") },
-          }
-        )
-        .then((response) => {
-          console.log(response.data);
-          return response.data;
-        });
-      setProduct(data.product);
-      if (
-        data.product.PROD_IMAG.length == 0 ||
-        data.product.PROD_IMAG == undefined
-      ) {
-        setImages(`${process.env.PUBLIC_URL}/images/no-image.png`);
-      } else {
-        setImages(
-          `http://187.84.80.162:8082/imagens/${params.prodCodigo}_1.jpg`
-        );
-      }
-
-      setRelatedProducts(data.relatedProducts);
-      window.scrollTo(0, 0);
-    };
-    loadProduct();
-  }, [params.prodCodigo]);
-
+  console.log(data);
   return (
     <>
       <Header />
@@ -80,37 +40,52 @@ function Detail({ match: { params } }) {
         <RightSide>
           <ContainerProduct>
             <div className="img-container">
-              <img id="img" src={images} className="image" />
+              {data?.product?.PROD_IMAG[0] == undefined ? (
+                <img
+                  src={process.env.PUBLIC_URL + "/images/no-image.png"}
+                  alt={data?.product?.PROD_DESCRICAO.slice(0, 18)}
+                  className="image"
+                />
+              ) : (
+                <img
+                  src={`http://187.84.80.162:8082/imagens/${data?.product?.PROD_IMAG[0].PROD_IMAG_NOME}`}
+                  alt={data?.product?.PROD_DESCRICAO.slice(0, 18)}
+                  className="image"
+                />
+              )}
             </div>
 
             <DetailsProducts>
-              <h1>{product.PROD_DESCRICAO}</h1>
+              <h1>{data?.product?.PROD_DESCRICAO}</h1>
               <div>
-                {product.PROD_QTD_ATUAL > 0 && <ProductDisp />}
+                {data?.product?.PROD_QTD_ATUAL > 0 && <ProductDisp />}
 
-                {product.PROD_QTD_ATUAL == 0 && <ProductUnavailable />}
+                {data?.product?.PROD_QTD_ATUAL == 0 && <ProductUnavailable />}
 
                 <div className="price">
-                  {product.PROD_PRECO_VENDA.toLocaleString("pt-br", {
+                  {data?.product?.PROD_PRECO_VENDA?.toLocaleString("pt-br", {
                     style: "currency",
                     currency: "BRL",
                   })}
                   <p>
                     Ou até em 10x de{" "}
-                    {(product.PROD_PRECO_VENDA / 10).toLocaleString("pt-br", {
-                      style: "currency",
-                      currency: "BRL",
-                    })}{" "}
+                    {(data?.product?.PROD_PRECO_VENDA / 10).toLocaleString(
+                      "pt-br",
+                      {
+                        style: "currency",
+                        currency: "BRL",
+                      }
+                    )}{" "}
                     no cartão
                   </p>
                 </div>
 
                 <div className="buy-button">
-                  {product.PROD_QTD_ATUAL > 0 && (
-                    <ButtonBuy id={product.PROD_CODIGO} />
+                  {data?.product?.PROD_QTD_ATUAL > 0 && (
+                    <ButtonBuy id={data?.PROD_CODIGO} />
                   )}
 
-                  {product.PROD_QTD_ATUAL == 0 && <ButtonUnavailable />}
+                  {data?.product?.PROD_QTD_ATUAL == 0 && <ButtonUnavailable />}
                 </div>
               </div>
             </DetailsProducts>
@@ -119,7 +94,7 @@ function Detail({ match: { params } }) {
           <RelatedProducts>
             <h1>Produtos relacionados</h1>
             <div className="layout-grid">
-              {relatedProducts.map((relatedProduct) => {
+              {data?.relatedProducts?.map((relatedProduct) => {
                 return (
                   <CardGrid
                     key={relatedProduct.PROD_CODIGO}
