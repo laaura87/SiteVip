@@ -25,5 +25,16 @@ export const Container = styled.div`
   }
 
   .down {
+    position: absolute;
+    background-color: white;
+    padding: 0;
+    ul {
+      list-style: none;
+
+      li {
+        width: 100%;
+        border-bottom: 1px solid black;
+      }
+    }
   }
 `;
