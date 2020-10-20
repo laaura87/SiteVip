@@ -13,6 +13,7 @@ routes.get("/", (req, res) => {
     message: "Meu alegre coração palpita por um universo de esperança",
   });
 });
+
 routes.post("/login", UsuarioController.login);
 
 routes.get("/products", auth, ProdutoController.index);
@@ -25,7 +26,9 @@ routes.get("/categories", auth, CategoriaController.index);
 
 routes.get("/filial", FilialController.index);
 
-routes.get("/cart", CarrinhoController.index);
+routes.get("/cart", auth, CarrinhoController.index);
+
+routes.get("/search", ProdutoController.search);
 
 routes.get("/cart/:filial/:codigo/:prodCodigo", auth, CarrinhoController.show);
 

@@ -2,8 +2,6 @@ const connection = require("../connection");
 
 module.exports = {
   async index(req, res) {
-    let { category } = req.query;
-
     let description;
     req.query.description
       ? (description = req.query.description.toUpperCase())
@@ -269,5 +267,15 @@ module.exports = {
     return res.json(result);
   },
 
-  async search(req, res) {},
+  async search(req, res) {
+    const { nameSearch } = req.body;
+    const { filial } = req.query;
+
+    const products = await connection("SIAC_TS.VW_PRODUTO")
+      .where("FIL_CODIGO", filial || 0)
+      .andWhere("PROD_ATIVO", "S")
+      .andWhere("PROD_DESCRICAO", "like", `%${nameSearch.toUpperCase()}%`);
+
+    return res.json(products);
+  },
 };
