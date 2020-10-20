@@ -28,7 +28,7 @@ function SearchResult() {
       <Header />
       <Container>
         <div className="title-results">
-          <h1>Resultado para '{name}'</h1>
+          <h1>Resultados para '{name}'</h1>
         </div>
         <div>
           {data?.data.map((product) => (

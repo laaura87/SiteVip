@@ -1,20 +1,24 @@
 import React from "react";
 
-import { Container } from "./styles";
+import { Container, ContainerBody } from "./styles";
+import ButtonBuy from "../ButtonBuy";
 
 function ProductResult({ name, picture, quantity, id, price }) {
   return (
-    <Container>
-      <div>
-        <img src={picture} alt="" />
-      </div>
-      <div>
-        <p>{name}</p>
-      </div>
-      <div>
-        <p>{price}</p>
-      </div>
-    </Container>
+    <ContainerBody>
+      <Container>
+        <div>
+          <img src={picture} alt="" />
+        </div>
+        <div>
+          <p>{name}</p>
+        </div>
+        <div className="buy">
+          <p>{price}</p>
+          <ButtonBuy id={id} />
+        </div>
+      </Container>
+    </ContainerBody>
   );
 }
 
