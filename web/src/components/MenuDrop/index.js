@@ -1,8 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { Container } from "./styles";
 import { FaBars, FaArrowRight } from "react-icons/fa";
 import { useAxios } from "../../hooks/useAxios";
+import { Dropdown } from "react-bootstrap";
 
 function MenuDrop() {
   const { data } = useAxios(
@@ -14,31 +16,33 @@ function MenuDrop() {
 
   return (
     <Container>
-      <div className="menu-drop">
-        <FaBars size={32} />
-        <p>TODOS OS DEPARTAMENTOS</p>
-      </div>
+      <Dropdown>
+        <Dropdown.Toggle variant="success" id="dropdown-basic">
+          <FaBars size={20} />
+          TODOS OS DEPARTAMENTOS
+        </Dropdown.Toggle>
 
-      <div className="down">
-        <ul>
-          <li>
-            {" "}
-            <FaArrowRight />
-            Seguranca
-          </li>
-          <li>
-            <FaArrowRight /> Telefone
-          </li>
-          <li>
-            <FaArrowRight />
-            Acessorios
-          </li>
-          <li>
-            <FaArrowRight />
-            Software
-          </li>
-        </ul>
-      </div>
+        <Dropdown.Menu>
+          {data?.map((category) => {
+            const subgrpQueryString = category.SUBGRUPO.map((subgrp) => {
+              return `${subgrp.SUB_GRP_DESCRICAO.replace(/\s/g, "_").replace(
+                /\//g,
+                "-"
+              )}`;
+            }).toString();
+            return (
+              <Dropdown.Item>
+                <Link to={`/products?category=${subgrpQueryString}`}>
+                  <span>
+                    <FaArrowRight />
+                  </span>
+                  {category.GRP_DESCRICAO}
+                </Link>
+              </Dropdown.Item>
+            );
+          })}
+        </Dropdown.Menu>
+      </Dropdown>
     </Container>
   );
 }

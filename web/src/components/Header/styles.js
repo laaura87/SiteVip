@@ -42,7 +42,6 @@ export const Header = styled.header`
   justify-content: space-between;
 
   .logo {
-    width: 14%;
     img {
       width: 80px;
       height: 80px;
@@ -76,7 +75,7 @@ export const Header = styled.header`
 `;
 
 export const InputSearch = styled.div`
-  width: 50%;
+  /* width: 50%; */
   box-sizing: border-box;
 
   form {

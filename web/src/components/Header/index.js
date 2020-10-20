@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAxios } from "../../hooks/useAxios";
 
@@ -66,6 +66,7 @@ function Component() {
           </div>
           <div className="exit">{login}</div>
         </SubHeader>
+
         <Header>
           <div className="logo">
             <Link to="/home">

@@ -1,40 +1,23 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  margin-right: 10px;
-  .menu-drop {
-    cursor: pointer;
-    background-color: #171d4b;
-    padding-left: 2px;
-    color: white;
-    display: flex;
-    align-items: center;
-    border-radius: 8px;
-    text-align: center;
-    font-weight: 600;
-    p {
-      display: flex;
-      align-items: center;
-      margin-top: 10px;
-      line-height: 16px;
+  * {
+    box-shadow: none !important;
+  }
+  .dropdown {
+    box-shadow: none !important;
+    padding: 4px;
+    .btn-success {
+      background-color: #171d4b;
+      border-color: #171d4b;
+    }
+    .btn-success.focus,
+    .btn-success:focus {
+      box-shadow: none !important;
     }
     svg {
+      margin-top: 0px;
       margin-right: 5px;
-      margin-left: 8px;
-    }
-  }
-
-  .down {
-    position: absolute;
-    background-color: white;
-    padding: 0;
-    ul {
-      list-style: none;
-
-      li {
-        width: 100%;
-        border-bottom: 1px solid black;
-      }
     }
   }
 `;

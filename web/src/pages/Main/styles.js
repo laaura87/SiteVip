@@ -3,10 +3,6 @@ import styled from "styled-components";
 export const Container = styled.div`
   img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .carousel-inner {
     height: 500px;
     object-fit: cover;
   }
@@ -43,24 +39,25 @@ export const EffectText = styled.div`
     color: white;
     text-align: center;
     margin-top: 10px;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    font-weight: 400;
+    text-shadow: 2px 1px 11px rgba(150, 150, 150, 0.44);
   }
 `;
 
 export const ContainerBody = styled.div`
   width: 90%;
   margin: 20px auto;
-
   display: grid;
-  grid-template-columns: 25% 75%;
-  gap: 40px;
-  @media (max-width: 1000px) {
-    grid-template-columns: 30% 70%;
-    gap: 10px;
-  }
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 0px;
+`;
+
+export const ImgPropaganda = styled.div`
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 20px;
+  margin-top: 15px;
+  img {
+    width: 100%;
   }
 `;
-export const LeftSection = styled.div``;
-export const RightSection = styled.div``;
