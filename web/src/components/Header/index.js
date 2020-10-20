@@ -16,13 +16,8 @@ import {
   FaShoppingCart,
 } from "react-icons/fa";
 
-import {
-  Container,
-  Header,
-  InputSearch,
-  MenuDropDown,
-  SubHeader,
-} from "./styles";
+import InputSearch from "../InputSearch";
+import { Container, Header, MenuDropDown, SubHeader } from "./styles";
 
 function Component() {
   const [showMenu, setShowMenu] = useState(false);
@@ -34,28 +29,6 @@ function Component() {
     }
   );
 
-  let login;
-  if (isSignedIn()) {
-    login = (
-      <div
-        onClick={() => {
-          onSignOut();
-          window.location.href = "/";
-        }}
-      >
-        <FaSignOutAlt></FaSignOutAlt>
-        Logout
-      </div>
-    );
-  } else {
-    login = (
-      <div>
-        <FaUserAlt></FaUserAlt>
-        Entrar
-      </div>
-    );
-  }
-
   return (
     <>
       <Container>
@@ -64,7 +37,24 @@ function Component() {
             <FaPhone />
             (81) 2103-7300
           </div>
-          <div className="exit">{login}</div>
+          <div className="exit">
+            {isSignedIn() ? (
+              <div
+                onClick={() => {
+                  onSignOut();
+                  window.location.href = "/";
+                }}
+              >
+                <FaSignOutAlt></FaSignOutAlt>
+                Logout
+              </div>
+            ) : (
+              <div>
+                <FaUserAlt></FaUserAlt>
+                Entrar
+              </div>
+            )}
+          </div>
         </SubHeader>
 
         <Header>
@@ -82,21 +72,11 @@ function Component() {
 
           <MenuDrop />
 
-          <InputSearch>
-            <form action="" method="get">
-              <input type="text" placeholder="Buscar por produto"></input>
-              <span class="bg-hover">
-                <button type="submit" className="button-input">
-                  <FaSearch></FaSearch>
-                </button>
-              </span>
-            </form>
-          </InputSearch>
+          <InputSearch />
 
           <Link to="/cart">
             <FaShoppingCart size={32} className="shopping-cart" />
           </Link>
-
           <FaBars
             size={32}
             className="open-menu"

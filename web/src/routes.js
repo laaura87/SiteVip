@@ -9,6 +9,7 @@ import Main from "./pages/Main";
 import Products from "./pages/Products";
 import DetailsProduct from "./pages/DetailsProduct";
 import Cart from "./pages/Cart";
+import SearchResult from "./pages/SearchResult";
 
 const Routes = () => {
   return (
@@ -50,6 +51,17 @@ const Routes = () => {
           path="/cart"
           render={(props) =>
             isSignedIn() ? <Cart /> : <Redirect to={{ pathname: "/" }} />
+          }
+        />
+        <Route
+          exact
+          path="/pesquisar/:name"
+          render={(props) =>
+            isSignedIn() ? (
+              <SearchResult />
+            ) : (
+              <Redirect to={{ pathname: "/" }} />
+            )
           }
         />
       </Switch>

@@ -20,4 +20,8 @@ export const Container = styled.div`
       margin-right: 5px;
     }
   }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
