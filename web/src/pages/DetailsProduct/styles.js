@@ -5,16 +5,6 @@ export const Container = styled.div`
   margin: 20px auto;
 
   display: grid;
-  grid-template-columns: 1fr 3fr;
-  gap: 40px;
-  @media (max-width: 1000px) {
-    grid-template-columns: 3fr 7fr;
-    gap: 10px;
-  }
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 0px;
-  }
 `;
 
 export const ContainerProduct = styled.div`

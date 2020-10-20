@@ -9,7 +9,7 @@ function InputSearch() {
   const { register, handleSubmit, watch, errors } = useForm();
   let history = useHistory();
   function onSubmit(data) {
-    history.push(`/pesquisar?name=${data.name.toUpperCase()}`);
+    history.push(`/pesquisar/${data.name.toUpperCase()}`);
   }
 
   return (
