@@ -29,3 +29,10 @@ export const Container = styled.div`
     grid-template-rows: 1fr;
   }
 `;
+
+export const ImgDiv = styled.div`
+  img {
+    height: 80px;
+    width: 80px;
+  }
+`;

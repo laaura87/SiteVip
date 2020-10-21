@@ -31,10 +31,10 @@ function SearchResult() {
           <h1>Resultados para '{name}'</h1>
         </div>
         <div>
-          {data?.data.map((product) => (
+          {data?.result.map((product) => (
             <ProductResult
               name={product.PROD_DESCRICAO}
-              picture={"https://via.placeholder.com/80"}
+              picture={product.PROD_IMAG_NOME}
               quantity={product.PROD_QTD_ATUAL}
               id={product.PROD_CODIGO}
               price={product.PROD_PRECO_VENDA.toLocaleString("pt-br", {
@@ -44,11 +44,7 @@ function SearchResult() {
             />
           ))}
         </div>
-        <Pagination
-          pages={data?.pagination.currentPage}
-          activePage={page}
-          onChange={setPage}
-        />
+        <Pagination pages={data?.pages} activePage={page} onChange={setPage} />
       </Container>
       <Footer />
     </>
