@@ -7,12 +7,17 @@ export const Container = styled.div`
   .dropdown {
     box-shadow: none !important;
     padding: 4px;
-    .btn-success {
+    .btn-primary {
       background-color: #171d4b;
       border-color: #171d4b;
     }
-    .btn-success.focus,
-    .btn-success:focus {
+    .btn-primary:active {
+      background-color: #171d4b;
+      border-color: #171d4b;
+    }
+
+    .btn-primary.focus,
+    .btn-primary:focus {
       box-shadow: none !important;
     }
     svg {

@@ -17,7 +17,7 @@ function MenuDrop() {
   return (
     <Container>
       <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
+        <Dropdown.Toggle variant="primary" id="dropdown-basic">
           <FaBars size={20} />
           TODOS OS DEPARTAMENTOS
         </Dropdown.Toggle>
