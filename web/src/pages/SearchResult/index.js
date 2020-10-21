@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAxios } from "../../hooks/useAxios";
 
-import { Container } from "./styles";
+import { Container, NoResult } from "./styles";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import Loading from "../../components/Loading";
 import Pagination from "../../components/Pagination";
 import ProductResult from "../../components/ProductResult";
 
@@ -22,13 +23,42 @@ function SearchResult() {
       headers: { "x-access-token": sessionStorage.getItem("token") },
     }
   );
-  console.log(data);
+
+  if (!data) {
+    return (
+      <>
+        <Header />
+        <Container>
+          <div className="title-results">
+            <h1>Resultados para '{name}'</h1>
+            <p>(total de produtos: {data?.count})</p>
+          </div>
+          <Loading />
+        </Container>
+        <Footer />
+      </>
+    );
+  }
+  if (data.count == 0) {
+    return (
+      <>
+        <Header />
+        <NoResult>
+          <div className="no-results">
+            <h1>Não encontramos resultados para '{name}' :(</h1>
+          </div>
+        </NoResult>
+        <Footer />
+      </>
+    );
+  }
   return (
     <>
       <Header />
       <Container>
         <div className="title-results">
           <h1>Resultados para '{name}'</h1>
+          <p>(total de produtos: {data?.count})</p>
         </div>
         <div>
           {data?.result.map((product) => (

@@ -12,6 +12,7 @@ export const Container = styled.div`
     justify-content: space-between;
 
     p {
+      font-size: 16px;
       margin-top: 10px;
       margin-left: 16px;
       text-align: center;
@@ -27,6 +28,14 @@ export const Container = styled.div`
       svg {
         margin-top: 12px;
       }
+    }
+  }
+
+  button:hover {
+    background-color: #008300;
+    transition: 0.2s;
+    span {
+      background-color: #027a02;
     }
   }
 `;
