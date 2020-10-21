@@ -25,7 +25,8 @@ function Detail({ match: { params } }) {
     `/products/${params.prodCodigo}?filial=${sessionStorage.getItem("filial")}`,
     {
       headers: { "x-access-token": sessionStorage.getItem("token") },
-    }
+    },
+    { revalidateOnFocus: false }
   );
 
   console.log(data);

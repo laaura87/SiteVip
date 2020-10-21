@@ -41,6 +41,10 @@ export const Header = styled.header`
   align-items: center;
   justify-content: space-between;
 
+  div:nth-child(3) {
+    width: 56%;
+  }
+
   .logo {
     img {
       width: 80px;
@@ -67,7 +71,7 @@ export const Header = styled.header`
     transition: 0.2s;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 890px) {
     .open-menu {
       display: none;
     }
@@ -135,11 +139,18 @@ export const MenuDropDown = styled.div`
   }
 
   .link-menu {
-    font-size: 14px;
-    border-top: 1px solid grey;
+    font-size: 18px;
     padding: 2px;
+    margin-bottom: 5px;
   }
 
+  .link-menu span {
+    display: flex;
+    align-items: center;
+    svg {
+      margin-right: 5px;
+    }
+  }
   .close-button-menu {
     cursor: pointer;
     color: white;

@@ -60,4 +60,10 @@ export const ImgPropaganda = styled.div`
   img {
     width: 100%;
   }
+
+  .two-images {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
 `;

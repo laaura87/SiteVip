@@ -21,7 +21,8 @@ function Main() {
     `/rand?filial=${sessionStorage.getItem("filial")}`,
     {
       headers: { "x-access-token": sessionStorage.getItem("token") },
-    }
+    },
+    { revalidateOnFocus: false }
   );
 
   return (
@@ -48,13 +49,16 @@ function Main() {
         <ImgPropaganda>
           <div>
             <Link to="/home">
-              <img src="https://via.placeholder.com/500x100" alt="" />
+              <img src="https://via.placeholder.com/500x220" alt="" />
             </Link>
           </div>
 
-          <div>
+          <div className="two-images">
             <Link to="/home">
-              <img src="https://via.placeholder.com/250x100" alt="" />
+              <img src="https://via.placeholder.com/250x140" alt="" />
+            </Link>
+            <Link to="/home">
+              <img src="https://via.placeholder.com/250x140" alt="" />
             </Link>
           </div>
         </ImgPropaganda>
@@ -76,7 +80,6 @@ function Main() {
           })}
         </GridContainerProducts>
       </ContainerBody>
-
       <Footer />
     </>
   );

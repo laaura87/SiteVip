@@ -7,13 +7,13 @@ import MenuDrop from "../MenuDrop";
 import cn from "classnames";
 
 import {
-  FaSearch,
   FaPhone,
   FaSignOutAlt,
   FaUserAlt,
   FaBars,
   FaTimes,
   FaShoppingCart,
+  FaArrowRight,
 } from "react-icons/fa";
 
 import InputSearch from "../InputSearch";
@@ -85,7 +85,7 @@ function Component() {
           <MenuDropDown className={cn({ active: showMenu })}>
             <nav>
               <div>
-                <h1>Categorias</h1>
+                <h1>TODOS OS DEPARTAMENTOS</h1>
                 {data?.map((category) => {
                   const subgrpQueryString = category.SUBGRUPO.map((subgrp) => {
                     return `${subgrp.SUB_GRP_DESCRICAO.replace(
@@ -96,7 +96,10 @@ function Component() {
                   return (
                     <div className="link-menu">
                       <Link to={`/products?category=${subgrpQueryString}`}>
-                        {category.GRP_DESCRICAO}
+                        <span>
+                          <FaArrowRight />
+                          {category.GRP_DESCRICAO}
+                        </span>
                       </Link>
                     </div>
                   );
@@ -119,39 +122,3 @@ function Component() {
 }
 
 export default Component;
-
-// {categories.map((category, index) => {
-//   const subgrpQueryString = category.SUBGRUPO.map((subgrp) => {
-//     return `${subgrp.SUB_GRP_DESCRICAO.replace(/\s/g, "_").replace(
-//       /\//g,
-//       "-"
-//     )}`;
-//   }).toString();
-//   return (
-//     <p key={index}>
-//       <strong>
-//         <Link to={`/products?category=${subgrpQueryString}`}>
-//           {category.GRP_DESCRICAO}
-//         </Link>
-//       </strong>
-//     </p>
-//   );
-// })}
-
-/* { <Menu>
-              <h1>Categorias</h1>
-              {categories.map((category) => {
-                const subgrpQueryString = category.SUBGRUPO.map((subgrp) => {
-                  return `${subgrp.SUB_GRP_DESCRICAO.replace(
-                    /\s/g,
-                    "_"
-                  ).replace(/\//g, "-")}`;
-                }).toString();
-                return (
-                  <Link to={`/products?category=${subgrpQueryString}`}>
-                    {category.GRP_DESCRICAO}
-                  </Link>
-                );
-              })} 
-        <Menu />
-              */
