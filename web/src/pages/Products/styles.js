@@ -47,3 +47,10 @@ export const Container = styled.div`
     text-align: center;
   }
 `;
+
+export const FormSelect = styled.form`
+  select {
+    margin-top: 8px;
+    margin-left: 8px;
+  }
+`;

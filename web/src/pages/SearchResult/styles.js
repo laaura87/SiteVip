@@ -35,3 +35,10 @@ export const NoResult = styled.div`
   text-align: center;
   justify-content: center;
 `;
+
+export const FormSelect = styled.form`
+  select {
+    margin-top: 8px;
+    margin-left: 8px;
+  }
+`;

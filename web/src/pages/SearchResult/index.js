@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+
 import { useParams } from "react-router-dom";
 import { useAxios } from "../../hooks/useAxios";
 
-import { Container, NoResult } from "./styles";
+import { Container, NoResult, FormSelect } from "./styles";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -12,10 +14,23 @@ import ProductResult from "../../components/ProductResult";
 
 function SearchResult() {
   const [page, setPage] = useState(1);
-
   const { name } = useParams();
+  const [orderBy, setOrderBy] = useState("SIAC_TS.VW_PRODUTO.PROD_DESCRICAO");
+  const [orderType, setOrderType] = useState("asc");
+  const { register, handleSubmit } = useForm();
 
-  const { data } = useAxios(
+  const onSubmit = (data) => {
+    let test = data.orderProducts.split(" ");
+    if (test[0] == "valor") {
+      setOrderBy("SIAC_TS.VW_PRODUTO.PROD_PRECO_VENDA");
+      test[1] == "desc" ? setOrderType("desc") : setOrderType("asc");
+    } else {
+      setOrderBy("SIAC_TS.VW_PRODUTO.PROD_DESCRICAO");
+      setOrderType("asc");
+    }
+  };
+
+  const { data, error } = useAxios(
     `/search?filial=${sessionStorage.getItem(
       "filial"
     )}&name=${name.toUpperCase()}&page=${page}`,
@@ -23,6 +38,11 @@ function SearchResult() {
       headers: { "x-access-token": sessionStorage.getItem("token") },
     }
   );
+
+  if (error) {
+    console.log(error);
+    return <h1>error</h1>;
+  }
 
   if (!data) {
     return (
@@ -59,6 +79,22 @@ function SearchResult() {
         <div className="title-results">
           <h1>Resultados para '{name}'</h1>
           <p>(total de produtos: {data?.count})</p>
+          <FormSelect onChange={handleSubmit(onSubmit)}>
+            <select name="orderProducts" ref={register}>
+              <option value="alfabeto asc" selected>
+                Ordem alfabética
+              </option>
+              <option value="valor desc">Maior valor</option>
+              <option value="valor asc">Menor valor</option>
+            </select>
+            <select name="quantityProducts" ref={register}>
+              <option value="10" selected>
+                10 itens por página
+              </option>
+              <option value="15">15 itens por página</option>
+              <option value="30">30 itens por página</option>
+            </select>
+          </FormSelect>
         </div>
         <div>
           {data?.result.map((product) => (
