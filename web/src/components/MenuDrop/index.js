@@ -14,6 +14,10 @@ function MenuDrop() {
     }
   );
 
+  const categories = data?.map((category) => {
+    return category.GRP_DESCRICAO;
+  });
+
   return (
     <Container>
       <Dropdown>
@@ -23,20 +27,14 @@ function MenuDrop() {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          {data?.map((category) => {
-            const subgrpQueryString = category.SUBGRUPO.map((subgrp) => {
-              return `${subgrp.SUB_GRP_DESCRICAO.replace(/\s/g, "_").replace(
-                /\//g,
-                "-"
-              )}`;
-            }).toString();
+          {categories?.map((category) => {
             return (
               <Dropdown.Item>
-                <Link to={`/products?category=${subgrpQueryString}`}>
+                <Link to={`/products?category=${category}`}>
                   <span>
                     <FaArrowRight />
                   </span>
-                  {category.GRP_DESCRICAO}
+                  {category}
                 </Link>
               </Dropdown.Item>
             );
