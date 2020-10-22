@@ -30,19 +30,14 @@ function SearchResult() {
     }
   };
 
-  const { data, error } = useAxios(
+  const { data } = useAxios(
     `/search?filial=${sessionStorage.getItem(
       "filial"
-    )}&name=${name.toUpperCase()}&page=${page}`,
+    )}&name=${name.toUpperCase()}&page=${page}&order=${orderBy}&type=${orderType}`,
     {
       headers: { "x-access-token": sessionStorage.getItem("token") },
     }
   );
-
-  if (error) {
-    console.log(error);
-    return <h1>error</h1>;
-  }
 
   if (!data) {
     return (
@@ -50,9 +45,29 @@ function SearchResult() {
         <Header />
         <Container>
           <div className="title-results">
-            <h1>Resultados para '{name}'</h1>
-            <p>(total de produtos: {data?.count})</p>
+            <div>
+              <h1>Resultados para '{name}'</h1>
+              <p>({data?.count} items)</p>
+            </div>
+
+            <FormSelect onChange={handleSubmit(onSubmit)}>
+              <select name="orderProducts" ref={register}>
+                <option value="alfabeto asc" selected>
+                  Ordem alfabética
+                </option>
+                <option value="valor desc">Maior valor</option>
+                <option value="valor asc">Menor valor</option>
+              </select>
+              <select name="quantityProducts" ref={register}>
+                <option value="10" selected>
+                  10 itens por página
+                </option>
+                <option value="15">15 itens por página</option>
+                <option value="30">30 itens por página</option>
+              </select>
+            </FormSelect>
           </div>
+
           <Loading />
         </Container>
         <Footer />
@@ -77,8 +92,11 @@ function SearchResult() {
       <Header />
       <Container>
         <div className="title-results">
-          <h1>Resultados para '{name}'</h1>
-          <p>(total de produtos: {data?.count})</p>
+          <div>
+            <h1>Resultados para '{name}'</h1>
+            <p>({data?.count} items)</p>
+          </div>
+
           <FormSelect onChange={handleSubmit(onSubmit)}>
             <select name="orderProducts" ref={register}>
               <option value="alfabeto asc" selected>

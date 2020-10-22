@@ -11,8 +11,9 @@ export const Container = styled.div`
       background-color: #171d4b;
       border-color: #171d4b;
     }
-    .btn-primary:active {
-      background-color: #171d4b;
+
+    *:active {
+      background-color: white;
       border-color: #171d4b;
     }
 

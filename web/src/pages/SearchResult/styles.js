@@ -13,14 +13,18 @@ export const Container = styled.div`
     border-bottom: 1px solid #e5e5e5;
     display: flex;
     justify-content: space-between;
+  }
+  .title-results div {
+    display: flex;
     align-items: center;
   }
-  .title-results h1 {
+  .title-results div h1 {
     text-align: center;
     padding-top: 8px;
   }
-  .title-results p {
+  .title-results div p {
     margin-top: 23px;
+    margin-left: 10px;
   }
 `;
 
