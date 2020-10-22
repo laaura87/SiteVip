@@ -74,10 +74,10 @@ function Cart() {
       }
       return product;
     });
-
     console.log(cartEdited);
     mutate(cartEdited, false);
   }
+
   let sub = 0;
   const subtotal = data?.map((product) => {
     sub += product.PROD_PRECO_VENDA * product.PROD_QTD;
