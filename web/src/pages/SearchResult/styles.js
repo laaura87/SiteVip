@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   margin: 20px auto;
-  height: 100vh;
+
   width: 90%;
   border-radius: 8px;
   background-color: white;
@@ -26,6 +26,29 @@ export const Container = styled.div`
     margin-top: 23px;
     margin-left: 10px;
   }
+
+  @media (max-width: 480px) {
+    .title-results {
+      height: 110px;
+    }
+    .title-results div {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .categorias {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+
+    .title-results div h1 {
+      margin-top: 4px;
+      font-size: 16px;
+    }
+    .title-results div p {
+      font-size: 14px;
+      margin-top: 5px;
+    }
+  }
 `;
 
 export const NoResult = styled.div`
@@ -44,5 +67,12 @@ export const FormSelect = styled.form`
   select {
     margin-top: 8px;
     margin-left: 8px;
+  }
+
+  @media (max-width: 480px) {
+    select {
+      font-size: 14px;
+      width: 90%;
+    }
   }
 `;

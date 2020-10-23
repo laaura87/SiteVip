@@ -45,7 +45,7 @@ function SearchResult() {
         <Header />
         <Container>
           <div className="title-results">
-            <div>
+            <div className="categorias">
               <h1>Resultados para '{name}'</h1>
               <p>({data?.count} items)</p>
             </div>
@@ -92,7 +92,7 @@ function SearchResult() {
       <Header />
       <Container>
         <div className="title-results">
-          <div>
+          <div className="categorias">
             <h1>Resultados para '{name}'</h1>
             <p>({data?.count} items)</p>
           </div>
