@@ -119,7 +119,12 @@ function Products({ location }) {
           ))}
         </ContainerProducts>
         <div className="root">
-          <Pagination count={data?.pages} page={page} onChange={handleChange} />
+          <Pagination
+            count={data?.pages}
+            page={page}
+            onChange={handleChange}
+            siblingCount={0}
+          />
         </div>
       </Container>
       <Footer />
