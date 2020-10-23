@@ -7,7 +7,7 @@ import Footer from "../../components/Footer";
 import ProductResult from "../../components/ProductResult";
 import Loading from "../../components/Loading";
 
-import { Container, FormSelect } from "./styles";
+import { Container, FormSelect, ContainerProducts } from "./styles";
 
 import { useAxios } from "../../hooks/useAxios";
 
@@ -35,7 +35,6 @@ function Products({ location }) {
       "filial"
     )}&category=${categories}&page=${page}&order=${orderBy}&type=${orderType}`
   );
-  console.log(data);
   function handleChange(event, value) {
     setPage(value);
   }
@@ -46,16 +45,14 @@ function Products({ location }) {
         <Header />
         <Container>
           <div className="title-results">
-            <div>
+            <div className="categorias">
               <h1>{categories}</h1>
               <p>({data?.count} items)</p>
             </div>
             <FormSelect onChange={handleSubmit(onSubmit)}>
               <select name="order-products">
                 <option value="30">Ordem alfabética </option>
-                <option value="10" selected>
-                  Maior valor
-                </option>
+                <option value="10">Maior valor</option>
                 <option value="15">Menor valor</option>
               </select>
               <select name="quantity-products">
@@ -86,7 +83,7 @@ function Products({ location }) {
       <Header />
       <Container>
         <div className="title-results">
-          <div>
+          <div className="categorias">
             <h1>{categories}</h1>
             <p>({data?.count} items)</p>
           </div>
@@ -107,7 +104,7 @@ function Products({ location }) {
             </select>
           </FormSelect>
         </div>
-        <div>
+        <ContainerProducts>
           {data?.result.map((product) => (
             <ProductResult
               name={product.PROD_DESCRICAO}
@@ -120,7 +117,7 @@ function Products({ location }) {
               })}
             />
           ))}
-        </div>
+        </ContainerProducts>
         <div className="root">
           <Pagination count={data?.pages} page={page} onChange={handleChange} />
         </div>

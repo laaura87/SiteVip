@@ -1,6 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Container, ContainerBody, ImgDiv } from "./styles";
+import {
+  Container,
+  ContainerBody,
+  ImgDiv,
+  ProductName,
+  BuyContainer,
+} from "./styles";
 import ButtonBuy from "../ButtonBuy";
 
 function ProductResult({ name, picture, quantity, id, price }) {
@@ -26,14 +32,15 @@ function ProductResult({ name, picture, quantity, id, price }) {
             )}
           </Link>
         </ImgDiv>
-        <div>
-          <p>{name}</p>
-        </div>
 
-        <div className="buy">
+        <ProductName>
+          <p>{name}</p>
+        </ProductName>
+
+        <BuyContainer>
           <p>{price}</p>
           <ButtonBuy id={id} />
-        </div>
+        </BuyContainer>
       </Container>
     </ContainerBody>
   );

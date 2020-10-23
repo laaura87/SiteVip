@@ -21,12 +21,14 @@ export const Container = styled.div`
     span {
       background-color: #008300;
       height: 100%;
-      width: 20%;
+      width: 40%;
       margin: 0;
+      padding-left: 6px;
       border-top-right-radius: 8px;
       border-bottom-right-radius: 8px;
       svg {
         margin-top: 12px;
+        margin-right: 4px;
       }
     }
   }
@@ -36,6 +38,18 @@ export const Container = styled.div`
     transition: 0.2s;
     span {
       background-color: #027a02;
+    }
+  }
+
+  @media (max-width: 480px) {
+    button {
+      p {
+        font-size: 13px;
+        margin-top: 12px;
+        margin-right: 5px;
+        text-align: center;
+        line-height: 14px;
+      }
     }
   }
 `;

@@ -17,17 +17,6 @@ export const Container = styled.div`
     text-align: center;
     justify-content: center;
   }
-  .buy {
-    p {
-      font-size: 18px;
-    }
-
-    button {
-      font-size: 16px;
-    }
-    display: grid;
-    grid-template-rows: 1fr;
-  }
 `;
 
 export const ImgDiv = styled.div`
@@ -35,4 +24,22 @@ export const ImgDiv = styled.div`
     height: 80px;
     width: 80px;
   }
+`;
+
+export const ProductName = styled.div`
+  @media (max-width: 480px) {
+    font-size: 14px;
+  }
+`;
+
+export const BuyContainer = styled.div`
+  p {
+    font-size: 18px;
+  }
+
+  button {
+    font-size: 16px;
+  }
+  display: grid !important;
+  grid-template-rows: 1fr;
 `;

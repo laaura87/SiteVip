@@ -7,6 +7,7 @@ export const Container = styled.div`
   border-radius: 8px;
   background-color: white;
   position: relative;
+
   .title-results {
     width: 95%;
     margin: 0 auto;
@@ -14,10 +15,12 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
   }
+
   .title-results div {
     display: flex;
     align-items: center;
   }
+
   .title-results div h1 {
     text-align: center;
     padding-top: 8px;
@@ -37,7 +40,6 @@ export const Container = styled.div`
     text-align: center;
     padding-bottom: 10px;
   }
-
   .root-data-fetch {
     position: absolute;
     margin-left: auto;
@@ -46,6 +48,29 @@ export const Container = styled.div`
     bottom: 10px;
     text-align: center;
   }
+
+  @media (max-width: 480px) {
+    .title-results {
+      height: 110px;
+    }
+    .title-results div {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .categorias {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+
+    .title-results div h1 {
+      margin-top: 4px;
+      font-size: 16px;
+    }
+    .title-results div p {
+      font-size: 14px;
+      margin-top: 5px;
+    }
+  }
 `;
 
 export const FormSelect = styled.form`
@@ -53,4 +78,13 @@ export const FormSelect = styled.form`
     margin-top: 8px;
     margin-left: 8px;
   }
+
+  @media (max-width: 480px) {
+    select {
+      font-size: 14px;
+      width: 90%;
+    }
+  }
 `;
+
+export const ContainerProducts = styled.div``;
