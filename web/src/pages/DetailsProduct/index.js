@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import {
   DetailsProducts,
   ContainerProduct,
   RelatedProducts,
   Container,
-  LeftSide,
-  RightSide,
 } from "./styles";
 
 import ProductUnavailable from "../../components/ProductUnavailable";
@@ -36,16 +34,16 @@ function Detail({ match: { params } }) {
       <Container>
         <ContainerProduct>
           <div className="img-container">
-            {data?.product?.PROD_IMAG[0] == undefined ? (
+            {data?.product?.PROD_IMAG[0] === undefined ? (
               <img
                 src={process.env.PUBLIC_URL + "/images/no-image.png"}
-                alt={data?.product?.PROD_DESCRICAO.slice(0, 18)}
+                alt="Sem Imagem"
                 className="image"
               />
             ) : (
               <img
                 src={`http://187.84.80.162:8082/imagens/${data?.product?.PROD_IMAG[0].PROD_IMAG_NOME}`}
-                alt={data?.product?.PROD_DESCRICAO.slice(0, 18)}
+                alt="Imagem produto"
                 className="image"
               />
             )}
@@ -56,7 +54,7 @@ function Detail({ match: { params } }) {
             <div>
               {data?.product?.PROD_QTD_ATUAL > 0 && <ProductDisp />}
 
-              {data?.product?.PROD_QTD_ATUAL == 0 && <ProductUnavailable />}
+              {data?.product?.PROD_QTD_ATUAL === 0 && <ProductUnavailable />}
 
               <div className="price">
                 {data?.product?.PROD_PRECO_VENDA?.toLocaleString("pt-br", {
@@ -81,7 +79,7 @@ function Detail({ match: { params } }) {
                   <ButtonBuy id={data?.PROD_CODIGO} />
                 )}
 
-                {data?.product?.PROD_QTD_ATUAL == 0 && <ButtonUnavailable />}
+                {data?.product?.PROD_QTD_ATUAL === 0 && <ButtonUnavailable />}
               </div>
             </div>
           </DetailsProducts>

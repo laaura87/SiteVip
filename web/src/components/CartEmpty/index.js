@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import { Container, CarEmpty } from "./styles";
+import { CarEmpty } from "./styles";
 import { Link } from "react-router-dom";
 import { FaCartPlus } from "react-icons/fa";
 

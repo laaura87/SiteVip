@@ -21,9 +21,9 @@ function SearchResult() {
 
   const onSubmit = (data) => {
     let test = data.orderProducts.split(" ");
-    if (test[0] == "valor") {
+    if (test[0] === "valor") {
       setOrderBy("SIAC_TS.VW_PRODUTO.PROD_PRECO_VENDA");
-      test[1] == "desc" ? setOrderType("desc") : setOrderType("asc");
+      test[1] === "desc" ? setOrderType("desc") : setOrderType("asc");
     } else {
       setOrderBy("SIAC_TS.VW_PRODUTO.PROD_DESCRICAO");
       setOrderType("asc");
@@ -74,7 +74,7 @@ function SearchResult() {
       </>
     );
   }
-  if (data.count == 0) {
+  if (data.count === 0) {
     return (
       <>
         <Header />

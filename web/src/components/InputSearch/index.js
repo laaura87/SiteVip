@@ -1,12 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { Container } from "./styles";
 import { useHistory } from "react-router";
 
 function InputSearch() {
-  const { register, handleSubmit, watch, errors } = useForm();
+  const { register, handleSubmit } = useForm();
   let history = useHistory();
   function onSubmit(data) {
     history.push(`/pesquisar/${data.name.toUpperCase()}`);

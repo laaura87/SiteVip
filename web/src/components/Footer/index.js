@@ -56,6 +56,7 @@ function Footer() {
                 <span>
                   <a
                     target="_blank"
+                    rel="noopener noreferrer"
                     href="https://www.instagram.com/vipinformatica/?hl=pt-br"
                   >
                     <FaInstagram size={24} />
@@ -66,6 +67,7 @@ function Footer() {
                 <span>
                   <a
                     target="_blank"
+                    rel="noopener noreferrer"
                     href="https://pt-br.facebook.com/vipinformatica.net/"
                   >
                     <FaFacebook size={24} />
@@ -77,6 +79,7 @@ function Footer() {
                 <span>
                   <a
                     target="_blank"
+                    rel="noopener noreferrer"
                     href="https://api.whatsapp.com/send?phone=5581995480041&text=Ol%C3%A1%C3%A1%2C%20gostaria%20de%20fazer%20um%20pedido"
                   >
                     <FaWhatsapp size={24} />

@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { mutate as mutateGlobal } from "swr";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import InputNumber from "react-input-number";
@@ -79,7 +78,7 @@ function Cart() {
   }
 
   let sub = 0;
-  const subtotal = data?.map((product) => {
+  sub = data?.map((product) => {
     sub += product.PROD_PRECO_VENDA * product.PROD_QTD;
     return sub;
   });
@@ -92,7 +91,7 @@ function Cart() {
         <Footer />
       </>
     );
-  } else if (data.length == 0) {
+  } else if (data.length === 0) {
     return <CartEmpty />;
   }
 
@@ -118,7 +117,7 @@ function Cart() {
                   <ContainerProducts>
                     <td width="50%" className="product-container">
                       <Link to={`/products/${data.PROD_CODIGO}`}>
-                        {data.PROD_IMAG[0] == undefined ? (
+                        {data.PROD_IMAG[0] === undefined ? (
                           <img
                             src={
                               process.env.PUBLIC_URL + "/images/no-image.png"
@@ -155,7 +154,7 @@ function Cart() {
                             />
                           )}
 
-                          {data.PROD_QTD == 1 && (
+                          {data.PROD_QTD === 1 && (
                             <FaMinus size={14} className="not-available" />
                           )}
                         </span>
