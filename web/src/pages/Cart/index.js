@@ -10,6 +10,7 @@ import {
   ContainerAll,
   ContainerProducts,
   Grid,
+  CartMobile,
   ContainerSub,
   Finish,
 } from "./styles";
@@ -78,7 +79,7 @@ function Cart() {
   }
 
   let sub = 0;
-  sub = data?.map((product) => {
+  const aux = data?.map((product) => {
     sub += product.PROD_PRECO_VENDA * product.PROD_QTD;
     return sub;
   });
@@ -201,6 +202,96 @@ function Cart() {
               })}
             </tbody>
           </Grid>
+
+          <CartMobile>
+            <div className="item-title">
+              <h1>Item</h1>
+            </div>
+
+            {data.map((data) => {
+              return (
+                <div className="product">
+                  <div className="img">
+                    <Link to={`/products/${data.PROD_CODIGO}`}>
+                      {data.PROD_IMAG[0] === undefined ? (
+                        <img
+                          src={process.env.PUBLIC_URL + "/images/no-image.png"}
+                          alt={data.PROD_DESCRICAO.slice(0, 18)}
+                        />
+                      ) : (
+                        <img
+                          src={`http://187.84.80.162:8082/imagens/${data.PROD_IMAG[0].PROD_IMAG_NOME}`}
+                          alt={data.PROD_DESCRICAO.slice(0, 18)}
+                        />
+                      )}
+                      <p className="name-product">{data.PROD_DESCRICAO}</p>
+                    </Link>
+                  </div>
+                  <div className="center">
+                    <div className="unity">
+                      <p>Preço: </p>
+                      <p>
+                        {data.PROD_PRECO_VENDA.toLocaleString("pt-br", {
+                          style: "currency",
+                          currency: "BRL",
+                        })}
+                      </p>
+                    </div>
+                    <div className="counter-product">
+                      <span>
+                        {data.PROD_QTD > 1 && (
+                          <FaMinus
+                            size={14}
+                            onClick={() =>
+                              handleEdit(data.PROD_CODIGO, data.PROD_QTD - 1)
+                            }
+                          />
+                        )}
+
+                        {data.PROD_QTD === 1 && (
+                          <FaMinus size={14} className="not-available" />
+                        )}
+                      </span>
+                      <InputNumber
+                        max={data.PROD_QTD_ATUAL}
+                        value={data.PROD_QTD}
+                      />
+                      <span>
+                        {data.PROD_QTD + 1 > data.PROD_QTD_ATUAL && (
+                          <FaPlus size={14} className="not-available" />
+                        )}
+                        {data.PROD_QTD + 1 <= data.PROD_QTD_ATUAL && (
+                          <FaPlus
+                            size={14}
+                            onClick={() =>
+                              handleEdit(data.PROD_CODIGO, data.PROD_QTD + 1)
+                            }
+                          />
+                        )}
+                      </span>
+                    </div>
+                    <div className="subtotal">
+                      <p>Subtotal: </p>
+                      <p>
+                        {(data.PROD_QTD * data.PROD_PRECO_VENDA).toLocaleString(
+                          "pt-br",
+                          {
+                            style: "currency",
+                            currency: "BRL",
+                          }
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="remove">
+                    <button onClick={() => handleDelete(data.PROD_CODIGO)}>
+                      Remover do carrinho
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </CartMobile>
 
           <ContainerSub>
             <div>
