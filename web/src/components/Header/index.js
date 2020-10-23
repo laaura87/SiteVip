@@ -29,6 +29,10 @@ function Component() {
     }
   );
 
+  const categories = data?.map((category) => {
+    return category.GRP_DESCRICAO;
+  });
+
   return (
     <>
       <Container>
@@ -86,25 +90,19 @@ function Component() {
             <nav>
               <div>
                 <h1>TODOS OS DEPARTAMENTOS</h1>
-                {data?.map((category) => {
-                  const subgrpQueryString = category.SUBGRUPO.map((subgrp) => {
-                    return `${subgrp.SUB_GRP_DESCRICAO.replace(
-                      /\s/g,
-                      "_"
-                    ).replace(/\//g, "-")}`;
-                  }).toString();
-                  return (
-                    <div className="link-menu">
-                      <Link to={`/products?category=${subgrpQueryString}`}>
-                        <span>
-                          <FaArrowRight />
-                          {category.GRP_DESCRICAO}
-                        </span>
-                      </Link>
-                    </div>
-                  );
-                })}{" "}
               </div>
+              {categories?.map((category) => {
+                return (
+                  <div className="link-menu">
+                    <Link to={`/products?category=${category}`}>
+                      <span>
+                        <FaArrowRight />
+                        {category}
+                      </span>
+                    </Link>
+                  </div>
+                );
+              })}
             </nav>
 
             <div>

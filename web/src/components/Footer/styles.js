@@ -4,6 +4,7 @@ export const Container = styled.footer`
   background-color: white;
   width: 100%;
   margin-top: 50px;
+  padding-bottom: 10px;
   div {
     padding-bottom: 8px;
     padding-top: 8px;

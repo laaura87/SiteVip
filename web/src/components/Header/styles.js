@@ -76,10 +76,19 @@ export const Header = styled.header`
       display: none;
     }
   }
+
+  @media (max-width: 480px) {
+    .logo {
+      img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+      }
+    }
+  }
 `;
 
 export const InputSearch = styled.div`
-  /* width: 50%; */
   box-sizing: border-box;
 
   form {
@@ -151,6 +160,7 @@ export const MenuDropDown = styled.div`
       margin-right: 5px;
     }
   }
+
   .close-button-menu {
     cursor: pointer;
     color: white;
@@ -161,5 +171,16 @@ export const MenuDropDown = styled.div`
 
   &.active {
     transform: translateX(0);
+  }
+
+  @media (max-width: 480px) {
+    div h1 {
+      font-size: 18px;
+    }
+    .link-menu {
+      font-size: 15px;
+      padding: 2px;
+      margin-bottom: 5px;
+    }
   }
 `;
