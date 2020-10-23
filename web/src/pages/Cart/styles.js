@@ -100,20 +100,14 @@ export const ContainerSub = styled.div`
   margin-top: 15px;
   margin-right: 20px;
   background-color: #fcf8e3;
-  float: right;
-  height: 40px;
-  width: 20%;
+  display: grid;
+  justify-content: center;
   border: 1px solid #eceeef;
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+  font-weight: 500;
 `;
 
 export const Finish = styled.button`
   margin-top: 20px;
-  width: 30%;
   height: 50px;
   text-transform: uppercase;
   text-align: center;
@@ -124,8 +118,8 @@ export const Finish = styled.button`
   padding: 0;
   align-items: center;
   justify-content: space-between;
-  margin-left: 30px;
   p {
+    font-size: 16px;
     margin-top: 12px;
     margin-left: 20px;
   }
@@ -139,6 +133,13 @@ export const Finish = styled.button`
     background-color: #008300;
     svg {
       margin-top: 12px;
+    }
+  }
+  &:hover {
+    background-color: #008300;
+    transition: 0.2s;
+    span {
+      background-color: #027a02;
     }
   }
 `;
@@ -183,6 +184,7 @@ export const CartMobile = styled.div`
 
   .center {
     margin-top: 25px;
+    margin-bottom: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -190,6 +192,7 @@ export const CartMobile = styled.div`
     .subtotal {
       display: flex;
       p {
+        margin-top: 18px;
         font-size: 18px;
         font-weight: 500;
       }
@@ -220,9 +223,14 @@ export const CartMobile = styled.div`
     cursor: default;
     color: grey;
   }
+
   .remove {
     button {
       background-color: #b53737;
+    }
+    button:hover {
+      background-color: #8c2a32;
+      transition: 0.2s;
     }
   }
 
@@ -233,5 +241,35 @@ export const CartMobile = styled.div`
         font-size: 16px !important;
       }
     }
+
+    .img img {
+      width: 60px;
+      height: 60px;
+    }
   }
+
+  @media (max-width: 560px) {
+    .counter-product {
+      width: 30% !important;
+    }
+    .counter-product input {
+      width: 18px !important;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .unity,
+    .subtotal {
+      p {
+        font-size: 14px !important;
+        margin-right: 4px !important;
+        margin-left: 4px !important;
+      }
+    }
+  }
+`;
+
+export const DivFooter = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 `;

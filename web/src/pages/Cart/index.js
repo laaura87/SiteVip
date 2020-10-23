@@ -12,6 +12,7 @@ import {
   Grid,
   CartMobile,
   ContainerSub,
+  DivFooter,
   Finish,
 } from "./styles";
 
@@ -207,7 +208,6 @@ function Cart() {
             <div className="item-title">
               <h1>Item</h1>
             </div>
-
             {data.map((data) => {
               return (
                 <div className="product">
@@ -293,24 +293,26 @@ function Cart() {
             })}
           </CartMobile>
 
-          <ContainerSub>
-            <div>
-              <p>Subtotal: </p>
-              <p>
-                {sub.toLocaleString("pt-br", {
-                  style: "currency",
-                  currency: "BRL",
-                })}
-              </p>
-            </div>
-          </ContainerSub>
+          <DivFooter>
+            <ContainerSub>
+              <div>
+                <p>Subtotal: </p>
+                <p>
+                  {sub.toLocaleString("pt-br", {
+                    style: "currency",
+                    currency: "BRL",
+                  })}
+                </p>
+              </div>
+            </ContainerSub>
 
-          <Finish>
-            <p>Finalizar Pedido</p>
-            <span>
-              <FaShoppingCart />
-            </span>
-          </Finish>
+            <Finish>
+              <p>Finalizar Pedido</p>
+              <span>
+                <FaShoppingCart />
+              </span>
+            </Finish>
+          </DivFooter>
         </Container>
       </ContainerAll>
 
