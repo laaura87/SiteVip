@@ -40,7 +40,17 @@ export const Container = styled.div`
       background-color: #027a02;
     }
   }
-
+  @media (max-width: 820px) {
+    button {
+      p {
+        font-size: 14px;
+        margin-top: 12px;
+        margin-right: 5px;
+        text-align: center;
+        line-height: 14px;
+      }
+    }
+  }
   @media (max-width: 480px) {
     button {
       p {

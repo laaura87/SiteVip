@@ -7,6 +7,7 @@ import { useAxios } from "../../hooks/useAxios";
 import Header from "../../components/Header";
 import CardGrid from "../../components/CardGrid";
 import Footer from "../../components/Footer";
+import CardLoading from "../../components/CardLoading";
 
 import {
   Container,
@@ -24,6 +25,63 @@ function Main() {
     },
     { revalidateOnFocus: false }
   );
+
+  if (!data) {
+    return (
+      <>
+        <Header />
+        <ContainerBody>
+          <Container>
+            <Carousel>
+              <Carousel.Item>
+                <img src="laptop.jpg" alt="Multilaser Xpad" />
+              </Carousel.Item>
+              <Carousel.Item>
+                <img src="tv.jpg" alt="Multilaser Escova Eletrica" />
+              </Carousel.Item>
+              <Carousel.Item>
+                <img src="mobile-phone.jpg" alt="Monitor Acer 23.6pol" />
+              </Carousel.Item>
+              <Carousel.Item>
+                <img src="acessories.jpg" alt="OEX Cooler fan" />
+              </Carousel.Item>
+            </Carousel>
+          </Container>
+
+          <ImgPropaganda>
+            <div>
+              <Link to="/home">
+                <img src="https://via.placeholder.com/500x220" alt="" />
+              </Link>
+            </div>
+
+            <div className="two-images">
+              <Link to="/home">
+                <img src="https://via.placeholder.com/250x140" alt="" />
+              </Link>
+              <Link to="/home">
+                <img src="https://via.placeholder.com/250x140" alt="" />
+              </Link>
+            </div>
+          </ImgPropaganda>
+          <EffectText className="effect-text">
+            <h1>As melhores ofertas</h1>
+          </EffectText>
+          <GridContainerProducts>
+            <CardLoading />
+            <CardLoading />
+            <CardLoading />
+            <CardLoading />
+            <CardLoading />
+            <CardLoading />
+            <CardLoading />
+            <CardLoading />
+          </GridContainerProducts>
+        </ContainerBody>
+        <Footer />
+      </>
+    );
+  }
 
   return (
     <>

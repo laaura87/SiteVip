@@ -19,6 +19,7 @@ function Products({ location }) {
   const [orderBy, setOrderBy] = useState("SIAC_TS.VW_PRODUTO.PROD_DESCRICAO");
   const [orderType, setOrderType] = useState("asc");
   const { register, handleSubmit } = useForm();
+
   const onSubmit = (data) => {
     let test = data.orderProducts.split(" ");
     if (test[0] === "valor") {
@@ -35,6 +36,7 @@ function Products({ location }) {
       "filial"
     )}&category=${categories}&page=${page}&order=${orderBy}&type=${orderType}`
   );
+
   function handleChange(event, value) {
     setPage(value);
   }
@@ -65,13 +67,6 @@ function Products({ location }) {
             </FormSelect>
           </div>
           <Loading />
-          <div className="root-data-fetch">
-            <Pagination
-              count={data?.pages}
-              page={page}
-              onChange={handleChange}
-            />
-          </div>
         </Container>
         <Footer />
       </>

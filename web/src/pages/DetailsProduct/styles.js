@@ -21,18 +21,38 @@ export const ContainerProduct = styled.div`
   overflow: none;
   box-sizing: border-box;
 
+  .buy-button {
+    margin-top: 20px;
+  }
+
+  .loading-button-buy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .img-container {
     background-color: white;
     margin: auto auto;
     width: 350px;
     height: 350px;
-    position: relative;
 
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
+  }
+
+  .loading-container {
+    margin: auto auto;
+    width: 350px;
+    height: 350px;
+
+    background-color: none !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   @media (max-width: 1300px) {
@@ -43,9 +63,14 @@ export const ContainerProduct = styled.div`
   }
 
   @media (max-width: 1200px) {
-    .img-container {
+    .img-container,
+    .loading-container {
       width: 230px;
       height: 230px;
+    }
+    .loading-img-responsive {
+      width: 230px !important;
+      height: 230px !important;
     }
   }
 
@@ -56,6 +81,10 @@ export const ContainerProduct = styled.div`
     }
     grid-template-columns: 1fr;
     height: 800px;
+    .loading-img-responsive {
+      width: 200px !important;
+      height: 200px !important;
+    }
   }
 
   @media (max-width: 768px) {
@@ -75,6 +104,10 @@ export const ContainerProduct = styled.div`
       p {
         font-size: 16px;
       }
+    }
+    .loading-img-responsive {
+      width: 190px !important;
+      height: 190px !important;
     }
   }
 `;
@@ -139,13 +172,13 @@ export const RelatedProducts = styled.div`
 
   @media (max-width: 955px) {
     div {
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr !important;
     }
   }
 
   @media (max-width: 768px) {
     div {
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr !important;
     }
   }
 

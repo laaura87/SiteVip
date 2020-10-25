@@ -1,4 +1,5 @@
 import React from "react";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 import {
   DetailsProducts,
@@ -13,6 +14,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import ButtonBuy from "../../components/ButtonBuy";
 import ButtonUnavailable from "../../components/ButtonUnavailable";
+import CardLoading from "../../components/CardLoading";
 
 import CardGrid from "../../components/CardGrid";
 
@@ -26,8 +28,68 @@ function Detail({ match: { params } }) {
     },
     { revalidateOnFocus: false }
   );
+  if (!data) {
+    return (
+      <>
+        <Header />
+        <Container>
+          <ContainerProduct>
+            <div className="loading-container">
+              <Skeleton
+                variant="rect"
+                width={280}
+                height={280}
+                animation="wave"
+                className="loading-img-responsive"
+              />
+            </div>
 
-  console.log(data);
+            <DetailsProducts>
+              <h1>
+                <Skeleton
+                  variant="text"
+                  width={300}
+                  height={80}
+                  animation="wave"
+                />
+              </h1>
+              <div>
+                <div className="price">
+                  <Skeleton
+                    variant="text"
+                    width={250}
+                    height={80}
+                    animation="wave"
+                  />
+                </div>
+
+                <div className="loading-button-buy">
+                  <Skeleton
+                    variant="text"
+                    width={180}
+                    height={80}
+                    animation="wave"
+                  />
+                </div>
+              </div>
+            </DetailsProducts>
+          </ContainerProduct>
+
+          <RelatedProducts>
+            <h1>Produtos relacionados</h1>
+            <div className="layout-grid">
+              <CardLoading></CardLoading>
+              <CardLoading></CardLoading>
+              <CardLoading></CardLoading>
+              <CardLoading></CardLoading>
+            </div>
+          </RelatedProducts>
+        </Container>
+        <Footer />
+      </>
+    );
+  }
+
   return (
     <>
       <Header />
@@ -61,17 +123,19 @@ function Detail({ match: { params } }) {
                   style: "currency",
                   currency: "BRL",
                 })}
-                <p>
-                  Ou até em 10x de{" "}
-                  {(data?.product?.PROD_PRECO_VENDA / 10).toLocaleString(
-                    "pt-br",
-                    {
-                      style: "currency",
-                      currency: "BRL",
-                    }
-                  )}{" "}
-                  no cartão
-                </p>
+                {data?.product?.PROD_PRECO_VENDA >= 100 && (
+                  <p>
+                    Ou até em 10x de
+                    {(data?.product?.PROD_PRECO_VENDA / 10).toLocaleString(
+                      "pt-br",
+                      {
+                        style: "currency",
+                        currency: "BRL",
+                      }
+                    )}
+                    no cartão
+                  </p>
+                )}
               </div>
 
               <div className="buy-button">
