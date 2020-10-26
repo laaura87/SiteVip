@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.footer`
+  position: fixed;
   background-color: white;
   width: 100%;
+  bottom: 0;
   margin-top: 50px;
   padding-bottom: 10px;
   div {

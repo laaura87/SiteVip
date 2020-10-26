@@ -24,12 +24,11 @@ import CartEmpty from "../../components/CartEmpty";
 import Loading from "../../components/Loading";
 
 function Cart() {
-  const { data, mutate } = useAxios(
+  const { data, mutate, error } = useAxios(
     `/cart?filial=${sessionStorage.getItem(
       "filial"
     )}&codigo=${sessionStorage.getItem("codigo")}`
   );
-  console.log(data);
   const toastId = React.useRef(null);
 
   async function handleDelete(prodCodigo) {
@@ -81,7 +80,7 @@ function Cart() {
   }
 
   let sub = 0;
-  const aux = data?.map((product) => {
+  const aux = data?.products?.map((product) => {
     sub += product.PROD_PRECO_VENDA * product.PROD_QTD;
     return sub;
   });
@@ -94,7 +93,8 @@ function Cart() {
         <Footer />
       </>
     );
-  } else if (data.length === 0) {
+  }
+  if (error) {
     return <CartEmpty />;
   }
 
@@ -115,7 +115,7 @@ function Cart() {
             </thead>
 
             <tbody>
-              {data.map((data, index) => {
+              {data.products.map((data, index) => {
                 return (
                   <ContainerProducts>
                     <td width="50%" className="product-container">
@@ -209,7 +209,7 @@ function Cart() {
             <div className="item-title">
               <h1>Item</h1>
             </div>
-            {data.map((data) => {
+            {data.products.map((data) => {
               return (
                 <div className="product">
                   <div className="img">
@@ -306,13 +306,14 @@ function Cart() {
                 </p>
               </div>
             </ContainerSub>
-
-            <Finish>
-              <p>Finalizar Pedido</p>
-              <span>
-                <FaShoppingCart />
-              </span>
-            </Finish>
+            <Link to="/finalizar-pedido">
+              <Finish>
+                <p>Continuar Pedido</p>
+                <span>
+                  <FaShoppingCart />
+                </span>
+              </Finish>
+            </Link>
           </DivFooter>
         </Container>
       </ContainerAll>

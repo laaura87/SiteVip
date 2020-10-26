@@ -273,3 +273,5 @@ export const DivFooter = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
 `;
+
+export const DivOptions = styled.div``;

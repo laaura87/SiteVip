@@ -10,6 +10,7 @@ import Products from "./pages/Products";
 import DetailsProduct from "./pages/DetailsProduct";
 import Cart from "./pages/Cart";
 import SearchResult from "./pages/SearchResult";
+import FinishOrder from "./pages/FinishOrder";
 
 const Routes = () => {
   return (
@@ -43,6 +44,14 @@ const Routes = () => {
             ) : (
               <Redirect to={{ pathname: "/" }} />
             )
+          }
+        />
+
+        <Route
+          exact
+          path="/finalizar-pedido"
+          render={(props) =>
+            isSignedIn() ? <FinishOrder /> : <Redirect to={{ pathname: "/" }} />
           }
         />
 
