@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   margin: 20px auto;
   width: 90%;
-  padding-bottom: 70px;
+  padding-bottom: 34px;
   border-radius: 8px;
   background-color: white;
   position: relative;
@@ -31,14 +31,10 @@ export const Container = styled.div`
   }
 
   .root {
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 32%;
-    bottom: 10px;
-    padding-top: 10px;
-    text-align: center;
-    padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    align-items: flex-end;
   }
   .root-data-fetch {
     position: absolute;
@@ -49,7 +45,7 @@ export const Container = styled.div`
     text-align: center;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 720px) {
     .title-results {
       height: 110px;
     }
@@ -79,7 +75,7 @@ export const FormSelect = styled.form`
     margin-left: 8px;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 720px) {
     select {
       font-size: 14px;
       width: 90%;

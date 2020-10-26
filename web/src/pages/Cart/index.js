@@ -29,7 +29,7 @@ function Cart() {
       "filial"
     )}&codigo=${sessionStorage.getItem("codigo")}`
   );
-
+  console.log(data);
   const toastId = React.useRef(null);
 
   async function handleDelete(prodCodigo) {
@@ -50,6 +50,7 @@ function Cart() {
             progress: undefined,
           });
         }
+        mutate();
       })
       .catch((err) => {
         console.log(err);

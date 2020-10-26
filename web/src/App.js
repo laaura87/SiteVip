@@ -6,6 +6,7 @@ import Routes from "./routes";
 import { SWRConfig } from "swr";
 import { fetcher } from "./services/api";
 import { ToastContainer } from "react-toastify";
+
 function App() {
   return (
     <>
@@ -15,7 +16,7 @@ function App() {
       <ToastContainer
         position="top-center"
         hideProgressBar
-        autoClose={5000}
+        autoClose={false}
         newestOnTop={false}
         closeOnClick
         rtl={false}

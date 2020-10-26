@@ -27,7 +27,7 @@ export const Container = styled.div`
     margin-left: 10px;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 720px) {
     .title-results {
       height: 110px;
     }
@@ -69,7 +69,7 @@ export const FormSelect = styled.form`
     margin-left: 8px;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 720px) {
     select {
       font-size: 14px;
       width: 90%;
