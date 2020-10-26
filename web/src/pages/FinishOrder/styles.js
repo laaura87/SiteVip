@@ -31,5 +31,10 @@ export const Container = styled.div`
       font-size: 24px;
     }
     padding-bottom: 14px;
+
+    section {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 `;
