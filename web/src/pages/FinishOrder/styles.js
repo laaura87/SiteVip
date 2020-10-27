@@ -16,6 +16,8 @@ export const Container = styled.div`
   .all-products {
     width: 90%;
     padding-top: 16px;
+    padding-bottom: 16px;
+
     margin: 20px auto;
     h3 {
       font-size: 24px;
