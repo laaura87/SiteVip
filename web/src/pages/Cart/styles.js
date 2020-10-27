@@ -2,11 +2,15 @@ import styled from "styled-components";
 
 export const ContainerAll = styled.div`
   width: 90%;
-  height: 100%;
+  min-height: 70vh;
   background-color: white;
   margin: 5px auto;
   box-shadow: 14px 15px 20px -20px rgba(0, 0, 0, 0.75);
   border-radius: 8px;
+  a:hover {
+    outline: none !important;
+    text-decoration: none !important;
+  }
 `;
 
 export const Container = styled.div`
@@ -118,6 +122,7 @@ export const Finish = styled.button`
   padding: 0;
   align-items: center;
   justify-content: space-between;
+
   p {
     font-size: 16px;
     margin-top: 12px;
