@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import InputNumber from "react-input-number";
 
 import { FaWindowClose, FaShoppingCart, FaPlus, FaMinus } from "react-icons/fa";
 import {
@@ -161,10 +160,7 @@ function Cart() {
                             <FaMinus size={14} className="not-available" />
                           )}
                         </span>
-                        <InputNumber
-                          max={data.PROD_QTD_ATUAL}
-                          value={data.PROD_QTD}
-                        />
+                        <input type="number" />
 
                         <span>
                           {data.PROD_QTD + 1 > data.PROD_QTD_ATUAL && (
@@ -253,10 +249,7 @@ function Cart() {
                           <FaMinus size={14} className="not-available" />
                         )}
                       </span>
-                      <InputNumber
-                        max={data.PROD_QTD_ATUAL}
-                        value={data.PROD_QTD}
-                      />
+                      <input type="number" />
                       <span>
                         {data.PROD_QTD + 1 > data.PROD_QTD_ATUAL && (
                           <FaPlus size={14} className="not-available" />

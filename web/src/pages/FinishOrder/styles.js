@@ -16,7 +16,7 @@ export const Container = styled.div`
   .all-products {
     width: 90%;
     padding-top: 16px;
-    margin: 0 auto;
+    margin: 20px auto;
     h3 {
       font-size: 24px;
     }
@@ -28,28 +28,13 @@ export const Container = styled.div`
       font-size: 20px;
     }
   }
-
-  .payment {
-    width: 90%;
-    margin: 14px auto;
-    h3 {
-      font-size: 24px;
-    }
-    padding-bottom: 14px;
-
-    section {
-      display: flex;
-      justify-content: space-between;
-    }
-  }
-
-  @media (max-width: 872px) {
-  }
 `;
+
 export const SelectPayment = styled.div`
   width: 60%;
   margin: 20px auto;
   display: flex;
+  justify-content: center;
   div {
     background-color: white;
     border: 1px solid #efefef;
@@ -66,10 +51,38 @@ export const SelectPayment = styled.div`
   }
 `;
 
+export const Payment = styled.div`
+  width: 90%;
+  margin: 14px auto;
+  h3 {
+    font-size: 24px;
+  }
+  padding-bottom: 14px;
+
+  section {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .multipayment {
+    h3 {
+      font-size: 20px;
+      margin-top: 5px;
+    }
+    select {
+      text-align: center;
+      width: 80%;
+    }
+    input {
+      width: 80%;
+      padding: 3px;
+    }
+  }
+`;
+
 export const Finish = styled.button`
   width: 40%;
-  margin: 20px auto;
-  margin-top: 20px;
+  margin: 30px auto;
   height: 50px;
   text-transform: uppercase;
   text-align: center;
