@@ -38,25 +38,6 @@ function FinishOrder() {
     totalParcelasDuplicata.push(i + 1);
   }
 
-  function changeValues(name, value) {
-    const dinheiroName = "dinheiro";
-    if (name === dinheiroName) {
-      console.log("dinheiro");
-
-      const valueFloat = parseFloat(value);
-      let decimal = sub - valueFloat;
-      decimal = decimal.toFixed(2);
-      if (valueFloat < sub) {
-        setDinheiro(valueFloat);
-        setDuplicata(decimal);
-      } else if (value === sub) {
-        setDinheiro(sub);
-        setDuplicata(0);
-      }
-      console.log(dinheiro, duplicata);
-    }
-  }
-
   const onSubmit = (data) => {
     if (data.pagamentoMetodo === "DINHEIRO") {
       setPaymentInstallments(1);
@@ -66,6 +47,19 @@ function FinishOrder() {
       setPayment(data.pagamentoMetodo);
     }
   };
+
+  function handleSend() {
+    const object = {
+      filial: sessionStorage.getItem("filial"),
+      codigo: sessionStorage.getItem("codigo"),
+      total: sub,
+      clieCpfCnpj: sessionStorage.getItem("cpfCnpj"),
+      intervalo: "",
+      formPagtCodigo: 8,
+      parcelas: paymentInstallments,
+    };
+    console.log(object);
+  }
 
   if (!data) {
     return (
@@ -304,7 +298,7 @@ function FinishOrder() {
             </section>
           )}
         </Payment>
-        <Link to="/finalizar-pedido">
+        <Link to="/finalizar-pedido" onClick={handleSend}>
           <Finish>
             <p>Finalizar Pedido</p>
             <span>
