@@ -30,6 +30,21 @@ export const Container = styled.div`
       font-size: 20px;
     }
   }
+
+  .all-products div div {
+    p {
+      margin-right: 8px;
+    }
+    p:nth-child(2) {
+      cursor: pointer;
+    }
+    p:nth-child(2):hover {
+      color: grey;
+      transition: 0.2s ease-out;
+      text-decoration: underline !important;
+    }
+  }
+
   .button-buy-footer {
     padding-bottom: 10px;
   }

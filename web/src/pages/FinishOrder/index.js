@@ -148,12 +148,15 @@ function FinishOrder() {
         <div className="all-products">
           <h3>Resumo dos produtos</h3>
           <div>
-            {data?.products?.length > 1 ? (
-              <p>{data?.products?.length} produtos</p>
-            ) : (
-              <p>{data?.products?.length} produto</p>
-            )}
-            <p>ver detalhes</p>
+            <div>
+              {data?.products?.length > 1 ? (
+                <p>{data?.products?.length} produtos</p>
+              ) : (
+                <p>{data?.products?.length} produto</p>
+              )}
+              <p>ver detalhes</p>
+            </div>
+
             <p>
               {sub.toLocaleString("pt-br", {
                 style: "currency",
