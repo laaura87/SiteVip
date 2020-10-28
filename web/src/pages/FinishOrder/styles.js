@@ -30,6 +30,9 @@ export const Container = styled.div`
       font-size: 20px;
     }
   }
+  .button-buy-footer {
+    padding-bottom: 10px;
+  }
 `;
 
 export const SelectPayment = styled.div`
@@ -78,6 +81,24 @@ export const Payment = styled.div`
     input {
       width: 80%;
       padding: 3px;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .multipayment {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .onepayment {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      h3 {
+        margin-bottom: 12px;
+        margin-top: 12px;
+      }
     }
   }
 `;

@@ -20,6 +20,7 @@ function FinishOrder() {
   const [multiPayment, setMultiPayment] = useState(false);
   const [dinheiro, setDinheiro] = useState();
   const [duplicata, setDuplicata] = useState();
+  const [qtdMetodoPagamento, setQtdMetodoPagamento] = useState(1);
 
   const { data } = useAxios(
     `/cart?filial=${sessionStorage.getItem(
@@ -49,15 +50,37 @@ function FinishOrder() {
   };
 
   function handleSend() {
+    let formPagtCodigo, quantidadeParcelas, pagoEmCadaParcela;
+
+    if (qtdMetodoPagamento == 2) {
+      formPagtCodigo = { duplicata: 18, dinheiro: 11 };
+      quantidadeParcelas = { diplicata: paymentInstallments, dinheiro: 1 };
+      pagoEmCadaParcela = {
+        duplicata: parseFloat(duplicata),
+        dinheiro: parseFloat(dinheiro),
+        total: sub,
+      };
+    }
+
+    if (qtdMetodoPagamento == 1) {
+      formPagtCodigo = payment === "DUPLICATA" ? 18 : 11;
+      quantidadeParcelas = paymentInstallments;
+      pagoEmCadaParcela = {
+        total: sub,
+      };
+    }
+
     const object = {
+      clieCpfCnpj: sessionStorage.getItem("cpfCnpj"),
       filial: sessionStorage.getItem("filial"),
       codigo: sessionStorage.getItem("codigo"),
-      total: sub,
-      clieCpfCnpj: sessionStorage.getItem("cpfCnpj"),
-      intervalo: "",
-      formPagtCodigo: 8,
-      parcelas: paymentInstallments,
+      quantidadeDePagamentos: qtdMetodoPagamento,
+      formPagtCodigo,
+      parcelas: quantidadeParcelas,
+      total: pagoEmCadaParcela,
+      intervalo: "TESTE",
     };
+
     console.log(object);
   }
 
@@ -78,16 +101,40 @@ function FinishOrder() {
             </div>
           </div>
 
-          <SelectPayment></SelectPayment>
-
-          <Link to="/finalizar-pedido">
-            <Finish>
-              <p>Finalizar Pedido</p>
-              <span>
-                <FaShoppingCart />
-              </span>
-            </Finish>
-          </Link>
+          <SelectPayment>
+            <div className="onePayment active">Um metódo de pagamento</div>
+            <div className="multiPayment">Dois metódos de pagamento</div>
+          </SelectPayment>
+          <Payment>
+            <section className="onepayment">
+              <div>
+                <h3>Formas de pagamento</h3>
+                <select name="pagamentoMetodo">
+                  <option selected disabled>
+                    Selecione a forma de pagamento
+                  </option>
+                </select>
+              </div>
+              <div>
+                <h3>Quantidade de Parcelas</h3>
+                <select name="parcelas" required>
+                  <option value="1" selected disabled>
+                    Selecione a quantidade das parcelas
+                  </option>
+                </select>
+              </div>
+            </section>
+          </Payment>
+          <div className="button-buy-footer">
+            <Link to="/finalizar-pedido">
+              <Finish>
+                <p>Finalizar Pedido</p>
+                <span>
+                  <FaShoppingCart />
+                </span>
+              </Finish>
+            </Link>
+          </div>
         </Container>
         <Footer />
       </>
@@ -117,18 +164,24 @@ function FinishOrder() {
 
         <SelectPayment>
           <div
-            className={`onePayment ${onePayment ? "active" : ""}`}
+            className={`onePayment ${
+              onePayment && !multiPayment ? "active" : ""
+            }`}
             onClick={() => {
-              setOnePayment(!onePayment);
+              setQtdMetodoPagamento(1);
+              setOnePayment(true);
               setMultiPayment(false);
             }}
           >
             Um metódo de pagamento
           </div>
           <div
-            className={`multiPayment ${multiPayment ? "active" : ""}`}
+            className={`multiPayment ${
+              multiPayment && !onePayment ? "active" : ""
+            }`}
             onClick={() => {
-              setMultiPayment(!multiPayment);
+              setQtdMetodoPagamento(2);
+              setMultiPayment(true);
               setOnePayment(false);
             }}
           >
@@ -138,13 +191,14 @@ function FinishOrder() {
 
         <Payment>
           {onePayment && (
-            <section>
+            <section className="onepayment">
               <div>
                 <h3>Formas de pagamento</h3>
                 <select
                   name="pagamentoMetodo"
                   ref={register}
                   onChange={handleSubmit(onSubmit)}
+                  required
                 >
                   <option selected disabled>
                     Selecione a forma de pagamento
@@ -167,6 +221,7 @@ function FinishOrder() {
                   name="parcelas"
                   ref={register}
                   onChange={handleSubmit(onSubmit)}
+                  required
                 >
                   <option value="1" selected disabled>
                     Selecione a quantidade das parcelas
@@ -203,6 +258,7 @@ function FinishOrder() {
                 <div>
                   <h3>Valor a ser pago em dinheiro</h3>
                   <CurrencyInput
+                    required
                     name="dinheiro"
                     prefix="R$ "
                     placeholder="R$ 0,00"
@@ -213,7 +269,7 @@ function FinishOrder() {
                     precision={2}
                     allowNegativeValue={false}
                     value={dinheiro}
-                    onChange={(value, name) => {
+                    onChange={(value) => {
                       const valueFloat = parseFloat(value);
                       let decimal = sub - valueFloat;
                       decimal = decimal.toFixed(2);
@@ -267,7 +323,7 @@ function FinishOrder() {
                     precision={2}
                     allowNegativeValue={false}
                     value={duplicata}
-                    onChange={(value, name) => {
+                    onChange={(value) => {
                       const valueFloat = parseFloat(value);
                       let decimal = sub - valueFloat;
                       decimal = decimal.toFixed(2);
@@ -280,6 +336,7 @@ function FinishOrder() {
                         setDuplicata(sub);
                       }
                     }}
+                    required
                   />
                 </div>
                 <div>
@@ -288,6 +345,7 @@ function FinishOrder() {
                     name="parcelas"
                     ref={register}
                     onChange={handleSubmit(onSubmit)}
+                    required
                   >
                     {totalParcelasDuplicata.map((parcela) => {
                       return <option value={parcela}>{parcela}x</option>;
@@ -298,14 +356,16 @@ function FinishOrder() {
             </section>
           )}
         </Payment>
-        <Link to="/finalizar-pedido" onClick={handleSend}>
-          <Finish>
-            <p>Finalizar Pedido</p>
-            <span>
-              <FaShoppingCart />
-            </span>
-          </Finish>
-        </Link>
+        <div className="button-buy-footer">
+          <Link to="/finalizar-pedido" onClick={handleSend}>
+            <Finish>
+              <p>Finalizar Pedido</p>
+              <span>
+                <FaShoppingCart />
+              </span>
+            </Finish>
+          </Link>
+        </div>
       </Container>
       <Footer />
     </>
