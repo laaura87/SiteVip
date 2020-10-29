@@ -1,8 +1,20 @@
 import React, { useState, useEffect } from "react";
-import "./style.css";
-import DefaultButton from "../../components/DefaultButton";
+
 import InputMask from "react-input-mask";
 import api from "../../services/api";
+
+import {
+  Container,
+  ContainerBody,
+  Inputs,
+  InputPassword,
+  InputCnpj,
+  SelectTypeUser,
+  FilialOption,
+  LoginButton,
+  ContainerLogin,
+} from "./styles";
+
 import { onSignIn } from "../../services/auth";
 
 function Login() {
@@ -10,6 +22,9 @@ function Login() {
   const [password, setPassword] = useState("");
   const [filiais, setFiliais] = useState([]);
   const [selectOption, setSelectedOption] = useState("1");
+
+  const [user, setUser] = useState(false);
+  const [enterprise, setEnterprise] = useState(true);
 
   const handleLogin = async () => {
     const result = await onSignIn(login, password);
@@ -37,74 +52,110 @@ function Login() {
   });
 
   return (
-    <div className="full-screen">
-      <div className="login-block">
-        <img
-          className="login-img"
-          alt="login"
-          src={`${process.env.PUBLIC_URL}/images/login-img.jpg`}
-        />
-        <div className="login-img-banner"></div>
-        <div className="input-block">
-          <img
-            className="login-page-logo"
-            alt="logo-login"
-            src={`${process.env.PUBLIC_URL}/images/vip_logo.png`}
-          />
-          <div className="block">
-            <label to="clieCpfCnpj">CNPJ:</label>
-            <InputMask
-              mask={"99.999.999/9999-99"}
-              className="input-login"
-              maskChar={null}
-              value={login}
-              onChange={(event) => {
-                setLogin(event.target.value);
-              }}
-            />
+    <>
+      <Container>
+        <ContainerBody>
+          <div className="img-container">
+            <img src="/images/vip_logo.png" alt="Logo VIP" />
           </div>
-
-          <div className="block">
-            <label to="senha">Senha:</label>
-            <input
-              className="input-login"
-              type="password"
-              name="senha"
-              id="senha"
-              value={password}
-              onChange={(event) => {
-                setPassword(event.target.value);
-              }}
-            />
-          </div>
-          <div className="block">
-            <label to="filial">Filial:</label>
-            <select
-              name="filial"
-              id="filial"
-              className="input-login"
-              onChange={(event) => setSelectedOption(event.target.value)}
-            >
-              {filiais.map((filial, index) => {
-                return (
-                  <option value={filial.FIL_CODIGO} key={index}>
-                    {filial.FIL_NOME}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-          <div className="login-button-container">
-            <DefaultButton
-              text="Login"
+          <SelectTypeUser>
+            <div
+              className={`${user && !enterprise ? "active" : ""}`}
               onClick={() => {
-                handleLogin();
+                setUser(true);
+                setEnterprise(false);
               }}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
+            >
+              Usuário
+            </div>
+            <div
+              className={`multiPayment ${enterprise && !user ? "active" : ""}`}
+              onClick={() => {
+                setEnterprise(true);
+                setUser(false);
+              }}
+            >
+              Fornecedor
+            </div>
+          </SelectTypeUser>
+
+          <Inputs>
+            {user && (
+              <ContainerLogin>
+                <InputCnpj>
+                  <label>Email:</label>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="jose@exemplo.com"
+                  />
+                </InputCnpj>
+                <InputPassword>
+                  <label>Senha:</label>
+                  <input className="w-filial" type="password" name="senha" />
+                </InputPassword>
+              </ContainerLogin>
+            )}
+            {enterprise && (
+              <>
+                <ContainerLogin>
+                  <InputCnpj className="field-cpnj">
+                    <label to="clieCpfCnpj">CNPJ:</label>
+                    <InputMask
+                      mask={"99.999.999/9999-99"}
+                      className="input-login"
+                      maskChar={null}
+                      value={login}
+                      onChange={(event) => {
+                        setLogin(event.target.value);
+                      }}
+                    />
+                  </InputCnpj>
+                  <InputPassword className="field-password">
+                    <label to="senha">Senha:</label>
+                    <input
+                      className="input-login"
+                      type="password"
+                      name="senha"
+                      id="senha"
+                      value={password}
+                      onChange={(event) => {
+                        setPassword(event.target.value);
+                      }}
+                    />
+                  </InputPassword>
+                </ContainerLogin>
+                <FilialOption>
+                  <label to="filial">Filial:</label>
+                  <select
+                    name="filial"
+                    id="filial"
+                    className="input-login"
+                    onChange={(event) => setSelectedOption(event.target.value)}
+                  >
+                    {filiais.map((filial, index) => {
+                      return (
+                        <option value={filial.FIL_CODIGO} key={index}>
+                          {filial.FIL_NOME}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </FilialOption>
+              </>
+            )}
+          </Inputs>
+
+          <LoginButton
+            onClick={() => {
+              handleLogin();
+            }}
+          >
+            ENTRAR
+          </LoginButton>
+        </ContainerBody>
+      </Container>
+    </>
   );
 }
 
