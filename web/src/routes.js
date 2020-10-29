@@ -18,7 +18,11 @@ const Routes = () => {
       <Switch>
         <Route exact path="/login" component={Login} />
         <Route exact path="/" render={(props) => <Main />} />
-        <Route exact path="/products" render={(props) => <Products />} />
+        <Route
+          exact
+          path="/products"
+          render={(props) => <Products {...props} />}
+        />
         <Route
           exact
           path="/products/:prodCodigo"

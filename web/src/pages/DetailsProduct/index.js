@@ -1,6 +1,6 @@
 import React from "react";
 import Skeleton from "@material-ui/lab/Skeleton";
-
+import { useParams } from "react-router-dom";
 import {
   DetailsProducts,
   ContainerProduct,
@@ -20,8 +20,10 @@ import CardGrid from "../../components/CardGrid";
 
 import { useAxios } from "../../hooks/useAxios";
 
-function Detail({ match: { params } }) {
-  const { data } = useAxios(`/products/${params.prodCodigo}?filial=${2}`, {
+function Detail() {
+  const { prodCodigo } = useParams();
+
+  const { data } = useAxios(`/products/${prodCodigo}?filial=${2}`, {
     revalidateOnFocus: false,
   });
 

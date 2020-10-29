@@ -48,7 +48,7 @@ function Component() {
                 Logout
               </div>
             ) : (
-              <div>
+              <div onClick={() => (window.location.href = "/login")}>
                 <FaUserAlt></FaUserAlt>
                 Entrar
               </div>

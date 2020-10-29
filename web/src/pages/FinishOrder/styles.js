@@ -131,7 +131,7 @@ export const Finish = styled.button`
   padding: 0;
   align-items: center;
   justify-content: space-between;
-
+  color: white;
   p {
     font-size: 16px;
     margin-top: 12px;

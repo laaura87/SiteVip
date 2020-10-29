@@ -30,7 +30,7 @@ function Login() {
     const result = await onSignIn(login, password);
     if (result) {
       sessionStorage.setItem("filial", selectOption);
-      window.location.href = "/home";
+      window.location.href = "/";
     } else {
       alert("Login ou senha inválidos. Tente novamente");
     }
