@@ -22,12 +22,7 @@ import { Container, Header, MenuDropDown, SubHeader } from "./styles";
 function Component() {
   const [showMenu, setShowMenu] = useState(false);
 
-  const { data } = useAxios(
-    `/categories?filial=${sessionStorage.getItem("filial")}`,
-    {
-      headers: { "x-access-token": sessionStorage.getItem("token") },
-    }
-  );
+  const { data } = useAxios(`/categories?filial=2`);
 
   const categories = data?.map((category) => {
     return category.GRP_DESCRICAO;
@@ -63,7 +58,7 @@ function Component() {
 
         <Header>
           <div className="logo">
-            <Link to="/home">
+            <Link to="/">
               <img
                 className="logo"
                 src={`${process.env.PUBLIC_URL}/images/vip_logo.png`}

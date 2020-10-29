@@ -31,12 +31,7 @@ function SearchResult() {
   };
 
   const { data } = useAxios(
-    `/search?filial=${sessionStorage.getItem(
-      "filial"
-    )}&name=${name.toUpperCase()}&page=${page}&order=${orderBy}&type=${orderType}`,
-    {
-      headers: { "x-access-token": sessionStorage.getItem("token") },
-    }
+    `/search?filial=${2}&name=${name.toUpperCase()}&page=${page}&order=${orderBy}&type=${orderType}`
   );
 
   if (!data) {

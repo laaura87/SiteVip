@@ -21,13 +21,10 @@ import CardGrid from "../../components/CardGrid";
 import { useAxios } from "../../hooks/useAxios";
 
 function Detail({ match: { params } }) {
-  const { data } = useAxios(
-    `/products/${params.prodCodigo}?filial=${sessionStorage.getItem("filial")}`,
-    {
-      headers: { "x-access-token": sessionStorage.getItem("token") },
-    },
-    { revalidateOnFocus: false }
-  );
+  const { data } = useAxios(`/products/${params.prodCodigo}?filial=${2}`, {
+    revalidateOnFocus: false,
+  });
+
   if (!data) {
     return (
       <>

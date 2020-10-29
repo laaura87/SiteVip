@@ -32,9 +32,7 @@ function Products({ location }) {
   };
 
   const { data } = useAxios(
-    `/products/category?filial=${sessionStorage.getItem(
-      "filial"
-    )}&category=${categories}&page=${page}&order=${orderBy}&type=${orderType}`
+    `/products/category?filial=${2}&category=${categories}&page=${page}&order=${orderBy}&type=${orderType}`
   );
 
   function handleChange(event, value) {
