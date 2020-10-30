@@ -30,6 +30,7 @@ function Login() {
 
   const handleLogin = async () => {
     const result = await onSignIn(login, password);
+
     if (result) {
       sessionStorage.setItem("filial", selectOption);
       window.location.href = "/";
@@ -45,7 +46,6 @@ function Login() {
     }
   };
   const onSubmit = (data) => {
-    console.log(data);
     setPassword(data.senha);
     setLogin(data.email);
   };
@@ -53,7 +53,14 @@ function Login() {
   const { data, error } = useAxios("/filial");
 
   if (error) {
-    alert("Serviço Indisponível no momento");
+    toast.error("Serviço Indisponível no momento.", {
+      position: "top-center",
+      autoClose: 5000,
+      closeOnClick: true,
+      hideProgressBar: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 
   return (
