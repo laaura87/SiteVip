@@ -9,7 +9,6 @@ import { Container, SelectPayment, Payment, Finish } from "./styles";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import ModalProducts from "../../components/ModalProducts";
 
 import { useAxios } from "../../hooks/useAxios";
 
@@ -81,7 +80,6 @@ function FinishOrder() {
       total: pagoEmCadaParcela,
       intervalo: "TESTE",
     };
-    console.log(object);
   }
 
   if (!data) {
@@ -154,6 +152,7 @@ function FinishOrder() {
               ) : (
                 <p>{data?.products?.length} produto</p>
               )}
+
               <p>ver detalhes</p>
             </div>
 
@@ -277,6 +276,9 @@ function FinishOrder() {
                       const valueFloat = parseFloat(value);
                       let decimal = sub - valueFloat;
                       decimal = decimal.toFixed(2);
+                      if (valueFloat > duplicata) {
+                        setDuplicata(0);
+                      }
                       if (valueFloat < sub) {
                         setDinheiro(valueFloat);
                         setDuplicata(decimal);

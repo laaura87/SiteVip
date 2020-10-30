@@ -29,13 +29,24 @@ function Login() {
   const [enterprise, setEnterprise] = useState(false);
 
   const handleLogin = async () => {
-    const result = await onSignIn(login, password);
+    if (enterprise) {
+      const result = await onSignIn(login, password);
 
-    if (result) {
-      sessionStorage.setItem("filial", selectOption);
-      window.location.href = "/";
+      if (result) {
+        sessionStorage.setItem("filial", selectOption);
+        window.location.href = "/";
+      } else {
+        toast.error("Login ou senha inválidos. Tente novamente.", {
+          position: "top-center",
+          autoClose: 5000,
+          closeOnClick: true,
+          hideProgressBar: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     } else {
-      toast.error("Login ou senha inválidos. Tente novamente.", {
+      toast.info("Em desenvolvimento.", {
         position: "top-center",
         autoClose: 5000,
         closeOnClick: true,
