@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAxios } from "../../hooks/useAxios";
-
+import { toast } from "react-toastify";
 import { onSignOut, isSignedIn } from "../../services/auth";
 import MenuDrop from "../MenuDrop";
 import cn from "classnames";
@@ -72,10 +72,26 @@ function Component() {
           <MenuDrop />
 
           <InputSearch />
+          {isSignedIn() ? (
+            <Link to="/cart">
+              <FaShoppingCart size={32} className="shopping-cart" />
+            </Link>
+          ) : (
+            <Link
+              onClick={() =>
+                toast.error("Você primeiro deve fazer login.", {
+                  position: "top-center",
+                  autoClose: 5000,
+                  closeOnClick: true,
+                  draggable: true,
+                  progress: undefined,
+                })
+              }
+            >
+              <FaShoppingCart size={32} className="shopping-cart" />
+            </Link>
+          )}
 
-          <Link to="/cart">
-            <FaShoppingCart size={32} className="shopping-cart" />
-          </Link>
           <FaBars
             size={32}
             className="open-menu"

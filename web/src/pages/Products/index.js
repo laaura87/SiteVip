@@ -58,13 +58,6 @@ function Products(props) {
                 <option value="10">Maior valor</option>
                 <option value="15">Menor valor</option>
               </select>
-              <select name="quantity-products">
-                <option value="10" selected>
-                  10 itens por página
-                </option>
-                <option value="15">15 itens por página</option>
-                <option value="30">30 itens por página</option>
-              </select>
             </FormSelect>
           </div>
           <Loading />
@@ -90,13 +83,6 @@ function Products(props) {
               </option>
               <option value="valor desc">Maior valor</option>
               <option value="valor asc">Menor valor</option>
-            </select>
-            <select name="quantityProducts" ref={register}>
-              <option value="10" selected>
-                10 itens por página
-              </option>
-              <option value="15">15 itens por página</option>
-              <option value="30">30 itens por página</option>
             </select>
           </FormSelect>
         </div>

@@ -29,8 +29,6 @@ function CartContent() {
     loadProducts();
   }, []);
 
-  console.log(cartProducts);
-
   if (cartProducts.length === 0) {
     return (
       <CarEmpty>

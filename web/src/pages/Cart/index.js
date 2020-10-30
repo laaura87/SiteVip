@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { mutate as mutateGlobal } from "swr";
 import "react-toastify/dist/ReactToastify.css";
 
 import { FaWindowClose, FaShoppingCart, FaPlus, FaMinus } from "react-icons/fa";
@@ -23,10 +24,14 @@ import CartEmpty from "../../components/CartEmpty";
 import Loading from "../../components/Loading";
 
 function Cart() {
-  const { data, mutate, error } = useAxios(
+  const { data, error, mutate } = useAxios(
     `/cart?filial=${sessionStorage.getItem(
       "filial"
-    )}&codigo=${sessionStorage.getItem("codigo")}`
+    )}&codigo=${sessionStorage.getItem("codigo")}`,
+    { headers: { "x-access-token": sessionStorage.getItem("token") } },
+    {
+      revalidateOnFocus: false,
+    }
   );
   const toastId = React.useRef(null);
 
@@ -76,6 +81,7 @@ function Cart() {
     });
     console.log(cartEdited);
     mutate(cartEdited, false);
+    mutateGlobal();
   }
 
   let sub = 0;
@@ -93,7 +99,7 @@ function Cart() {
       </>
     );
   }
-  if (error) {
+  if (error?.status === 404) {
     return <CartEmpty />;
   }
 
