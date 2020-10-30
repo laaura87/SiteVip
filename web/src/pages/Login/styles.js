@@ -33,6 +33,23 @@ export const ContainerBody = styled.div`
       height: 80px;
     }
   }
+
+  .new-user {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    p {
+      font-size: 18px;
+    }
+
+    p:nth-child(1) {
+      margin-right: 10px;
+    }
+    .bold {
+      font-weight: 600;
+    }
+  }
 `;
 
 export const Inputs = styled.div`
@@ -74,7 +91,7 @@ export const InputPassword = styled.div`
   }
 
   .w-filial {
-    margin-bottom: 50px;
+    margin-bottom: 10px;
   }
 `;
 
@@ -134,4 +151,16 @@ export const LoginButton = styled.button`
 export const ContainerLogin = styled.div`
   width: 80%;
   margin: 0 auto;
+  .remember-password a {
+    margin-bottom: 10px;
+    display: flex !important;
+    justify-content: right;
+    align-items: center;
+    p {
+      margin-top: 20px;
+    }
+    span {
+      margin-right: 5px;
+    }
+  }
 `;

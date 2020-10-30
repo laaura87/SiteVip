@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-
+import { useForm } from "react-hook-form";
+import { useAxios } from "../../hooks/useAxios";
 import InputMask from "react-input-mask";
-import api from "../../services/api";
-
+import { toast } from "react-toastify";
+import { GiPadlock } from "react-icons/gi";
 import {
   Container,
   ContainerBody,
@@ -16,15 +17,16 @@ import {
 } from "./styles";
 
 import { onSignIn } from "../../services/auth";
+import { Link } from "react-router-dom";
 
 function Login() {
+  const { register, handleSubmit, watch, errors } = useForm();
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const [filiais, setFiliais] = useState([]);
   const [selectOption, setSelectedOption] = useState("1");
 
-  const [user, setUser] = useState(false);
-  const [enterprise, setEnterprise] = useState(true);
+  const [user, setUser] = useState(true);
+  const [enterprise, setEnterprise] = useState(false);
 
   const handleLogin = async () => {
     const result = await onSignIn(login, password);
@@ -32,24 +34,27 @@ function Login() {
       sessionStorage.setItem("filial", selectOption);
       window.location.href = "/";
     } else {
-      alert("Login ou senha inválidos. Tente novamente");
+      toast.error("Login ou senha inválidos. Tente novamente.", {
+        position: "top-center",
+        autoClose: 5000,
+        closeOnClick: true,
+        hideProgressBar: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
+  const onSubmit = (data) => {
+    console.log(data);
+    setPassword(data.senha);
+    setLogin(data.email);
+  };
 
-  useEffect(() => {
-    const loadFiliais = () => {
-      api
-        .get("/filial")
-        .then((response) => {
-          setFiliais(response.data);
-        })
-        .catch((err) => {
-          alert("Serviço Indisponível no momento");
-          console.log(err);
-        });
-    };
-    loadFiliais();
-  });
+  const { data, error } = useAxios("/filial");
+
+  if (error) {
+    alert("Serviço Indisponível no momento");
+  }
 
   return (
     <>
@@ -88,12 +93,37 @@ function Login() {
                     type="email"
                     name="email"
                     placeholder="jose@exemplo.com"
+                    ref={register({
+                      required: "E-mail obrigatório.",
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                        message: "Entre com um e-mail válido.",
+                      },
+                    })}
+                    onBlur={handleSubmit(onSubmit)}
                   />
+                  {errors.email && <span>{errors.email.message}</span>}
                 </InputCnpj>
                 <InputPassword>
                   <label>Senha:</label>
-                  <input className="w-filial" type="password" name="senha" />
+                  <input
+                    className="w-filial"
+                    type="password"
+                    name="senha"
+                    placeholder="*********"
+                    ref={register({ required: true })}
+                    onBlur={handleSubmit(onSubmit)}
+                  />
+                  {errors.senha && <span>Senha obrigatória.</span>}
                 </InputPassword>
+                <div className="remember-password">
+                  <Link to="/">
+                    <span>
+                      <GiPadlock size={18} />
+                    </span>
+                    <p>Esqueceu sua senha?</p>
+                  </Link>
+                </div>
               </ContainerLogin>
             )}
             {enterprise && (
@@ -133,7 +163,7 @@ function Login() {
                     className="input-login"
                     onChange={(event) => setSelectedOption(event.target.value)}
                   >
-                    {filiais.map((filial, index) => {
+                    {data?.map((filial, index) => {
                       return (
                         <option value={filial.FIL_CODIGO} key={index}>
                           {filial.FIL_NOME}
@@ -153,6 +183,14 @@ function Login() {
           >
             ENTRAR
           </LoginButton>
+          {user && (
+            <div className="new-user">
+              <p>Novo por aqui?</p>
+              <Link to="/" className="bold">
+                <p>Crie uma conta.</p>
+              </Link>
+            </div>
+          )}
         </ContainerBody>
       </Container>
     </>
